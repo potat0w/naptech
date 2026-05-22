@@ -53,7 +53,7 @@ const cards: ServiceCard[] = [
     Icon: User,
     services: [
       line("Companionship", "companionship"),
-      line("Meal Preparation", "meal-preparation"),
+      line("Meal Preparation", "home-help-and-housekeeping"),
       line("Home Help", "home-help-and-housekeeping"),
       line("Personal Care", "personal-care"),
       line("Overnight Care", "overnight-care"),

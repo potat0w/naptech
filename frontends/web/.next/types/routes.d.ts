@@ -4,7 +4,7 @@
 type AppRoutes = "/" | "/advice-and-care" | "/advice-and-care/articles" | "/advice-and-care/cost-of-care" | "/advice-and-care/faqs" | "/advice-and-care/how-to-age-well" | "/advice-and-care/news-events" | "/book" | "/enquire" | "/how-it-works" | "/login" | "/profile" | "/recruitment" | "/recruitment/apply" | "/signup" | "/what-we-do/[slug]" | "/why-us/our-team"
 type PageRoutes = never
 type LayoutRoutes = "/" | "/book"
-type RedirectRoutes = never
+type RedirectRoutes = "/what-we-do/meal-preparation" | "/why-us/our-caregivers"
 type RewriteRoutes = never
 type Routes = AppRoutes | PageRoutes | LayoutRoutes | RedirectRoutes | RewriteRoutes
 
@@ -26,6 +26,8 @@ interface ParamMap {
   "/recruitment/apply": {}
   "/signup": {}
   "/what-we-do/[slug]": { "slug": string; }
+  "/what-we-do/meal-preparation": {}
+  "/why-us/our-caregivers": {}
   "/why-us/our-team": {}
 }
 

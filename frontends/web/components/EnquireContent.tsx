@@ -12,7 +12,12 @@ import {
 } from "@/lib/auth/form-styles";
 import { images } from "@/lib/images";
 import { btnPrimary, btnSecondary } from "@/lib/layout";
-import { formValuesFromForm, inputErrorClass, validateWithSchema } from "@/lib/validation/helpers";
+import {
+  formCheckboxValues,
+  formValuesFromForm,
+  inputErrorClass,
+  validateWithSchema,
+} from "@/lib/validation/helpers";
 import { submitInquiry } from "@/lib/api/inquiries";
 import { ApiError } from "@/lib/api/client";
 import { enquireSchema } from "@/lib/validation/schemas";
@@ -38,10 +43,10 @@ export default function EnquireContent({ titleId, onClose }: EnquireContentProps
     setFieldErrors({});
     setPending(true);
 
-    const validation = await validateWithSchema(
-      enquireSchema,
-      formValuesFromForm(e.currentTarget)
-    );
+    const validation = await validateWithSchema(enquireSchema, {
+      ...formValuesFromForm(e.currentTarget),
+      ...formCheckboxValues(e.currentTarget, ["privacyConsent", "marketingConsent"]),
+    });
 
     if (!validation.success) {
       setError(validation.message);
@@ -55,13 +60,9 @@ export default function EnquireContent({ titleId, onClose }: EnquireContentProps
         fullName: validation.values.fullName,
         phone: validation.values.phone,
         email: validation.values.email,
-        message: validation.values.message,
-        privacyConsent:
-          validation.values.privacyConsent === true ||
-          validation.values.privacyConsent === "yes",
-        marketingConsent:
-          validation.values.marketingConsent === true ||
-          validation.values.marketingConsent === "yes",
+        message: validation.values.message ?? "",
+        privacyConsent: Boolean(validation.values.privacyConsent),
+        marketingConsent: Boolean(validation.values.marketingConsent),
       });
       setPending(false);
       setSubmitted(true);

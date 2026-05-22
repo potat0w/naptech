@@ -27,7 +27,7 @@ const slides = [
       { text: " match" },
     ],
     body: "At Naptec, care is more than a service — it's a relationship. We tailor every care plan to the individual, matching clients with caregivers who share their values, ensuring every visit brings connection, comfort, and quality care. Every visit lasts at least an hour, creating space for genuine connection and meaningful moments.",
-    href: "/why-us/our-caregivers",
+    href: "/why-us/our-team",
   },
   {
     image:

@@ -14,7 +14,10 @@ publicRouter.post("/inquiries", async (req, res, next) => {
     const body = await validateBody(enquireSchema, req.body);
     const inquiry = await inquiryService.createInquiry({
       ...body,
-      privacyConsent: body.privacyConsent === true || body.privacyConsent === "yes",
+      privacyConsent:
+        body.privacyConsent === true ||
+        body.privacyConsent === "yes" ||
+        body.privacyConsent === "on",
       marketingConsent:
         body.marketingConsent === true ||
         body.marketingConsent === "yes" ||

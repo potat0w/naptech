@@ -12,6 +12,18 @@
       "priority": true,
       "statusCode": 308,
       "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    },
+    {
+      "source": "/what-we-do/meal-preparation",
+      "destination": "/what-we-do/home-help-and-housekeeping",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/what-we-do/meal-preparation(?:/)?$"
+    },
+    {
+      "source": "/why-us/our-caregivers",
+      "destination": "/why-us/our-team",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/why-us/our-caregivers(?:/)?$"
     }
   ],
   "headers": [],

@@ -58,9 +58,15 @@ export const enquireSchema = yup.object({
     .test(
       "privacyConsent",
       "Please confirm you have read the privacy notice.",
-      (value) => value === "yes" || value === true
+      (value) => value === "yes" || value === "on" || value === true
     ),
-  marketingConsent: yup.mixed().optional(),
+  marketingConsent: yup
+    .mixed()
+    .optional()
+    .test("marketingConsent", "", (value) => {
+      if (value === undefined || value === null || value === "") return true;
+      return value === "yes" || value === "on" || value === true;
+    }),
 });
 
 export const bookCareSchema = yup.object({

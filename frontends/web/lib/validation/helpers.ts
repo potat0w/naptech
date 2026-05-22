@@ -17,6 +17,19 @@ export function formValuesFromForm(form: HTMLFormElement): Record<string, unknow
   return values;
 }
 
+export function formCheckboxValues(
+  form: HTMLFormElement,
+  names: readonly string[]
+): Record<string, boolean> {
+  const data = new FormData(form);
+  const values: Record<string, boolean> = {};
+  for (const name of names) {
+    const raw = data.get(name);
+    values[name] = raw === "yes" || raw === "on" || raw === "true";
+  }
+  return values;
+}
+
 export function parseYupError(error: ValidationError): {
   message: string;
   fieldErrors: Record<string, string>;
