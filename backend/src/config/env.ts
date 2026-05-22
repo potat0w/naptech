@@ -10,10 +10,8 @@ export const env = {
   nodeEnv: process.env.NODE_ENV ?? "development",
   port: Number(process.env.PORT ?? 4000),
   databaseUrl: required("DATABASE_URL"),
-  corsAllowAll:
-    process.env.CORS_ORIGIN?.trim() === "*" ||
-    process.env.CORS_ALLOW_ALL === "true",
-  corsOrigins: (process.env.CORS_ORIGIN ?? "http://localhost:3000")
+  corsAllowAll: process.env.CORS_RESTRICT !== "true",
+  corsOrigins: (process.env.CORS_ORIGIN ?? "")
     .split(",")
     .map((value) => value.trim())
     .filter((value) => value && value !== "*"),

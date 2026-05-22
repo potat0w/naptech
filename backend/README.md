@@ -22,8 +22,8 @@ API base URL: `http://localhost:4000/v1`
 | `DATABASE_URL` | Yes |
 | `JWT_ACCESS_SECRET` | Yes |
 | `JWT_REFRESH_SECRET` | Yes |
-| `CORS_ORIGIN` | `*` to allow any frontend origin, or comma-separated URLs (e.g. `https://naptech-web.vercel.app,https://naptech-admin.vercel.app`) |
-| `CORS_ALLOW_ALL` | Optional — set `true` instead of `CORS_ORIGIN=*` |
+| `CORS_RESTRICT` | Default off — any frontend origin is allowed. Set `true` to lock down with `CORS_ORIGIN` |
+| `CORS_ORIGIN` | Only used when `CORS_RESTRICT=true` — comma-separated URLs |
 | `PORT` | Optional (default `4000`) |
 | `AI_PROVIDER` | `gemini` or `rules` (default `rules`) |
 | `GEMINI_API_KEY` | Required when `AI_PROVIDER=gemini` |
