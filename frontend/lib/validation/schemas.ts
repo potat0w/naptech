@@ -93,12 +93,27 @@ export const bookCareSchema = yup.object({
     .default(""),
 });
 
+function isGoogleDriveUrl(value: string | undefined): boolean {
+  if (!value) return false;
+  try {
+    const host = new URL(value).hostname.replace(/^www\./, "");
+    return host === "drive.google.com" || host === "docs.google.com";
+  } catch {
+    return false;
+  }
+}
+
 const cvDriveUrlField = yup
   .string()
   .trim()
-  .required("Please provide a link to your CV on Google Drive.")
+  .required("Please provide a Google Drive link to your CV.")
   .url("Please enter a valid URL.")
-  .max(500, "Please enter a shorter link.");
+  .max(500, "Please enter a shorter link.")
+  .test(
+    "google-drive",
+    "CV must be a Google Drive share link (drive.google.com or docs.google.com).",
+    (value) => isGoogleDriveUrl(value)
+  );
 
 const recruitmentFieldsBase = {
   firstName: nameField.label("First name"),

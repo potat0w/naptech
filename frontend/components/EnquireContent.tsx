@@ -260,10 +260,10 @@ export default function EnquireContent({ titleId, onClose }: EnquireContentProps
       Naptec processes your personal data to respond to your enquiry. For more
       information on how we use your data, please contact us at{" "}
       <a
-        href="mailto:info@naptec.co.uk"
+        href="mailto:info@naptechealthcareservices.com"
         className="text-brand underline underline-offset-2 transition-colors hover:text-brand-dark"
       >
-        info@naptec.co.uk
+        info@naptechealthcareservices.com
       </a>
       .
     </p>

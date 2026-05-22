@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: naptec-api
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: npm run render:start
+    healthCheckPath: /v1/health
+    envVars:
+      - key: NODE_ENV
+        value: production

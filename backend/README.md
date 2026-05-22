@@ -33,6 +33,18 @@ API base URL: `http://localhost:4000/v1`
 | `MAIL_FROM` | Verified sender in Brevo |
 | `ADMIN_EMAIL` | Receives enquiry & booking alerts |
 
+## Deploy on Render
+
+1. Create a **Web Service** from this repo.
+2. Set **Root Directory** to `backend` (required — `dist/` is not committed).
+3. **Build Command:** `npm install && npm run build`
+4. **Start Command:** `npm run render:start` (runs migrations, then `node dist/index.js`)
+5. Add env vars from `.env.example` (`DATABASE_URL`, JWT secrets, `CORS_ORIGIN`, etc.).
+
+Or connect the repo with **Blueprint** using the root `render.yaml`.
+
+If start fails with `Cannot find module .../dist/index.js`, the build step did not run or Root Directory is not `backend`.
+
 ## Scripts
 
 - `npm run dev` — development server

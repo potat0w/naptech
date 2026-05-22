@@ -117,6 +117,13 @@ export default function RecruitmentApplyForm() {
               />
               Part-time, full-time, and live-in opportunities
             </li>
+            <li className="flex gap-3">
+              <span
+                className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#3B2A8F]"
+                aria-hidden
+              />
+              Your CV must be uploaded to Google Drive — a share link is required to apply
+            </li>
           </ul>
           <p className="mt-6 text-sm text-neutral-600">
             Looking for home care for yourself or a loved one?{" "}
@@ -297,7 +304,8 @@ export default function RecruitmentApplyForm() {
                   className={inputErrorClass(Boolean(fieldErrors.cvDriveUrl), inputClass)}
                 />
                 <p className="mt-1.5 text-xs text-neutral-500">
-                  Upload your CV to Google Drive and paste a share link with view access.
+                  Required: upload your CV to Google Drive, set sharing to anyone with the link
+                  (view), then paste the drive.google.com or docs.google.com link here.
                 </p>
                 <FormFieldError message={fieldErrors.cvDriveUrl} />
               </label>

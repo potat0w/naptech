@@ -72,7 +72,7 @@ export function wrapEmailHtml(options: {
                 Lower Stretton, Warrington, Cheshire WA4 4PG
               </p>
               <p style="margin:0;font-size:12px;color:#6b6560;">
-                <a href="mailto:info@naptec.co.uk" style="color:#644596;text-decoration:none;font-weight:bold;">info@naptec.co.uk</a>
+                <a href="mailto:info@naptechealthcareservices.com" style="color:#644596;text-decoration:none;font-weight:bold;">info@naptechealthcareservices.com</a>
               </p>
             </td>
           </tr>

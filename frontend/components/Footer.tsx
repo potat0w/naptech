@@ -111,10 +111,10 @@ export default function Footer() {
               Email
             </p>
             <a
-              href="mailto:info@naptec.co.uk"
+              href="mailto:info@naptechealthcareservices.com"
               className="mt-2 block break-all text-lg font-semibold tracking-tight text-white underline underline-offset-4 transition-colors hover:text-white/90 sm:break-normal"
             >
-              info@naptec.co.uk
+              info@naptechealthcareservices.com
             </a>
             <Link
               href="/recruitment"
