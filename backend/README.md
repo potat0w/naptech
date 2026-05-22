@@ -27,6 +27,11 @@ API base URL: `http://localhost:4000/v1`
 | `AI_PROVIDER` | `gemini` or `rules` (default `rules`) |
 | `GEMINI_API_KEY` | Required when `AI_PROVIDER=gemini` |
 | `GEMINI_MODEL` | Optional (default `gemini-2.5-flash`) |
+| `SMTP_HOST` | Brevo: `smtp-relay.brevo.com` |
+| `SMTP_PORT` | Usually `587` |
+| `SMTP_USER` / `SMTP_PASS` | Brevo SMTP credentials |
+| `MAIL_FROM` | Verified sender in Brevo |
+| `ADMIN_EMAIL` | Receives enquiry & booking alerts |
 
 ## Scripts
 

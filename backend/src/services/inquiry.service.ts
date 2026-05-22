@@ -1,6 +1,8 @@
 import { prisma } from "../db/prisma.js";
 import { logActivity } from "../utils/activity.js";
 import { deriveInquirySubject } from "../utils/mappers.js";
+import { sendInquiryNotificationEmail } from "../utils/email.js";
+import { smtpConfigured } from "../config/env.js";
 import type { EnquiryType, InquiryStatus } from "@prisma/client";
 
 export async function createInquiry(data: {
@@ -34,6 +36,20 @@ export async function createInquiry(data: {
     entityId: inquiry.id,
     message: `New enquiry from ${inquiry.fullName}`,
   });
+
+  if (smtpConfigured()) {
+    try {
+      await sendInquiryNotificationEmail({
+        fullName: inquiry.fullName,
+        email: inquiry.email,
+        phone: inquiry.phone,
+        subject: inquiry.subject,
+        message: inquiry.message ?? "",
+      });
+    } catch (err) {
+      console.error("Failed to send enquiry notification email:", err);
+    }
+  }
 
   return inquiry;
 }

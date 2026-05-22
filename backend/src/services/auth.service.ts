@@ -10,6 +10,8 @@ import {
   signAccessToken,
 } from "../utils/tokens.js";
 import { serializeUserMe } from "../serializers/user.js";
+import { sendPasswordResetEmail, sendPasswordResetOtpEmail } from "../utils/email.js";
+import { brevoOtpConfigured, env, smtpConfigured } from "../config/env.js";
 
 const REFRESH_MS = 7 * 24 * 60 * 60 * 1000;
 
@@ -162,7 +164,107 @@ export async function forgotPassword(email: string) {
     },
   });
 
+  if (smtpConfigured()) {
+    try {
+      await sendPasswordResetEmail(user.email, token);
+    } catch (err) {
+      console.error("Failed to send password reset email:", err);
+    }
+  }
+
   return { ok: true, resetToken: process.env.NODE_ENV === "development" ? token : undefined };
+}
+
+function generateOtpCode() {
+  return String(Math.floor(100000 + Math.random() * 900000));
+}
+
+export async function requestClientPasswordResetOtp(email: string) {
+  const normalized = email.trim().toLowerCase();
+  const user = await prisma.user.findFirst({
+    where: { email: normalized, role: "client", deletedAt: null, isActive: true },
+  });
+
+  if (!user) {
+    return { ok: true };
+  }
+
+  const code = generateOtpCode();
+
+  await prisma.passwordResetOtp.updateMany({
+    where: { userId: user.id, usedAt: null },
+    data: { usedAt: new Date() },
+  });
+
+  await prisma.passwordResetOtp.create({
+    data: {
+      userId: user.id,
+      codeHash: hashToken(code),
+      expiresAt: new Date(Date.now() + 15 * 60 * 1000),
+    },
+  });
+
+  if (brevoOtpConfigured() || smtpConfigured()) {
+    try {
+      await sendPasswordResetOtpEmail(user.email, code);
+    } catch (err) {
+      console.error("Failed to send password reset OTP email:", err);
+    }
+  }
+
+  return {
+    ok: true,
+    otp: env.nodeEnv === "development" ? code : undefined,
+  };
+}
+
+export async function resetClientPasswordWithOtp(
+  email: string,
+  code: string,
+  password: string
+) {
+  const normalized = email.trim().toLowerCase();
+  const user = await prisma.user.findFirst({
+    where: { email: normalized, role: "client", deletedAt: null },
+    include: { credential: true },
+  });
+
+  if (!user?.credential) {
+    throw unauthorized("Invalid or expired code.");
+  }
+
+  const record = await prisma.passwordResetOtp.findFirst({
+    where: {
+      userId: user.id,
+      codeHash: hashToken(code.trim()),
+      usedAt: null,
+      expiresAt: { gt: new Date() },
+    },
+    orderBy: { createdAt: "desc" },
+  });
+
+  if (!record) {
+    throw unauthorized("Invalid or expired code.");
+  }
+
+  const passwordHash = await hashPassword(password);
+
+  await prisma.$transaction([
+    prisma.authCredential.update({
+      where: { userId: user.id },
+      data: { passwordHash, passwordChangedAt: new Date() },
+    }),
+    prisma.passwordResetOtp.update({
+      where: { id: record.id },
+      data: { usedAt: new Date() },
+    }),
+    prisma.passwordResetOtp.updateMany({
+      where: { userId: user.id, usedAt: null },
+      data: { usedAt: new Date() },
+    }),
+  ]);
+
+  return { ok: true };
 }
 
 export async function resetPassword(token: string, password: string) {

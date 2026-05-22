@@ -63,6 +63,25 @@ export async function apiMe() {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000/v1";
 
+export async function requestPasswordResetOtp(email: string) {
+  return apiRequest<{ ok: boolean }>("/auth/forgot-password-otp", {
+    method: "POST",
+    body: { email },
+  });
+}
+
+export async function resetPasswordWithOtp(data: {
+  email: string;
+  code: string;
+  password: string;
+  confirmPassword: string;
+}) {
+  return apiRequest<{ ok: boolean }>("/auth/reset-password-otp", {
+    method: "POST",
+    body: data,
+  });
+}
+
 export async function tryApiRefresh() {
   const res = await fetch(`${API_URL}/auth/refresh`, {
     method: "POST",

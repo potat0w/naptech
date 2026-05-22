@@ -6,6 +6,8 @@ import { validateBody } from "../validation/validate.js";
 import {
   forgotPasswordSchema,
   loginSchema,
+  requestPasswordOtpSchema,
+  resetPasswordOtpSchema,
   resetPasswordSchema,
   signupSchema,
 } from "../validation/schemas.js";
@@ -113,6 +115,30 @@ authRouter.post("/reset-password", async (req, res, next) => {
   try {
     const body = await validateBody(resetPasswordSchema, req.body);
     const result = await authService.resetPassword(body.token, body.password);
+    res.json(result);
+  } catch (e) {
+    next(e);
+  }
+});
+
+authRouter.post("/forgot-password-otp", async (req, res, next) => {
+  try {
+    const body = await validateBody(requestPasswordOtpSchema, req.body);
+    const result = await authService.requestClientPasswordResetOtp(body.email);
+    res.json(result);
+  } catch (e) {
+    next(e);
+  }
+});
+
+authRouter.post("/reset-password-otp", async (req, res, next) => {
+  try {
+    const body = await validateBody(resetPasswordOtpSchema, req.body);
+    const result = await authService.resetClientPasswordWithOtp(
+      body.email,
+      body.code,
+      body.password
+    );
     res.json(result);
   } catch (e) {
     next(e);

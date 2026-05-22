@@ -114,6 +114,24 @@ export const resetPasswordSchema = yup.object({
     .oneOf([yup.ref("password")], "Passwords do not match."),
 });
 
+export const requestPasswordOtpSchema = yup.object({
+  email: emailField,
+});
+
+export const resetPasswordOtpSchema = yup.object({
+  email: emailField,
+  code: yup
+    .string()
+    .trim()
+    .required("Enter the code from your email.")
+    .matches(/^\d{6}$/, "Enter the 6-digit code from your email."),
+  password: passwordField,
+  confirmPassword: yup
+    .string()
+    .required("Please confirm your password.")
+    .oneOf([yup.ref("password")], "Passwords do not match."),
+});
+
 export const createAssignmentSchema = yup.object({
   caregiverUserId: yup.string().uuid("Invalid caregiver id.").required(),
   clientName: yup.string().trim().required().max(160),

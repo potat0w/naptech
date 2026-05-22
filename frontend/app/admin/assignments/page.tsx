@@ -16,6 +16,7 @@ import {
   reassignAssignment,
 } from "@/lib/api/admin";
 import { ApiError } from "@/lib/api/client";
+import { confirmDialog } from "@/lib/swal";
 import type { Assignment, Caregiver } from "@/lib/portal/types";
 import { Plus } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState, type FormEvent } from "react";
@@ -81,9 +82,14 @@ export default function AdminAssignmentsPage() {
   };
 
   const handleCancel = async (assignmentId: string) => {
-    if (!confirm("Remove this visit from the caregiver? They will no longer see these tasks.")) {
-      return;
-    }
+    const confirmed = await confirmDialog({
+      title: "Remove this visit?",
+      text: "The caregiver will no longer see these tasks.",
+      confirmText: "Yes, remove",
+      cancelText: "Keep visit",
+      icon: "warning",
+    });
+    if (!confirmed) return;
     setActionPending(true);
     setError(null);
     setNotice(null);

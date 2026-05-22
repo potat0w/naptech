@@ -21,10 +21,28 @@ export const env = {
   aiProvider: process.env.AI_PROVIDER ?? "rules",
   geminiApiKey: process.env.GEMINI_API_KEY ?? "",
   geminiModel: process.env.GEMINI_MODEL ?? "gemini-2.5-flash",
+  appUrl: process.env.APP_URL ?? process.env.CORS_ORIGIN ?? "http://localhost:3000",
+  smtpHost: process.env.SMTP_HOST ?? "",
+  smtpPort: Number(process.env.SMTP_PORT ?? 587),
+  smtpUser: process.env.SMTP_USER ?? "",
+  smtpPass: process.env.SMTP_PASS ?? "",
+  mailFrom: process.env.MAIL_FROM ?? "kahonbintezaman@gmail.com",
+  mailFromName: process.env.MAIL_FROM_NAME ?? "Naptec Care",
+  adminEmail: process.env.ADMIN_EMAIL ?? "kahonbintezaman@gmail.com",
+  brevoApiKey: process.env.BREVO_API_KEY ?? "",
+  brevoOtpTemplateId: Number(process.env.BREVO_OTP_TEMPLATE_ID ?? 0),
 };
 
 export function geminiConfigured() {
   return Boolean(env.geminiApiKey.trim());
+}
+
+export function smtpConfigured() {
+  return Boolean(env.smtpHost && env.smtpUser && env.smtpPass);
+}
+
+export function brevoOtpConfigured() {
+  return Boolean(env.brevoApiKey.trim() && env.brevoOtpTemplateId > 0);
 }
 
 export function cloudinaryConfigured() {

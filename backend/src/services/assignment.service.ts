@@ -4,6 +4,10 @@ import { logActivity } from "../utils/activity.js";
 import { badRequest, conflict, notFound } from "../utils/errors.js";
 import { formatServiceAddress } from "../serializers/booking.js";
 import { serializeAssignment } from "../serializers/assignment.js";
+import {
+  emailCaregiverNewAssignment,
+  emailCaregiverRemovedFromAssignment,
+} from "../utils/assignment-email.js";
 
 const assignmentInclude = {
   tasks: true,
@@ -165,6 +169,8 @@ export async function createAssignment(
     message: `New assignment created for ${caregiver.firstName} ${caregiver.lastName} — ${assignment.clientDisplayName}`,
   });
 
+  await emailCaregiverNewAssignment(caregiver, assignment);
+
   return serializeAssignment(assignment);
 }
 
@@ -307,12 +313,16 @@ export async function reassignAssignment(
     throw badRequest("This visit is already assigned to that caregiver.");
   }
 
+  const previousCaregiver = assignment.caregiver;
+
   await prisma.assignment.update({
     where: { id: assignmentId },
     data: { status: "cancelled" },
   });
 
   await syncCareRequestStatus(assignment.careRequestId);
+
+  await emailCaregiverRemovedFromAssignment(previousCaregiver, assignment);
 
   const tasks = assignment.tasks
     .sort((a, b) => a.sortOrder - b.sortOrder)

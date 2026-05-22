@@ -6,7 +6,13 @@ import {
   careForFromApi,
   patientLabel,
 } from "../utils/mappers.js";
-import { serializeAdminBooking, serializeBooking } from "../serializers/booking.js";
+import {
+  formatServiceAddress,
+  serializeAdminBooking,
+  serializeBooking,
+} from "../serializers/booking.js";
+import { sendBookingNotificationEmail } from "../utils/email.js";
+import { smtpConfigured } from "../config/env.js";
 
 export async function createBooking(
   userId: string,
@@ -66,6 +72,20 @@ export async function createBooking(
     entityId: request.id,
     message: `${user.firstName} ${user.lastName} submitted a care booking request`,
   });
+
+  if (smtpConfigured()) {
+    try {
+      await sendBookingNotificationEmail({
+        clientName: request.patientLabel,
+        email: user.email,
+        phone: user.phone ?? "",
+        address: formatServiceAddress(request),
+        careNotes: request.careNotes ?? undefined,
+      });
+    } catch (err) {
+      console.error("Failed to send booking notification email:", err);
+    }
+  }
 
   return serializeBooking(request, user);
 }

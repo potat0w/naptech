@@ -2,6 +2,7 @@
 
 import { useAuth } from "@/components/AuthProvider";
 import BookCareForm from "@/components/BookCareForm";
+import ClientPasswordReset from "@/components/ClientPasswordReset";
 import { formInputClass, formLabelClass, headingFont } from "@/lib/auth/form-styles";
 import { fetchBookings } from "@/lib/api/bookings";
 import { btnPrimary, btnSecondary, containerClass } from "@/lib/layout";
@@ -535,6 +536,8 @@ export default function BookCareContent() {
                 Update
               </button>
             )}
+
+            <ClientPasswordReset email={viewProfile?.email ?? user.email} />
 
             <p className="mt-4 border-t border-surface-card pt-4 text-xs text-muted sm:mt-6 sm:pt-5 sm:text-sm">
               Need advice first?{" "}
