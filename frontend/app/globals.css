@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --brand: #644596;
+  --brand-dark: #503878;
+  --brand-deeper: #3f2d62;
+  --surface: #faf8f4;
+  --surface-alt: #f5f2f8;
+  --surface-card: #ede9f3;
+  --surface-card-hover: #e3dde9;
+  --muted: #6b6560;
+  --body: #404040;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-brand: var(--brand);
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-deeper: var(--brand-deeper);
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
+  --color-surface-card: var(--surface-card);
+  --color-surface-card-hover: var(--surface-card-hover);
+  --color-muted: var(--muted);
+  --color-body: var(--body);
+  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-serif);
+}
+
+.trust-bar-inner {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  animation: trust-bar-scroll 35s linear infinite;
+}
+
+@keyframes trust-bar-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes fade-up-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 0;
+}
+
+.animate-fade-up-delay-1 {
+  animation-delay: 0.08s;
+}
+
+.animate-fade-up-delay-2 {
+  animation-delay: 0.16s;
+}
+
+.animate-fade-up-delay-3 {
+  animation-delay: 0.24s;
+}
+
+.animate-fade-up-delay-4 {
+  animation-delay: 0.32s;
+}
+
+.animate-fade-up-delay-5 {
+  animation-delay: 0.4s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .trust-bar-track {
+    overflow: visible;
+  }
+
+  .trust-bar-inner {
+    animation: none;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 100%;
+    max-width: 72rem;
+    margin-inline: auto;
+    gap: 0.75rem;
+    padding-inline: 1rem;
+  }
+
+  .trust-bar-inner > p:nth-child(n + 5) {
+    display: none;
+  }
+
+  .trust-bar-divider {
+    display: none;
+  }
+}

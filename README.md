@@ -42,6 +42,9 @@ App: http://localhost:3000
 |-------|----------|------|
 | admin@naptec.care | ChangeMe123! | admin |
 | caregiver@naptec.care | ChangeMe123! | caregiver |
+| james.okonkwo@naptec.care | ChangeMe123! | caregiver |
+| priya.sharma@naptec.care | ChangeMe123! | caregiver |
+| emma.walsh@naptec.care | ChangeMe123! | caregiver |
 | client@naptec.care | ChangeMe123! | client |
 
 See [backend/README.md](backend/README.md) for API routes and database scripts.

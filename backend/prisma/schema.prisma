@@ -1,0 +1,509 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  client
+  caregiver
+  admin
+}
+
+enum CareFor {
+  loved_one
+  self
+}
+
+enum CareRequestStatus {
+  pending
+  matched
+  assigned
+  completed
+  cancelled
+}
+
+enum CaregiverStatus {
+  active
+  inactive
+}
+
+enum AvailabilityStatus {
+  available
+  unavailable
+  busy
+}
+
+enum VerificationStatus {
+  pending
+  approved
+  rejected
+}
+
+enum VerificationDocumentType {
+  passport
+  driving_license
+}
+
+enum DbsCheckStatus {
+  pending
+  verified
+  expired
+}
+
+enum AssignmentPriority {
+  low
+  medium
+  high
+}
+
+enum AssignmentStatus {
+  scheduled
+  in_progress
+  completed
+  pending_report
+  cancelled
+}
+
+enum ReportStatus {
+  pending
+  submitted
+  reviewed
+}
+
+enum InquiryStatus {
+  new
+  in_progress
+  closed
+}
+
+enum RecruitmentStatus {
+  new
+  reviewing
+  interview
+  hired
+  rejected
+}
+
+enum RecruitmentPosition {
+  part_time
+  full_time
+  live_in
+}
+
+enum RecruitmentExperience {
+  new
+  some
+  experienced
+}
+
+enum EnquiryType {
+  email
+  visit
+  brochure
+}
+
+enum FilePurpose {
+  cv
+  verification_document
+  profile_image
+}
+
+enum ActivityType {
+  assignment
+  report
+  caregiver
+  booking
+  inquiry
+}
+
+enum NotificationType {
+  assignment
+  report
+  booking
+  system
+}
+
+model User {
+  id              String    @id @default(uuid()) @db.Uuid
+  role            UserRole
+  firstName       String    @db.VarChar(80)
+  lastName        String    @db.VarChar(80)
+  email           String    @unique @db.VarChar(255)
+  phone           String?   @db.VarChar(20)
+  profileImageUrl String?
+  isActive        Boolean   @default(true)
+  emailVerifiedAt DateTime?
+  lastLoginAt     DateTime?
+  deletedAt       DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  address                 UserAddress?
+  credential              AuthCredential?
+  refreshTokens           RefreshToken[]
+  passwordResetTokens     PasswordResetToken[]
+  emailVerificationTokens EmailVerificationToken[]
+
+  caregiverProfile      CaregiverProfile?
+  caregiverVerification CaregiverVerification?
+
+  careRequests           CareRequest[]
+  assignmentsAsClient    Assignment[] @relation("AssignmentClient")
+  assignmentsAsCaregiver Assignment[] @relation("AssignmentCaregiver")
+  assignmentsCreated     Assignment[] @relation("AssignmentAdmin")
+
+  careReportsSubmitted CareReport[] @relation("ReportCaregiver")
+  careReportsReviewed  CareReport[] @relation("ReportReviewer")
+
+  notifications   Notification[]
+  reviewsGiven    Review[] @relation("ReviewAuthor")
+  reviewsReceived Review[] @relation("ReviewCaregiver")
+
+  uploadedFiles FileAsset[]
+  activityLogs  ActivityLog[] @relation("ActivityActor")
+  auditLogs     AuditLog[]
+
+  @@index([role])
+  @@index([deletedAt])
+  @@map("users")
+}
+
+model UserAddress {
+  id           String  @id @default(uuid()) @db.Uuid
+  userId       String  @unique @db.Uuid
+  addressLine1 String  @db.VarChar(120)
+  addressLine2 String? @db.VarChar(120)
+  city         String  @db.VarChar(80)
+  postcode     String  @db.VarChar(12)
+  country      String  @default("GB") @db.Char(2)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_addresses")
+}
+
+model AuthCredential {
+  userId            String   @id @db.Uuid
+  passwordHash      String   @db.VarChar(255)
+  passwordChangedAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("auth_credentials")
+}
+
+model RefreshToken {
+  id        String    @id @default(uuid()) @db.Uuid
+  userId    String    @db.Uuid
+  tokenHash String    @unique @db.VarChar(64)
+  expiresAt DateTime
+  revokedAt DateTime?
+  userAgent String?
+  ipAddress String?   @db.VarChar(45)
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@map("refresh_tokens")
+}
+
+model PasswordResetToken {
+  id        String    @id @default(uuid()) @db.Uuid
+  userId    String    @db.Uuid
+  tokenHash String    @unique @db.VarChar(64)
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("password_reset_tokens")
+}
+
+model EmailVerificationToken {
+  id        String    @id @default(uuid()) @db.Uuid
+  userId    String    @db.Uuid
+  tokenHash String    @unique @db.VarChar(64)
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("email_verification_tokens")
+}
+
+model CareRequest {
+  id            String            @id @default(uuid()) @db.Uuid
+  userId        String            @db.Uuid
+  careFor       CareFor
+  patientLabel  String            @db.VarChar(120)
+  addressLine1  String            @db.VarChar(120)
+  addressLine2  String?           @db.VarChar(120)
+  city          String            @db.VarChar(80)
+  postcode      String            @db.VarChar(12)
+  preferredDate DateTime?         @db.Date
+  careNotes     String?           @db.VarChar(500)
+  status        CareRequestStatus @default(pending)
+  deletedAt     DateTime?
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  user        User         @relation(fields: [userId], references: [id])
+  assignments Assignment[]
+
+  @@index([userId, createdAt(sort: Desc)])
+  @@index([status])
+  @@map("care_requests")
+}
+
+model Inquiry {
+  id               String        @id @default(uuid()) @db.Uuid
+  fullName         String        @db.VarChar(160)
+  phone            String        @db.VarChar(20)
+  email            String        @db.VarChar(255)
+  subject          String        @db.VarChar(200)
+  message          String?
+  privacyConsent   Boolean
+  marketingConsent Boolean       @default(false)
+  enquiryType      EnquiryType?
+  careHomeSlug     String?       @db.VarChar(50)
+  status           InquiryStatus @default(new)
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  @@index([status, createdAt(sort: Desc)])
+  @@index([email])
+  @@map("inquiries")
+}
+
+model FileAsset {
+  id                 String      @id @default(uuid()) @db.Uuid
+  cloudinaryPublicId String      @unique
+  url                String
+  mimeType           String      @db.VarChar(100)
+  sizeBytes          Int
+  purpose            FilePurpose
+  uploadedByUserId   String?     @db.Uuid
+  createdAt          DateTime    @default(now())
+
+  uploadedBy            User?                   @relation(fields: [uploadedByUserId], references: [id], onDelete: SetNull)
+  verificationDocuments CaregiverVerification[] @relation("VerificationDocument")
+
+  @@index([purpose])
+  @@map("file_assets")
+}
+
+model RecruitmentApplication {
+  id                   String                @id @default(uuid()) @db.Uuid
+  firstName            String                @db.VarChar(80)
+  lastName             String                @db.VarChar(80)
+  email                String                @db.VarChar(255)
+  telephone            String                @db.VarChar(20)
+  position             RecruitmentPosition
+  experience           RecruitmentExperience
+  availability         String?               @db.VarChar(500)
+  message              String?
+  rightToWorkConfirmed Boolean
+  cvDriveUrl           String
+  status               RecruitmentStatus     @default(new)
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+
+  @@index([status, createdAt(sort: Desc)])
+  @@index([email])
+  @@map("recruitment_applications")
+}
+
+model CaregiverProfile {
+  id                 String             @id @default(uuid()) @db.Uuid
+  userId             String             @unique @db.Uuid
+  bio                String?
+  experienceYears    Int?
+  hourlyRate         Decimal?           @db.Decimal(10, 2)
+  specializations    String[]
+  skills             String[]
+  availabilityStatus AvailabilityStatus @default(available)
+  accountStatus      CaregiverStatus    @default(active)
+  verificationStatus VerificationStatus @default(pending)
+  profileCompleted   Boolean            @default(false)
+  isPublic           Boolean            @default(true)
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([accountStatus])
+  @@map("caregiver_profiles")
+}
+
+model CaregiverVerification {
+  id                       String                     @id @default(uuid()) @db.Uuid
+  caregiverUserId          String                     @unique @db.Uuid
+  legalFullName            String
+  dateOfBirth              DateTime                   @db.Date
+  verificationDocumentType VerificationDocumentType
+  documentLast4            String?
+  documentFileId           String?                    @db.Uuid
+  dbsCheckStatus           DbsCheckStatus             @default(pending)
+  verificationStatus       VerificationStatus         @default(pending)
+  verifiedByUserId         String?                    @db.Uuid
+  submittedAt              DateTime                   @default(now())
+  verifiedAt               DateTime?
+
+  caregiver    User      @relation(fields: [caregiverUserId], references: [id], onDelete: Cascade)
+  documentFile FileAsset? @relation("VerificationDocument", fields: [documentFileId], references: [id])
+
+  @@map("caregiver_verifications")
+}
+
+model Assignment {
+  id                String             @id @default(uuid()) @db.Uuid
+  careRequestId     String?            @db.Uuid
+  clientUserId      String?            @db.Uuid
+  caregiverUserId   String             @db.Uuid
+  assignedByUserId  String             @db.Uuid
+  clientDisplayName String             @db.VarChar(160)
+  serviceAddress    String
+  shiftDate         DateTime           @db.Date
+  shiftStart        String             @db.VarChar(5)
+  shiftEnd          String             @db.VarChar(5)
+  priority          AssignmentPriority @default(medium)
+  status            AssignmentStatus   @default(scheduled)
+  deletedAt         DateTime?
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+
+  careRequest CareRequest?     @relation(fields: [careRequestId], references: [id], onDelete: SetNull)
+  client      User?            @relation("AssignmentClient", fields: [clientUserId], references: [id], onDelete: SetNull)
+  caregiver   User             @relation("AssignmentCaregiver", fields: [caregiverUserId], references: [id])
+  assignedBy  User             @relation("AssignmentAdmin", fields: [assignedByUserId], references: [id])
+  tasks       AssignmentTask[]
+  reports     CareReport[]
+
+  @@index([caregiverUserId, shiftDate])
+  @@index([status])
+  @@index([shiftDate])
+  @@map("assignments")
+}
+
+model AssignmentTask {
+  id           String @id @default(uuid()) @db.Uuid
+  assignmentId String @db.Uuid
+  sortOrder    Int
+  description  String @db.VarChar(500)
+
+  assignment Assignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+
+  @@index([assignmentId, sortOrder])
+  @@map("assignment_tasks")
+}
+
+model CareReport {
+  id               String       @id @default(uuid()) @db.Uuid
+  assignmentId     String       @db.Uuid
+  caregiverUserId  String       @db.Uuid
+  rawNotes         String
+  preview          String?      @db.VarChar(300)
+  status           ReportStatus @default(pending)
+  submittedAt      DateTime     @default(now())
+  reviewedAt       DateTime?
+  reviewedByUserId String?      @db.Uuid
+  autoDeleteAt     DateTime?
+
+  assignment  Assignment          @relation(fields: [assignmentId], references: [id])
+  caregiver   User                @relation("ReportCaregiver", fields: [caregiverUserId], references: [id])
+  reviewedBy  User?               @relation("ReportReviewer", fields: [reviewedByUserId], references: [id], onDelete: SetNull)
+  aiProcessed AIProcessedReport?
+
+  @@index([caregiverUserId, submittedAt(sort: Desc)])
+  @@index([status])
+  @@index([assignmentId])
+  @@map("care_reports")
+}
+
+model AIProcessedReport {
+  id               String   @id @default(uuid()) @db.Uuid
+  careReportId     String   @unique @db.Uuid
+  structuredReport String
+  summary          String?
+  aiProvider       String   @db.VarChar(50)
+  processedAt      DateTime @default(now())
+
+  careReport CareReport @relation(fields: [careReportId], references: [id], onDelete: Cascade)
+
+  @@map("ai_processed_reports")
+}
+
+model ActivityLog {
+  id          String       @id @default(uuid()) @db.Uuid
+  actorUserId String?      @db.Uuid
+  type        ActivityType
+  entityType  String       @db.VarChar(50)
+  entityId    String       @db.Uuid
+  message     String
+  createdAt   DateTime     @default(now())
+
+  actor User? @relation("ActivityActor", fields: [actorUserId], references: [id], onDelete: SetNull)
+
+  @@index([createdAt(sort: Desc)])
+  @@map("activity_logs")
+}
+
+model AuditLog {
+  id         String   @id @default(uuid()) @db.Uuid
+  userId     String?  @db.Uuid
+  action     String   @db.VarChar(100)
+  resource   String   @db.VarChar(100)
+  resourceId String?  @db.Uuid
+  ipAddress  String?  @db.VarChar(45)
+  userAgent  String?
+  metadata   Json?
+  createdAt  DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([createdAt(sort: Desc)])
+  @@index([userId])
+  @@map("audit_logs")
+}
+
+model Notification {
+  id         String           @id @default(uuid()) @db.Uuid
+  receiverId String           @db.Uuid
+  type       NotificationType
+  title      String
+  message    String
+  payload    Json?
+  isRead     Boolean          @default(false)
+  createdAt  DateTime         @default(now())
+
+  receiver User @relation(fields: [receiverId], references: [id], onDelete: Cascade)
+
+  @@index([receiverId, isRead, createdAt(sort: Desc)])
+  @@map("notifications")
+}
+
+model Review {
+  id              String   @id @default(uuid()) @db.Uuid
+  authorUserId    String   @db.Uuid
+  caregiverUserId String   @db.Uuid
+  assignmentId    String?  @db.Uuid
+  rating          Int
+  comment         String?
+  createdAt       DateTime @default(now())
+
+  author    User @relation("ReviewAuthor", fields: [authorUserId], references: [id])
+  caregiver User @relation("ReviewCaregiver", fields: [caregiverUserId], references: [id])
+
+  @@index([caregiverUserId])
+  @@map("reviews")
+}
