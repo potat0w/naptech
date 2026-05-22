@@ -1,0 +1,11 @@
+{
+  "/(portal)/dashboard/page": "app/(portal)/dashboard/page.js",
+  "/(portal)/profile/page": "app/(portal)/profile/page.js",
+  "/(portal)/reports/page": "app/(portal)/reports/page.js",
+  "/(portal)/tasks/page": "app/(portal)/tasks/page.js",
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/login/page": "app/login/page.js",
+  "/page": "app/page.js"
+}

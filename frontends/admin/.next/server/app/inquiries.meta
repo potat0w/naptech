@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/(portal)/layout,_N_T_/(portal)/inquiries/layout,_N_T_/(portal)/inquiries/page,_N_T_/inquiries"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/!KHBvcnRhbCk/inquiries/__PAGE__",
+    "/!KHBvcnRhbCk/inquiries",
+    "/!KHBvcnRhbCk",
+    "/_index",
+    "/_head"
+  ]
+}

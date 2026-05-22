@@ -1,0 +1,22 @@
+{
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/advice-and-care/articles/page": "app/advice-and-care/articles/page.js",
+  "/advice-and-care/cost-of-care/page": "app/advice-and-care/cost-of-care/page.js",
+  "/advice-and-care/faqs/page": "app/advice-and-care/faqs/page.js",
+  "/advice-and-care/how-to-age-well/page": "app/advice-and-care/how-to-age-well/page.js",
+  "/advice-and-care/news-events/page": "app/advice-and-care/news-events/page.js",
+  "/advice-and-care/page": "app/advice-and-care/page.js",
+  "/book/page": "app/book/page.js",
+  "/enquire/page": "app/enquire/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/how-it-works/page": "app/how-it-works/page.js",
+  "/login/page": "app/login/page.js",
+  "/page": "app/page.js",
+  "/profile/page": "app/profile/page.js",
+  "/recruitment/apply/page": "app/recruitment/apply/page.js",
+  "/recruitment/page": "app/recruitment/page.js",
+  "/signup/page": "app/signup/page.js",
+  "/what-we-do/[slug]/page": "app/what-we-do/[slug]/page.js",
+  "/why-us/our-team/page": "app/why-us/our-team/page.js"
+}

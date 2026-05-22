@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/advice-and-care/layout,_N_T_/advice-and-care/articles/layout,_N_T_/advice-and-care/articles/page,_N_T_/advice-and-care/articles"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/advice-and-care/articles/__PAGE__",
+    "/advice-and-care/articles",
+    "/advice-and-care",
+    "/_index",
+    "/_head"
+  ]
+}

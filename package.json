@@ -1,0 +1,19 @@
+{
+  "name": "naptec",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontends/web",
+    "frontends/admin",
+    "frontends/caregiver"
+  ],
+  "scripts": {
+    "dev:api": "npm run dev -w backend",
+    "dev:web": "npm run dev -w naptec-web",
+    "dev:admin": "npm run dev -w naptec-admin",
+    "dev:caregiver": "npm run dev -w naptec-caregiver",
+    "build:web": "npm run build -w naptec-web",
+    "build:admin": "npm run build -w naptec-admin",
+    "build:caregiver": "npm run build -w naptec-caregiver"
+  }
+}

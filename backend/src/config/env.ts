@@ -10,7 +10,10 @@ export const env = {
   nodeEnv: process.env.NODE_ENV ?? "development",
   port: Number(process.env.PORT ?? 4000),
   databaseUrl: required("DATABASE_URL"),
-  corsOrigin: process.env.CORS_ORIGIN ?? "http://localhost:3000",
+  corsOrigins: (process.env.CORS_ORIGIN ?? "http://localhost:3000")
+    .split(",")
+    .map((value) => value.trim())
+    .filter(Boolean),
   jwtAccessSecret: required("JWT_ACCESS_SECRET"),
   jwtRefreshSecret: required("JWT_REFRESH_SECRET"),
   jwtAccessExpires: process.env.JWT_ACCESS_EXPIRES ?? "15m",
@@ -21,7 +24,10 @@ export const env = {
   aiProvider: process.env.AI_PROVIDER ?? "rules",
   geminiApiKey: process.env.GEMINI_API_KEY ?? "",
   geminiModel: process.env.GEMINI_MODEL ?? "gemini-2.5-flash",
-  appUrl: process.env.APP_URL ?? process.env.CORS_ORIGIN ?? "http://localhost:3000",
+  appUrl:
+    process.env.APP_URL ??
+    (process.env.CORS_ORIGIN ?? "http://localhost:3000").split(",")[0]?.trim() ??
+    "http://localhost:3000",
   smtpHost: process.env.SMTP_HOST ?? "",
   smtpPort: Number(process.env.SMTP_PORT ?? 587),
   smtpUser: process.env.SMTP_USER ?? "",

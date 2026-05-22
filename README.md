@@ -1,18 +1,23 @@
 # Naptec
 
-Care platform: Next.js frontend + Express API + PostgreSQL.
+Care platform: three Next.js frontends + one Express API + PostgreSQL.
 
 ## Project structure
 
 ```
 Naptec/
-├── backend/     # Express API, Prisma, PostgreSQL
-└── frontend/    # Next.js app
+├── backend/              # Express API (deploy once)
+└── frontends/
+    ├── web/              # Public site + client booking
+    ├── admin/            # Admin portal
+    └── caregiver/        # Caregiver portal
 ```
+
+See [frontends/README.md](frontends/README.md) for per-app URLs and env vars.
 
 ## Run locally
 
-**Terminal 1 — API**
+**API**
 
 ```bash
 cd backend
@@ -23,28 +28,29 @@ npm run db:seed
 npm run dev
 ```
 
-API: http://localhost:4000/v1
+API (production): https://naptech-1.onrender.com/v1  
+API (local): http://localhost:4000/v1
 
-**Terminal 2 — Frontend**
+**Frontends** (three terminals)
 
 ```bash
-cd frontend
-cp .env.example .env.local
-npm install
-npm run dev
+cd frontends/web && cp .env.example .env.local && npm install && npm run dev
+cd frontends/admin && cp .env.example .env.local && npm install && npm run dev
+cd frontends/caregiver && cp .env.example .env.local && npm install && npm run dev
 ```
 
-App: http://localhost:3000
+| App | URL |
+|-----|-----|
+| Web | http://localhost:3000 |
+| Admin | http://localhost:3001 |
+| Caregiver | http://localhost:3002 |
 
 ## Seed accounts
 
-| Email | Password | Role |
-|-------|----------|------|
-| admin@naptec.care | ChangeMe123! | admin |
-| caregiver@naptec.care | ChangeMe123! | caregiver |
-| james.okonkwo@naptec.care | ChangeMe123! | caregiver |
-| priya.sharma@naptec.care | ChangeMe123! | caregiver |
-| emma.walsh@naptec.care | ChangeMe123! | caregiver |
-| client@naptec.care | ChangeMe123! | client |
+| Email | Password | Role | Sign in at |
+|-------|----------|------|------------|
+| admin@naptec.care | ChangeMe123! | admin | http://localhost:3001 |
+| caregiver@naptec.care | ChangeMe123! | caregiver | http://localhost:3002 |
+| client@naptec.care | ChangeMe123! | client | http://localhost:3000 |
 
-See [backend/README.md](backend/README.md) for API routes and database scripts.
+See [backend/README.md](backend/README.md) for API routes and Render deploy.

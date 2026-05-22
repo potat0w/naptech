@@ -1,0 +1,168 @@
+{
+  "version": 3,
+  "pages404": true,
+  "appType": "app",
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "priority": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "onMatchHeaders": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [
+    {
+      "page": "/what-we-do/[slug]",
+      "regex": "^/what\\-we\\-do/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPslug": "nxtPslug"
+      },
+      "namedRegex": "^/what\\-we\\-do/(?<nxtPslug>[^/]+?)(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_global-error",
+      "regex": "^/_global\\-error(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_global\\-error(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/advice-and-care",
+      "regex": "^/advice\\-and\\-care(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/advice\\-and\\-care(?:/)?$"
+    },
+    {
+      "page": "/advice-and-care/articles",
+      "regex": "^/advice\\-and\\-care/articles(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/advice\\-and\\-care/articles(?:/)?$"
+    },
+    {
+      "page": "/advice-and-care/cost-of-care",
+      "regex": "^/advice\\-and\\-care/cost\\-of\\-care(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/advice\\-and\\-care/cost\\-of\\-care(?:/)?$"
+    },
+    {
+      "page": "/advice-and-care/faqs",
+      "regex": "^/advice\\-and\\-care/faqs(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/advice\\-and\\-care/faqs(?:/)?$"
+    },
+    {
+      "page": "/advice-and-care/how-to-age-well",
+      "regex": "^/advice\\-and\\-care/how\\-to\\-age\\-well(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/advice\\-and\\-care/how\\-to\\-age\\-well(?:/)?$"
+    },
+    {
+      "page": "/advice-and-care/news-events",
+      "regex": "^/advice\\-and\\-care/news\\-events(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/advice\\-and\\-care/news\\-events(?:/)?$"
+    },
+    {
+      "page": "/book",
+      "regex": "^/book(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/book(?:/)?$"
+    },
+    {
+      "page": "/enquire",
+      "regex": "^/enquire(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/enquire(?:/)?$"
+    },
+    {
+      "page": "/favicon.ico",
+      "regex": "^/favicon\\.ico(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/favicon\\.ico(?:/)?$"
+    },
+    {
+      "page": "/how-it-works",
+      "regex": "^/how\\-it\\-works(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/how\\-it\\-works(?:/)?$"
+    },
+    {
+      "page": "/login",
+      "regex": "^/login(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/login(?:/)?$"
+    },
+    {
+      "page": "/profile",
+      "regex": "^/profile(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/profile(?:/)?$"
+    },
+    {
+      "page": "/recruitment",
+      "regex": "^/recruitment(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/recruitment(?:/)?$"
+    },
+    {
+      "page": "/recruitment/apply",
+      "regex": "^/recruitment/apply(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/recruitment/apply(?:/)?$"
+    },
+    {
+      "page": "/signup",
+      "regex": "^/signup(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/signup(?:/)?$"
+    },
+    {
+      "page": "/why-us/our-team",
+      "regex": "^/why\\-us/our\\-team(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/why\\-us/our\\-team(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments",
+    "clientParamParsing": false,
+    "dynamicRSCPrerender": false
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}
