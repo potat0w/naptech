@@ -27,7 +27,21 @@ export default function ClientPasswordReset({ email }: ClientPasswordResetProps)
     setError(null);
     setNotice(null);
     try {
-      await requestPasswordResetOtp(email);
+      const result = await requestPasswordResetOtp(email);
+      if (result.otp) {
+        setStep("reset");
+        setCode("");
+        setNotice(
+          `Your reset code is ${result.otp}. Enter it below with your new password. (Also check your email.)`
+        );
+        return;
+      }
+      if (result.emailSent === false) {
+        setError(
+          "We could not send the reset email. Check your spam folder, wait a minute and tap Resend code, or contact us for help."
+        );
+        return;
+      }
       setStep("reset");
       setCode("");
       setNotice("We sent a 6-digit code to your email. Enter it below with your new password.");

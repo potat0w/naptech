@@ -186,7 +186,7 @@ export async function requestClientPasswordResetOtp(email: string) {
   });
 
   if (!user) {
-    return { ok: true };
+    return { ok: true, emailSent: true };
   }
 
   const code = generateOtpCode();
@@ -204,9 +204,11 @@ export async function requestClientPasswordResetOtp(email: string) {
     },
   });
 
+  let emailSent = false;
   if (emailConfigured()) {
     const result = await sendPasswordResetOtpEmail(user.email, code);
-    if (!result.sent) {
+    emailSent = result.sent;
+    if (!emailSent) {
       console.error(`Password reset OTP was not delivered to ${user.email}`);
     }
   } else {
@@ -215,6 +217,7 @@ export async function requestClientPasswordResetOtp(email: string) {
 
   return {
     ok: true,
+    emailSent,
     otp: env.nodeEnv === "development" ? code : undefined,
   };
 }

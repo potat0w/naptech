@@ -63,10 +63,13 @@ export async function apiMe() {
 }
 
 export async function requestPasswordResetOtp(email: string) {
-  return apiRequest<{ ok: boolean }>("/auth/forgot-password-otp", {
-    method: "POST",
-    body: { email },
-  });
+  return apiRequest<{ ok: boolean; emailSent?: boolean; otp?: string }>(
+    "/auth/forgot-password-otp",
+    {
+      method: "POST",
+      body: { email },
+    }
+  );
 }
 
 export async function resetPasswordWithOtp(data: {

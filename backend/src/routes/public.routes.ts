@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { emailConfigured } from "../config/env.js";
 import * as inquiryService from "../services/inquiry.service.js";
 import * as recruitmentService from "../services/recruitment.service.js";
 import { inquiryLimiter, recruitmentLimiter } from "../middleware/rateLimit.js";
@@ -54,5 +55,9 @@ publicRouter.post("/recruitment/applications", recruitmentLimiter, async (req, r
 });
 
 publicRouter.get("/health", (_req, res) => {
-  res.json({ status: "ok", timestamp: new Date().toISOString() });
+  res.json({
+    status: "ok",
+    timestamp: new Date().toISOString(),
+    emailConfigured: emailConfigured(),
+  });
 });
