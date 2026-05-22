@@ -71,6 +71,8 @@ export default function EnquireContent({ titleId, onClose }: EnquireContentProps
       if (err instanceof ApiError) {
         setError(err.message);
         if (err.fieldErrors) setFieldErrors(err.fieldErrors);
+      } else if (err instanceof Error && err.name === "AbortError") {
+        setError("The request timed out. Please try again.");
       } else {
         setError("Something went wrong. Please try again.");
       }

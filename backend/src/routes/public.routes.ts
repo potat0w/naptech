@@ -1,15 +1,13 @@
 import { Router } from "express";
 import * as inquiryService from "../services/inquiry.service.js";
 import * as recruitmentService from "../services/recruitment.service.js";
-import { publicFormLimiter } from "../middleware/rateLimit.js";
+import { inquiryLimiter, recruitmentLimiter } from "../middleware/rateLimit.js";
 import { validateBody } from "../validation/validate.js";
 import { enquireSchema, recruitmentFieldsSchema } from "../validation/schemas.js";
 
 export const publicRouter = Router();
 
-publicRouter.use(publicFormLimiter);
-
-publicRouter.post("/inquiries", async (req, res, next) => {
+publicRouter.post("/inquiries", inquiryLimiter, async (req, res, next) => {
   try {
     const body = await validateBody(enquireSchema, req.body);
     const inquiry = await inquiryService.createInquiry({
@@ -35,7 +33,7 @@ publicRouter.post("/inquiries", async (req, res, next) => {
   }
 });
 
-publicRouter.post("/recruitment/applications", async (req, res, next) => {
+publicRouter.post("/recruitment/applications", recruitmentLimiter, async (req, res, next) => {
   try {
     const body = await validateBody(recruitmentFieldsSchema, req.body);
     const application = await recruitmentService.createRecruitmentApplication({

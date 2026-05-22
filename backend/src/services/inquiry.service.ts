@@ -30,25 +30,21 @@ export async function createInquiry(data: {
     },
   });
 
-  await logActivity({
+  void logActivity({
     type: "inquiry",
     entityType: "inquiry",
     entityId: inquiry.id,
     message: `New enquiry from ${inquiry.fullName}`,
-  });
+  }).catch((err) => console.error("Failed to log enquiry activity:", err));
 
   if (smtpConfigured()) {
-    try {
-      await sendInquiryNotificationEmail({
-        fullName: inquiry.fullName,
-        email: inquiry.email,
-        phone: inquiry.phone,
-        subject: inquiry.subject,
-        message: inquiry.message ?? "",
-      });
-    } catch (err) {
-      console.error("Failed to send enquiry notification email:", err);
-    }
+    void sendInquiryNotificationEmail({
+      fullName: inquiry.fullName,
+      email: inquiry.email,
+      phone: inquiry.phone,
+      subject: inquiry.subject,
+      message: inquiry.message ?? "",
+    }).catch((err) => console.error("Failed to send enquiry notification email:", err));
   }
 
   return inquiry;
