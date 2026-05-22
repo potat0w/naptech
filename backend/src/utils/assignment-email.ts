@@ -5,7 +5,7 @@ import {
   sendCaregiverRemovedFromAssignmentEmail,
   type AssignmentEmailDetails,
 } from "./email.js";
-import { smtpConfigured } from "../config/env.js";
+import { emailConfigured } from "../config/env.js";
 
 type AssignmentWithTasks = Assignment & { tasks: AssignmentTask[] };
 
@@ -30,14 +30,13 @@ export async function emailCaregiverNewAssignment(
   caregiver: User,
   assignment: AssignmentWithTasks
 ) {
-  if (!smtpConfigured() || !caregiver.email) return;
-  try {
-    await sendCaregiverNewAssignmentEmail(
-      caregiver.email,
-      toEmailDetails(assignment, caregiver)
-    );
-  } catch (err) {
-    console.error("Failed to send new assignment email:", err);
+  if (!emailConfigured() || !caregiver.email) return;
+  const result = await sendCaregiverNewAssignmentEmail(
+    caregiver.email,
+    toEmailDetails(assignment, caregiver)
+  );
+  if (!result.sent) {
+    console.error(`New assignment email not sent → ${caregiver.email}`);
   }
 }
 
@@ -45,13 +44,12 @@ export async function emailCaregiverRemovedFromAssignment(
   caregiver: User,
   assignment: AssignmentWithTasks
 ) {
-  if (!smtpConfigured() || !caregiver.email) return;
-  try {
-    await sendCaregiverRemovedFromAssignmentEmail(
-      caregiver.email,
-      toEmailDetails(assignment, caregiver)
-    );
-  } catch (err) {
-    console.error("Failed to send assignment removal email:", err);
+  if (!emailConfigured() || !caregiver.email) return;
+  const result = await sendCaregiverRemovedFromAssignmentEmail(
+    caregiver.email,
+    toEmailDetails(assignment, caregiver)
+  );
+  if (!result.sent) {
+    console.error(`Assignment removal email not sent → ${caregiver.email}`);
   }
 }

@@ -11,7 +11,7 @@ import {
 } from "../utils/tokens.js";
 import { serializeUserMe } from "../serializers/user.js";
 import { sendPasswordResetEmail, sendPasswordResetOtpEmail } from "../utils/email.js";
-import { brevoOtpConfigured, env, smtpConfigured } from "../config/env.js";
+import { emailConfigured, env, smtpConfigured } from "../config/env.js";
 
 const REFRESH_MS = 7 * 24 * 60 * 60 * 1000;
 
@@ -204,12 +204,13 @@ export async function requestClientPasswordResetOtp(email: string) {
     },
   });
 
-  if (brevoOtpConfigured() || smtpConfigured()) {
-    try {
-      await sendPasswordResetOtpEmail(user.email, code);
-    } catch (err) {
-      console.error("Failed to send password reset OTP email:", err);
+  if (emailConfigured()) {
+    const result = await sendPasswordResetOtpEmail(user.email, code);
+    if (!result.sent) {
+      console.error(`Password reset OTP was not delivered to ${user.email}`);
     }
+  } else {
+    console.error("Password reset OTP not sent — configure BREVO_API_KEY or SMTP on Render");
   }
 
   return {

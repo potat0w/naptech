@@ -31,14 +31,40 @@ API base URL: `http://localhost:4000/v1`
 | `SMTP_HOST` | Brevo: `smtp-relay.brevo.com` |
 | `SMTP_PORT` | Usually `587` |
 | `SMTP_USER` / `SMTP_PASS` | Brevo SMTP credentials |
-| `MAIL_FROM` | Verified sender in Brevo |
+| `MAIL_FROM` | Verified sender in Brevo (must match a validated sender) |
 | `ADMIN_EMAIL` | Receives enquiry & booking alerts |
+| `BREVO_API_KEY` | Brevo → SMTP & API → API keys (v3) |
+| `BREVO_OTP_TEMPLATE_ID` | Numeric template ID from Brevo (not `0`) |
+| `BREVO_OTP_PARAM` | Template variable name (default `otp`) — must match `{{ params.otp }}` in template |
+
+### Brevo on Render (emails not sending?)
+
+Set **at least one** of:
+
+1. **Brevo API** (recommended for OTP): `BREVO_API_KEY` + `BREVO_OTP_TEMPLATE_ID` + `MAIL_FROM`
+2. **Brevo SMTP**: `SMTP_HOST`, `SMTP_USER`, `SMTP_PASS`, `MAIL_FROM`
+
+After deploy, open **Render → Logs** on startup. You should see:
+
+```
+Email configuration:
+  SMTP: yes (...)
+  Brevo API key: yes
+  Brevo OTP template: yes (id 123, param "otp")
+  Sender: your@verified-domain.com
+```
+
+If you see `WARNING: No email transport configured`, env vars are missing on Render.
+
+**OTP template:** In Brevo, create a transactional template with `{{ params.otp }}` (or set `BREVO_OTP_PARAM` to your variable name). Use the numeric template ID from Brevo, not `0`.
+
+**Sender:** `MAIL_FROM` must be a **verified sender** in Brevo (Senders & IP → Senders).
 
 ## Deploy on Render
 
 1. Create a **Web Service** from this repo.
 2. Set **Root Directory** to `backend` (required — `dist/` is not committed).
-3. **Build Command:** `npm install && npm run build`
+3. **Build Command:** `npm install --include=dev && npm run build`
 4. **Start Command:** `npm run render:start` (runs migrations, then `node dist/index.js`)
 5. Add env vars from `.env.example` (`DATABASE_URL`, JWT secrets, `CORS_ORIGIN`, etc.).
 

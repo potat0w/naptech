@@ -2,7 +2,7 @@ import { prisma } from "../db/prisma.js";
 import { logActivity } from "../utils/activity.js";
 import { deriveInquirySubject } from "../utils/mappers.js";
 import { sendInquiryNotificationEmail } from "../utils/email.js";
-import { smtpConfigured } from "../config/env.js";
+import { emailConfigured } from "../config/env.js";
 import type { EnquiryType, InquiryStatus } from "@prisma/client";
 
 export async function createInquiry(data: {
@@ -37,7 +37,7 @@ export async function createInquiry(data: {
     message: `New enquiry from ${inquiry.fullName}`,
   }).catch((err) => console.error("Failed to log enquiry activity:", err));
 
-  if (smtpConfigured()) {
+  if (emailConfigured()) {
     void sendInquiryNotificationEmail({
       fullName: inquiry.fullName,
       email: inquiry.email,

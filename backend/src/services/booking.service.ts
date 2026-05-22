@@ -12,7 +12,7 @@ import {
   serializeBooking,
 } from "../serializers/booking.js";
 import { sendBookingNotificationEmail } from "../utils/email.js";
-import { smtpConfigured } from "../config/env.js";
+import { emailConfigured } from "../config/env.js";
 
 export async function createBooking(
   userId: string,
@@ -73,7 +73,7 @@ export async function createBooking(
     message: `${user.firstName} ${user.lastName} submitted a care booking request`,
   });
 
-  if (smtpConfigured()) {
+  if (emailConfigured()) {
     try {
       await sendBookingNotificationEmail({
         clientName: request.patientLabel,
