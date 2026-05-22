@@ -67,6 +67,14 @@ async function main() {
     password: "ChangeMe123!",
   });
 
+  await createUserWithCredential({
+    role: "admin",
+    firstName: "Kahon",
+    lastName: "Zaman",
+    email: "kahonbintezaman@gmail.com",
+    password: "ChangeMe123!",
+  });
+
   const caregiverSeeds = [
     {
       firstName: "Sarah",
@@ -169,6 +177,7 @@ async function main() {
 
   console.log("Seed complete:");
   console.log("  admin@naptec.care / ChangeMe123!");
+  console.log("  kahonbintezaman@gmail.com / ChangeMe123!");
   console.log("  caregiver@naptec.care / ChangeMe123!");
   console.log("  james.okonkwo@naptec.care / ChangeMe123!");
   console.log("  priya.sharma@naptec.care / ChangeMe123!");

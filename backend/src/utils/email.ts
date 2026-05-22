@@ -5,6 +5,7 @@ import {
   buildNewAssignmentEmailHtml,
   buildRemovedAssignmentEmailHtml,
 } from "./assignment-email-html.js";
+import { buildInquiryNotificationEmailHtml } from "./inquiry-email-html.js";
 import { buildPasswordResetOtpHtml } from "./otp-email-html.js";
 
 export type AssignmentEmailDetails = {
@@ -142,21 +143,9 @@ export async function sendInquiryNotificationEmail(data: {
   message: string;
 }) {
   const subject = `New enquiry: ${data.subject}`;
-  const text = `A new enquiry was submitted on the Naptec website.
+  const html = buildInquiryNotificationEmailHtml(data, `${env.appUrl}/admin/inquiries`);
 
-Name: ${data.fullName}
-Email: ${data.email}
-Phone: ${data.phone}
-Subject: ${data.subject}
-
-Message:
-${data.message || "(no message)"}`;
-
-  return sendEmail({
-    to: env.adminEmail,
-    subject,
-    text,
-  });
+  return sendHtmlEmail(env.adminEmail, subject, html);
 }
 
 export async function sendBookingNotificationEmail(data: {
