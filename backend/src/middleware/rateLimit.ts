@@ -5,7 +5,7 @@ const isDev = env.nodeEnv !== "production";
 
 export const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: isDev ? 500 : 20,
+  max: isDev ? 500 : 120,
   standardHeaders: true,
   legacyHeaders: false,
   message: { error: { code: "RATE_LIMIT", message: "Too many attempts. Try again later." } },

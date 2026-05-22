@@ -28,8 +28,11 @@ export async function authenticate(req: AuthRequest, _res: Response, next: NextF
     if (!user) return next(unauthorized());
     req.user = { id: user.id, role: user.role, email: user.email };
     return next();
-  } catch {
-    return next(unauthorized("Invalid or expired token."));
+  } catch (err) {
+    if (err instanceof Error && err.name === "JsonWebTokenError") {
+      return next(unauthorized("Invalid or expired token."));
+    }
+    return next(err);
   }
 }
 
