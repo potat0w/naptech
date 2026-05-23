@@ -64,6 +64,30 @@ export function buildNewAssignmentEmailHtml(
   });
 }
 
+export function buildNewAssignmentEmailText(
+  details: AssignmentEmailDetails,
+  portalUrl: string
+) {
+  const tasks =
+    details.tasks.length > 0
+      ? details.tasks.map((task, i) => `${i + 1}. ${task}`).join("\n")
+      : "Standard visit tasks (see your portal).";
+
+  return `Hello ${details.caregiverName},
+
+You have been assigned a new home visit.
+
+Client: ${details.clientName}
+Address: ${details.address}
+Date: ${details.date}
+Time: ${details.shiftStart} – ${details.shiftEnd}
+
+Tasks:
+${tasks}
+
+View visit in portal: ${portalUrl}`;
+}
+
 export function buildRemovedAssignmentEmailHtml(details: AssignmentEmailDetails) {
   const body = `
     <p style="margin:0 0 8px;font-size:16px;line-height:1.6;color:#404040;">
@@ -81,4 +105,45 @@ export function buildRemovedAssignmentEmailHtml(details: AssignmentEmailDetails)
     headline: "Visit reassigned",
     body,
   });
+}
+
+export function buildRemovedAssignmentEmailText(details: AssignmentEmailDetails) {
+  return `Hello ${details.caregiverName},
+
+You are no longer assigned to this visit. It has been reassigned to another caregiver — you do not need to attend.
+
+Client: ${details.clientName}
+Address: ${details.address}
+Date: ${details.date}
+Time: ${details.shiftStart} – ${details.shiftEnd}`;
+}
+
+export function buildCancelledAssignmentEmailHtml(details: AssignmentEmailDetails) {
+  const body = `
+    <p style="margin:0 0 8px;font-size:16px;line-height:1.6;color:#404040;">
+      Hello <strong style="color:#3f2d62;">${escapeHtml(details.caregiverName)}</strong>,
+    </p>
+    <p style="margin:0;font-size:15px;line-height:1.6;color:#6b6560;">
+      This home visit has been cancelled. You do not need to attend.
+    </p>
+    ${visitCard(details)}`;
+
+  return wrapEmailHtml({
+    title: `Visit cancelled — ${details.clientName}`,
+    preheader: `Visit cancelled: ${details.clientName} on ${details.date}`,
+    headerBg: "#503878",
+    headline: "Visit cancelled",
+    body,
+  });
+}
+
+export function buildCancelledAssignmentEmailText(details: AssignmentEmailDetails) {
+  return `Hello ${details.caregiverName},
+
+This home visit has been cancelled. You do not need to attend.
+
+Client: ${details.clientName}
+Address: ${details.address}
+Date: ${details.date}
+Time: ${details.shiftStart} – ${details.shiftEnd}`;
 }

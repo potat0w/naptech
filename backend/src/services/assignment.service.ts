@@ -5,6 +5,7 @@ import { badRequest, conflict, notFound } from "../utils/errors.js";
 import { formatServiceAddress } from "../serializers/booking.js";
 import { serializeAssignment } from "../serializers/assignment.js";
 import {
+  emailCaregiverCancelledAssignment,
   emailCaregiverNewAssignment,
   emailCaregiverRemovedFromAssignment,
 } from "../utils/assignment-email.js";
@@ -286,6 +287,8 @@ export async function cancelAssignment(adminId: string, assignmentId: string) {
     entityId: assignment.id,
     message: `Assignment cancelled for ${assignment.caregiver.firstName} ${assignment.caregiver.lastName} — ${assignment.clientDisplayName}`,
   });
+
+  await emailCaregiverCancelledAssignment(assignment.caregiver, assignment);
 
   return serializeAssignment(updated);
 }

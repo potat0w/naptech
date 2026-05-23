@@ -1,6 +1,7 @@
 import type { Assignment, AssignmentTask, User } from "@prisma/client";
 import { dateOnlyToIso } from "./dates.js";
 import {
+  sendCaregiverCancelledAssignmentEmail,
   sendCaregiverNewAssignmentEmail,
   sendCaregiverRemovedFromAssignmentEmail,
   type AssignmentEmailDetails,
@@ -51,5 +52,19 @@ export async function emailCaregiverRemovedFromAssignment(
   );
   if (!result.sent) {
     console.error(`Assignment removal email not sent → ${caregiver.email}`);
+  }
+}
+
+export async function emailCaregiverCancelledAssignment(
+  caregiver: User,
+  assignment: AssignmentWithTasks
+) {
+  if (!emailConfigured() || !caregiver.email) return;
+  const result = await sendCaregiverCancelledAssignmentEmail(
+    caregiver.email,
+    toEmailDetails(assignment, caregiver)
+  );
+  if (!result.sent) {
+    console.error(`Assignment cancellation email not sent → ${caregiver.email}`);
   }
 }

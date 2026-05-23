@@ -8,15 +8,24 @@ import {
 } from "../config/env.js";
 import { sendBrevoHtmlEmail, sendBrevoTemplateEmail } from "./brevo.js";
 import {
+  buildCancelledAssignmentEmailHtml,
+  buildCancelledAssignmentEmailText,
   buildNewAssignmentEmailHtml,
+  buildNewAssignmentEmailText,
   buildRemovedAssignmentEmailHtml,
+  buildRemovedAssignmentEmailText,
 } from "./assignment-email-html.js";
 import {
   buildBookingNotificationEmailHtml,
   buildBookingNotificationEmailText,
 } from "./booking-email-html.js";
-import { buildInquiryNotificationEmailHtml } from "./inquiry-email-html.js";
+import { buildInquiryNotificationEmailHtml, buildInquiryNotificationEmailText } from "./inquiry-email-html.js";
 import { buildPasswordResetOtpHtml } from "./otp-email-html.js";
+import { buildPasswordResetEmailHtml, buildPasswordResetEmailText } from "./password-reset-email-html.js";
+import {
+  buildRecruitmentApplicationEmailHtml,
+  buildRecruitmentApplicationEmailText,
+} from "./recruitment-email-html.js";
 
 export type AssignmentEmailDetails = {
   caregiverName: string;
@@ -66,16 +75,6 @@ async function sendViaSmtp(to: string, subject: string, html: string, text?: str
 async function deliverHtmlEmail(to: string, subject: string, html: string, text?: string) {
   const failures: string[] = [];
 
-  if (smtpConfigured()) {
-    try {
-      await sendViaSmtp(to, subject, html, text);
-      console.log(`Email sent via SMTP → ${to} (${subject})`);
-      return { sent: true as const, channel: "smtp" as const };
-    } catch (err) {
-      failures.push(`SMTP: ${err instanceof Error ? err.message : String(err)}`);
-    }
-  }
-
   if (brevoApiKeyConfigured()) {
     try {
       await sendBrevoHtmlEmail({ to, subject, html, text });
@@ -83,6 +82,16 @@ async function deliverHtmlEmail(to: string, subject: string, html: string, text?
       return { sent: true as const, channel: "brevo" as const };
     } catch (err) {
       failures.push(`Brevo: ${err instanceof Error ? err.message : String(err)}`);
+    }
+  }
+
+  if (smtpConfigured()) {
+    try {
+      await sendViaSmtp(to, subject, html, text);
+      console.log(`Email sent via SMTP → ${to} (${subject})`);
+      return { sent: true as const, channel: "smtp" as const };
+    } catch (err) {
+      failures.push(`SMTP: ${err instanceof Error ? err.message : String(err)}`);
     }
   }
 
@@ -132,7 +141,8 @@ export async function sendCaregiverNewAssignmentEmail(
   const subject = `New home visit assigned — ${details.clientName}`;
   const portalUrl = joinAppUrl(appUrls.caregiver(), "/tasks");
   const html = buildNewAssignmentEmailHtml(details, portalUrl);
-  return deliverHtmlEmail(to, subject, html);
+  const text = buildNewAssignmentEmailText(details, portalUrl);
+  return deliverHtmlEmail(to, subject, html, text);
 }
 
 export async function sendCaregiverRemovedFromAssignmentEmail(
@@ -141,24 +151,25 @@ export async function sendCaregiverRemovedFromAssignmentEmail(
 ) {
   const subject = `Visit reassigned — ${details.clientName}`;
   const html = buildRemovedAssignmentEmailHtml(details);
-  return deliverHtmlEmail(to, subject, html);
+  const text = buildRemovedAssignmentEmailText(details);
+  return deliverHtmlEmail(to, subject, html, text);
+}
+
+export async function sendCaregiverCancelledAssignmentEmail(
+  to: string,
+  details: AssignmentEmailDetails
+) {
+  const subject = `Visit cancelled — ${details.clientName}`;
+  const html = buildCancelledAssignmentEmailHtml(details);
+  const text = buildCancelledAssignmentEmailText(details);
+  return deliverHtmlEmail(to, subject, html, text);
 }
 
 export async function sendPasswordResetEmail(to: string, resetToken: string) {
   const resetUrl = `${joinAppUrl(appUrls.web(), "/reset-password")}?token=${encodeURIComponent(resetToken)}`;
   const subject = "Reset your Naptec password";
-  const text = `You requested a password reset for your Naptec account.
-
-Use this link to set a new password (valid for 1 hour):
-${resetUrl}
-
-If you did not request this, you can ignore this email.`;
-
-  const html = `
-<p>You requested a password reset for your Naptec account.</p>
-<p><a href="${resetUrl}">Reset your password</a></p>
-<p>This link is valid for 1 hour.</p>
-<p>If you did not request this, you can ignore this email.</p>`;
+  const html = buildPasswordResetEmailHtml(resetUrl);
+  const text = buildPasswordResetEmailText(resetUrl);
 
   return deliverHtmlEmail(to, subject, html, text);
 }
@@ -171,11 +182,29 @@ export async function sendInquiryNotificationEmail(data: {
   message: string;
 }) {
   const subject = `New enquiry: ${data.subject}`;
-  const html = buildInquiryNotificationEmailHtml(
-    data,
-    joinAppUrl(appUrls.admin(), "/inquiries")
-  );
-  return deliverHtmlEmail(env.adminEmail, subject, html);
+  const adminUrl = joinAppUrl(appUrls.admin(), "/inquiries");
+  const html = buildInquiryNotificationEmailHtml(data, adminUrl);
+  const text = buildInquiryNotificationEmailText(data);
+  return deliverHtmlEmail(env.adminEmail, subject, html, text);
+}
+
+export async function sendRecruitmentApplicationNotificationEmail(data: {
+  firstName: string;
+  lastName: string;
+  email: string;
+  telephone: string;
+  position: string;
+  experience: string;
+  cvDriveUrl: string;
+  availability?: string;
+  message?: string;
+}) {
+  const fullName = `${data.firstName} ${data.lastName}`.trim();
+  const subject = `New job application — ${fullName}`;
+  const adminUrl = joinAppUrl(appUrls.admin(), "/dashboard");
+  const html = buildRecruitmentApplicationEmailHtml(data, adminUrl);
+  const text = buildRecruitmentApplicationEmailText(data);
+  return deliverHtmlEmail(env.adminEmail, subject, html, text);
 }
 
 export async function sendBookingNotificationEmail(data: {

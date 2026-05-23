@@ -1,5 +1,7 @@
 import { prisma } from "../db/prisma.js";
 import { experienceFromApi, positionFromApi } from "../utils/mappers.js";
+import { sendRecruitmentApplicationNotificationEmail } from "../utils/email.js";
+import { emailConfigured } from "../config/env.js";
 
 export async function createRecruitmentApplication(fields: {
   firstName: string;
@@ -13,7 +15,7 @@ export async function createRecruitmentApplication(fields: {
   message?: string;
   rightToWork: unknown;
 }) {
-  return prisma.recruitmentApplication.create({
+  const application = await prisma.recruitmentApplication.create({
     data: {
       firstName: fields.firstName.trim(),
       lastName: fields.lastName.trim(),
@@ -27,4 +29,22 @@ export async function createRecruitmentApplication(fields: {
       rightToWorkConfirmed: true,
     },
   });
+
+  if (emailConfigured()) {
+    void sendRecruitmentApplicationNotificationEmail({
+      firstName: application.firstName,
+      lastName: application.lastName,
+      email: application.email,
+      telephone: application.telephone,
+      position: application.position,
+      experience: application.experience,
+      cvDriveUrl: application.cvDriveUrl,
+      availability: application.availability ?? undefined,
+      message: application.message ?? undefined,
+    }).catch((err) =>
+      console.error("Failed to send recruitment application notification email:", err)
+    );
+  }
+
+  return application;
 }

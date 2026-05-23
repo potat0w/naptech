@@ -66,3 +66,18 @@ export function buildInquiryNotificationEmailHtml(
     body,
   });
 }
+
+export function buildInquiryNotificationEmailText(data: InquiryEmailData) {
+  const message = data.message.trim() || "(no message)";
+  return `A new enquiry was submitted on the Naptec website.
+
+Name: ${data.fullName}
+Email: ${data.email}
+Phone: ${data.phone}
+Subject: ${data.subject}
+
+Message:
+${message}
+
+Review in the admin portal.`;
+}

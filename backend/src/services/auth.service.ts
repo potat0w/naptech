@@ -11,7 +11,7 @@ import {
 } from "../utils/tokens.js";
 import { serializeUserMe } from "../serializers/user.js";
 import { sendPasswordResetEmail, sendPasswordResetOtpEmail } from "../utils/email.js";
-import { emailConfigured, env, smtpConfigured } from "../config/env.js";
+import { emailConfigured, env } from "../config/env.js";
 
 const REFRESH_MS = 7 * 24 * 60 * 60 * 1000;
 
@@ -164,7 +164,7 @@ export async function forgotPassword(email: string) {
     },
   });
 
-  if (smtpConfigured()) {
+  if (emailConfigured()) {
     try {
       await sendPasswordResetEmail(user.email, token);
     } catch (err) {
