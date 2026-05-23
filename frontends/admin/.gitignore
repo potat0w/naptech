@@ -1,0 +1,10 @@
+node_modules
+.env
+.env.local
+backend/RENDER-COPY-PASTE.env
+*.log
+.DS_Store
+dist
+backend/dist
+frontend/.next
+**/.next/

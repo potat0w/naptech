@@ -31,6 +31,9 @@ const caregiverNav: NavItem[] = [
   { href: "/profile", label: "Profile", icon: User },
 ];
 
+const portalHeaderClass =
+  "flex h-16 shrink-0 items-center border-b border-surface-card";
+
 export default function PortalShell({ title, children }: { title: string; children: ReactNode }) {
   const { user, logout } = useAuth();
   const pathname = usePathname();
@@ -49,13 +52,14 @@ export default function PortalShell({ title, children }: { title: string; childr
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="flex items-center justify-between border-b border-surface-card px-5 py-4">
-          <Link href={caregiverNav[0].href} className="flex min-w-0 items-center">
+        <div className={`${portalHeaderClass} justify-between overflow-visible px-5`}>
+          <Link href={caregiverNav[0].href} className="flex items-center">
             <SiteLogo
               linked={false}
-              className="h-12 w-auto max-w-[170px]"
-              width={170}
-              height={48}
+              priority
+              className="h-11 w-auto max-w-[160px] object-contain"
+              width={160}
+              height={160}
             />
           </Link>
           <button
@@ -116,8 +120,10 @@ export default function PortalShell({ title, children }: { title: string; childr
       ) : null}
 
       <div className="flex min-h-screen flex-1 flex-col lg:pl-64">
-        <header className="sticky top-0 z-20 flex items-center justify-between border-b border-surface-card bg-white/95 px-4 py-3 backdrop-blur sm:px-6">
-          <div className="flex items-center gap-3">
+        <header
+          className={`sticky top-0 z-20 ${portalHeaderClass} justify-between bg-white/95 px-4 backdrop-blur sm:px-6`}
+        >
+          <div className="flex min-w-0 items-center gap-3">
             <button
               type="button"
               onClick={() => setMobileOpen(true)}
@@ -126,9 +132,14 @@ export default function PortalShell({ title, children }: { title: string; childr
             >
               <Menu className="h-5 w-5" />
             </button>
-            <div>
-              <p className="text-xs font-medium uppercase tracking-wide text-brand">Care portal</p>
-              <h1 className="text-lg font-normal text-neutral-900 sm:text-xl" style={headingFont}>
+            <div className="min-w-0">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-brand">
+                Care portal
+              </p>
+              <h1
+                className="truncate text-lg font-normal leading-tight text-neutral-900 sm:text-xl"
+                style={headingFont}
+              >
                 {title}
               </h1>
             </div>

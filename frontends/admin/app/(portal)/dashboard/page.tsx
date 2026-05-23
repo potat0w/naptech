@@ -11,15 +11,18 @@ import {
 } from "@/lib/api/admin";
 import type { AdminBooking, CareReport } from "@/lib/portal/types";
 import {
-  BarChart3,
   CalendarDays,
+  ChevronLeft,
+  ChevronRight,
   ClipboardList,
   FileText,
   Inbox,
   Users,
 } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+
+const ACTIVITY_PAGE_SIZE = 6;
 
 export default function AdminDashboardPage() {
   const [stats, setStats] = useState({
@@ -35,6 +38,17 @@ export default function AdminDashboardPage() {
   const [reports, setReports] = useState<CareReport[]>([]);
   const [pendingBookings, setPendingBookings] = useState<AdminBooking[]>([]);
   const [loading, setLoading] = useState(true);
+  const [activityPage, setActivityPage] = useState(0);
+
+  const activityTotalPages = Math.max(1, Math.ceil(activity.length / ACTIVITY_PAGE_SIZE));
+  const paginatedActivity = useMemo(
+    () =>
+      activity.slice(
+        activityPage * ACTIVITY_PAGE_SIZE,
+        activityPage * ACTIVITY_PAGE_SIZE + ACTIVITY_PAGE_SIZE
+      ),
+    [activity, activityPage]
+  );
 
   useEffect(() => {
     Promise.all([
@@ -123,30 +137,45 @@ export default function AdminDashboardPage() {
             )}
           </section>
 
-          <div className="mt-8 grid gap-6 lg:grid-cols-3">
-            <div className="rounded-2xl border border-surface-card bg-white p-5 lg:col-span-2">
-              <h2 className="text-sm font-semibold text-neutral-900">Reports overview</h2>
-              <div className="mt-6 flex h-48 items-center justify-center rounded-xl border border-dashed border-surface-card bg-surface-alt/50">
-                <div className="flex items-center gap-2 text-sm text-muted">
-                  <BarChart3 className="h-5 w-5 text-brand" />
-                  Chart placeholder — connect analytics later
-                </div>
+          <div className="mt-8 rounded-2xl border border-surface-card bg-white p-5">
+            <h2 className="text-sm font-semibold text-neutral-900">Recent activity</h2>
+            <ul className="mt-4 space-y-3">
+              {paginatedActivity.map((item) => (
+                <li key={item.id} className="border-b border-surface-card pb-3 last:border-0">
+                  <p className="text-sm text-body">{item.message}</p>
+                  <p className="mt-0.5 text-xs text-muted">
+                    {new Date(item.time).toLocaleString("en-GB")}
+                  </p>
+                </li>
+              ))}
+            </ul>
+            {activity.length > ACTIVITY_PAGE_SIZE ? (
+              <div className="mt-4 flex items-center justify-end gap-3 border-t border-surface-card pt-4">
+                <button
+                  type="button"
+                  onClick={() => setActivityPage((page) => Math.max(0, page - 1))}
+                  disabled={activityPage === 0}
+                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-surface-card text-neutral-700 transition-colors hover:bg-surface-alt disabled:cursor-not-allowed disabled:opacity-40"
+                  aria-label="Previous page"
+                >
+                  <ChevronLeft className="h-4 w-4" strokeWidth={2} />
+                </button>
+                <p className="text-sm tabular-nums text-muted">
+                  {activityPage + 1} of {activityTotalPages}
+                </p>
+                <button
+                  type="button"
+                  onClick={() =>
+                    setActivityPage((page) => Math.min(activityTotalPages - 1, page + 1))
+                  }
+                  disabled={activityPage >= activityTotalPages - 1}
+                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand text-white transition-colors hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-40"
+                  aria-label="Next page"
+                >
+                  <ChevronRight className="h-4 w-4" strokeWidth={2} />
+                </button>
               </div>
-            </div>
-
-            <div className="rounded-2xl border border-surface-card bg-white p-5">
-              <h2 className="text-sm font-semibold text-neutral-900">Recent activity</h2>
-              <ul className="mt-4 space-y-3">
-                {activity.map((item) => (
-                  <li key={item.id} className="border-b border-surface-card pb-3 last:border-0">
-                    <p className="text-sm text-body">{item.message}</p>
-                    <p className="mt-0.5 text-xs text-muted">
-                      {new Date(item.time).toLocaleString("en-GB")}
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            ) : null}
           </div>
 
           <section className="mt-8 rounded-2xl border border-surface-card bg-white overflow-hidden">

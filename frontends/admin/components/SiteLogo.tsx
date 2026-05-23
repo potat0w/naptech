@@ -33,11 +33,11 @@ export default function SiteLogo({
   );
 
   if (!linked) {
-    return <span className="inline-flex shrink-0">{image}</span>;
+    return <span className="inline-flex shrink-0 items-center overflow-visible">{image}</span>;
   }
 
   return (
-    <Link href="/" onClick={onClick} className="inline-flex shrink-0">
+    <Link href="/" onClick={onClick} className="inline-flex shrink-0 items-center overflow-visible">
       {image}
     </Link>
   );
