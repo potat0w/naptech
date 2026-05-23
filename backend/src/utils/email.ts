@@ -11,6 +11,10 @@ import {
   buildNewAssignmentEmailHtml,
   buildRemovedAssignmentEmailHtml,
 } from "./assignment-email-html.js";
+import {
+  buildBookingNotificationEmailHtml,
+  buildBookingNotificationEmailText,
+} from "./booking-email-html.js";
 import { buildInquiryNotificationEmailHtml } from "./inquiry-email-html.js";
 import { buildPasswordResetOtpHtml } from "./otp-email-html.js";
 
@@ -182,15 +186,9 @@ export async function sendBookingNotificationEmail(data: {
   careNotes?: string;
 }) {
   const subject = `New care booking request — ${data.clientName}`;
-  const text = `A client submitted a new care booking request.
+  const adminUrl = joinAppUrl(appUrls.admin(), "/bookings");
+  const html = buildBookingNotificationEmailHtml(data, adminUrl);
+  const text = buildBookingNotificationEmailText(data);
 
-Client: ${data.clientName}
-Email: ${data.email}
-Phone: ${data.phone}
-Address: ${data.address}
-${data.careNotes ? `\nCare notes:\n${data.careNotes}` : ""}
-
-Review and assign a caregiver in the admin portal.`;
-
-  return deliverHtmlEmail(env.adminEmail, subject, text.replace(/\n/g, "<br>"), text);
+  return deliverHtmlEmail(env.adminEmail, subject, html, text);
 }
