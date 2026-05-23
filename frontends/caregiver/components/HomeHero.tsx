@@ -22,7 +22,7 @@ export default function HomeHero() {
       />
 
 
-      <div className="relative flex flex-col lg:grid lg:min-h-[min(88vh,820px)] lg:grid-cols-2">
+      <div className="relative flex flex-col gap-6 sm:gap-8 lg:grid lg:min-h-[min(88vh,820px)] lg:grid-cols-2 lg:gap-0">
         <div
           className={`${containerClass} relative z-10 order-2 flex flex-col justify-center py-10 sm:py-14 lg:order-1 lg:col-start-1 lg:row-start-1 lg:max-w-none lg:py-20 xl:pr-8`}
         >
@@ -59,7 +59,7 @@ export default function HomeHero() {
 
         </div>
 
-        <div className="animate-fade-up animate-fade-up-delay-2 relative order-1 mx-4 aspect-[5/4] overflow-hidden rounded-2xl sm:mx-6 sm:aspect-[16/10] lg:absolute lg:inset-y-0 lg:right-0 lg:order-2 lg:mx-0 lg:aspect-auto lg:w-[54%] lg:max-w-none lg:rounded-none">
+        <div className="animate-fade-up animate-fade-up-delay-2 relative order-1 mx-4 mt-4 aspect-[5/4] overflow-hidden rounded-2xl sm:mx-6 sm:mt-6 sm:aspect-[16/10] lg:absolute lg:inset-y-0 lg:right-0 lg:order-2 lg:mx-0 lg:mt-0 lg:aspect-auto lg:w-[54%] lg:max-w-none lg:rounded-none">
           <Image
             src={images.hero}
             alt="Care professional supporting a client outdoors in the sunshine"
