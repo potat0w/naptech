@@ -50,14 +50,13 @@ export default function PortalShell({ title, children }: { title: string; childr
         }`}
       >
         <div className="flex items-center justify-between border-b border-surface-card px-5 py-4">
-          <Link href={caregiverNav[0].href} className="flex min-w-0 flex-col gap-1">
+          <Link href={caregiverNav[0].href} className="flex min-w-0 items-center">
             <SiteLogo
               linked={false}
-              className="h-9 w-auto max-w-[140px]"
-              width={160}
-              height={40}
+              className="h-12 w-auto max-w-[170px]"
+              width={170}
+              height={48}
             />
-            <span className="text-xs font-medium text-muted">Care portal</span>
           </Link>
           <button
             type="button"
