@@ -24,7 +24,7 @@ export default function HomeHero() {
 
       <div className="relative flex flex-col lg:grid lg:min-h-[min(88vh,820px)] lg:grid-cols-2">
         <div
-          className={`${containerClass} relative z-10 order-1 flex flex-col justify-center py-10 sm:py-14 lg:col-start-1 lg:row-start-1 lg:max-w-none lg:py-20 xl:pr-8`}
+          className={`${containerClass} relative z-10 order-2 flex flex-col justify-center py-10 sm:py-14 lg:order-1 lg:col-start-1 lg:row-start-1 lg:max-w-none lg:py-20 xl:pr-8`}
         >
           <p className={`${labelEyebrow} animate-fade-up`}>Welcome to Naptec</p>
           <h1 className="animate-fade-up animate-fade-up-delay-1 mt-4 max-w-lg scroll-mt-20 text-[2.75rem] font-normal leading-[1.08] text-neutral-900 sm:scroll-mt-[4.25rem] sm:text-5xl lg:text-[3.5rem] xl:text-6xl">
@@ -59,7 +59,7 @@ export default function HomeHero() {
 
         </div>
 
-        <div className="animate-fade-up animate-fade-up-delay-2 relative order-2 mx-4 aspect-[5/4] max-h-[min(52vh,22rem)] overflow-hidden rounded-2xl sm:mx-6 sm:aspect-[16/10] sm:max-h-[min(48vh,24rem)] lg:absolute lg:inset-y-0 lg:right-0 lg:order-2 lg:mx-0 lg:max-h-none lg:aspect-auto lg:w-[54%] lg:max-w-none lg:rounded-none">
+        <div className="animate-fade-up animate-fade-up-delay-2 relative order-1 mx-4 aspect-[5/4] overflow-hidden rounded-2xl sm:mx-6 sm:aspect-[16/10] lg:absolute lg:inset-y-0 lg:right-0 lg:order-2 lg:mx-0 lg:aspect-auto lg:w-[54%] lg:max-w-none lg:rounded-none">
           <Image
             src={images.hero}
             alt="Care professional supporting a client outdoors in the sunshine"
