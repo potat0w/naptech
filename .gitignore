@@ -6,4 +6,4 @@ backend/RENDER-COPY-PASTE.env
 .DS_Store
 dist
 backend/dist
-frontend/.next
+.next/

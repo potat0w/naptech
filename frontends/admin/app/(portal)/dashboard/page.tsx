@@ -22,7 +22,56 @@ import {
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
-const ACTIVITY_PAGE_SIZE = 6;
+const PAGE_SIZE = 6;
+
+function PaginationControls({
+  page,
+  totalPages,
+  onPageChange,
+  className = "border-t border-surface-card px-5 py-4",
+}: {
+  page: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+  className?: string;
+}) {
+  if (totalPages <= 1) return null;
+
+  return (
+    <div className={`flex items-center justify-end gap-3 ${className}`}>
+      <button
+        type="button"
+        onClick={() => onPageChange(Math.max(0, page - 1))}
+        disabled={page === 0}
+        className="flex h-9 w-9 items-center justify-center rounded-lg border border-surface-card text-neutral-700 transition-colors hover:bg-surface-alt disabled:cursor-not-allowed disabled:opacity-40"
+        aria-label="Previous page"
+      >
+        <ChevronLeft className="h-4 w-4" strokeWidth={2} />
+      </button>
+      <p className="text-sm tabular-nums text-muted">
+        {page + 1} of {totalPages}
+      </p>
+      <button
+        type="button"
+        onClick={() => onPageChange(Math.min(totalPages - 1, page + 1))}
+        disabled={page >= totalPages - 1}
+        className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand text-white transition-colors hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-40"
+        aria-label="Next page"
+      >
+        <ChevronRight className="h-4 w-4" strokeWidth={2} />
+      </button>
+    </div>
+  );
+}
+
+function paginate<T>(items: T[], page: number) {
+  const start = page * PAGE_SIZE;
+  return items.slice(start, start + PAGE_SIZE);
+}
+
+function pageCount(count: number) {
+  return Math.max(1, Math.ceil(count / PAGE_SIZE));
+}
 
 export default function AdminDashboardPage() {
   const [stats, setStats] = useState({
@@ -38,16 +87,21 @@ export default function AdminDashboardPage() {
   const [reports, setReports] = useState<CareReport[]>([]);
   const [pendingBookings, setPendingBookings] = useState<AdminBooking[]>([]);
   const [loading, setLoading] = useState(true);
+  const [bookingsPage, setBookingsPage] = useState(0);
   const [activityPage, setActivityPage] = useState(0);
+  const [reportsPage, setReportsPage] = useState(0);
 
-  const activityTotalPages = Math.max(1, Math.ceil(activity.length / ACTIVITY_PAGE_SIZE));
+  const paginatedBookings = useMemo(
+    () => paginate(pendingBookings, bookingsPage),
+    [pendingBookings, bookingsPage]
+  );
   const paginatedActivity = useMemo(
-    () =>
-      activity.slice(
-        activityPage * ACTIVITY_PAGE_SIZE,
-        activityPage * ACTIVITY_PAGE_SIZE + ACTIVITY_PAGE_SIZE
-      ),
+    () => paginate(activity, activityPage),
     [activity, activityPage]
+  );
+  const paginatedReports = useMemo(
+    () => paginate(reports, reportsPage),
+    [reports, reportsPage]
   );
 
   useEffect(() => {
@@ -60,8 +114,8 @@ export default function AdminDashboardPage() {
       .then(([dash, act, reps, bookings]) => {
         setStats(dash.stats);
         setActivity(act.activity);
-        setReports(reps.reports.slice(0, 10));
-        setPendingBookings(bookings.bookings.slice(0, 8));
+        setReports(reps.reports);
+        setPendingBookings(bookings.bookings);
       })
       .finally(() => setLoading(false));
   }, []);
@@ -112,7 +166,7 @@ export default function AdminDashboardPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {pendingBookings.map((booking) => (
+                    {paginatedBookings.map((booking) => (
                       <tr key={booking.id} className="border-t border-surface-card">
                         <td className="px-5 py-3 font-medium text-neutral-900">
                           {booking.clientName}
@@ -135,6 +189,11 @@ export default function AdminDashboardPage() {
                 </table>
               </div>
             )}
+            <PaginationControls
+              page={bookingsPage}
+              totalPages={pageCount(pendingBookings.length)}
+              onPageChange={setBookingsPage}
+            />
           </section>
 
           <div className="mt-8 rounded-2xl border border-surface-card bg-white p-5">
@@ -149,33 +208,12 @@ export default function AdminDashboardPage() {
                 </li>
               ))}
             </ul>
-            {activity.length > ACTIVITY_PAGE_SIZE ? (
-              <div className="mt-4 flex items-center justify-end gap-3 border-t border-surface-card pt-4">
-                <button
-                  type="button"
-                  onClick={() => setActivityPage((page) => Math.max(0, page - 1))}
-                  disabled={activityPage === 0}
-                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-surface-card text-neutral-700 transition-colors hover:bg-surface-alt disabled:cursor-not-allowed disabled:opacity-40"
-                  aria-label="Previous page"
-                >
-                  <ChevronLeft className="h-4 w-4" strokeWidth={2} />
-                </button>
-                <p className="text-sm tabular-nums text-muted">
-                  {activityPage + 1} of {activityTotalPages}
-                </p>
-                <button
-                  type="button"
-                  onClick={() =>
-                    setActivityPage((page) => Math.min(activityTotalPages - 1, page + 1))
-                  }
-                  disabled={activityPage >= activityTotalPages - 1}
-                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand text-white transition-colors hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-40"
-                  aria-label="Next page"
-                >
-                  <ChevronRight className="h-4 w-4" strokeWidth={2} />
-                </button>
-              </div>
-            ) : null}
+            <PaginationControls
+              page={activityPage}
+              totalPages={pageCount(activity.length)}
+              onPageChange={setActivityPage}
+              className="mt-4 border-t border-surface-card pt-4"
+            />
           </div>
 
           <section className="mt-8 rounded-2xl border border-surface-card bg-white overflow-hidden">
@@ -193,7 +231,7 @@ export default function AdminDashboardPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {reports.map((report) => (
+                  {paginatedReports.map((report) => (
                     <tr key={report.id} className="border-t border-surface-card">
                       <td className="px-5 py-3 text-neutral-900">{report.caregiverName}</td>
                       <td className="px-5 py-3 text-body">{report.clientName}</td>
@@ -208,6 +246,11 @@ export default function AdminDashboardPage() {
                 </tbody>
               </table>
             </div>
+            <PaginationControls
+              page={reportsPage}
+              totalPages={pageCount(reports.length)}
+              onPageChange={setReportsPage}
+            />
           </section>
         </>
       )}
