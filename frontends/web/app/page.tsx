@@ -22,9 +22,7 @@ export default function Home() {
   return (
     <main className="flex flex-1 flex-col">
       <HomeHero />
-      <FadeIn when="mount" delay={400}>
-        <TrustBar />
-      </FadeIn>
+      <TrustBar />
       <FadeIn>
         <AboutUsSection />
       </FadeIn>

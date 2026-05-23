@@ -59,22 +59,24 @@ h6 {
 }
 
 .trust-bar-inner {
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
   width: max-content;
-  min-width: 100%;
+}
+
+.trust-bar-inner.is-ready {
   animation: trust-bar-scroll 35s linear infinite;
   will-change: transform;
 }
 
 @keyframes trust-bar-scroll {
   from {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translateX(-50%);
+    transform: translate3d(calc(var(--trust-bar-offset, 0px) * -1), 0, 0);
   }
 }
 
@@ -119,11 +121,5 @@ h6 {
     animation: none;
     opacity: 1;
     transform: none;
-  }
-
-  .trust-bar-inner {
-    animation: none;
-    transform: none;
-    will-change: auto;
   }
 }

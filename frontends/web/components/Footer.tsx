@@ -6,7 +6,7 @@ import {
   YouTubeIcon,
 } from "@/components/SocialIcons";
 import { containerClass } from "@/lib/layout";
-import { naptecContact, naptecFullAddress } from "@/lib/contact";
+import { naptecContact, naptecLocationLines } from "@/lib/contact";
 import { naptecSocialLinks } from "@/lib/team";
 import Link from "next/link";
 
@@ -101,38 +101,45 @@ export default function Footer() {
               height={56}
               inverted
             />
-            <h3 className="mt-10 font-sans text-xs font-bold uppercase tracking-[0.14em] text-white">
-              National Office
-            </h3>
-            <p className="mt-6 text-sm leading-relaxed text-white/70">
-              {naptecFullAddress}
+
+            <p className="mt-5 text-sm leading-relaxed text-white/70">
+              {naptecLocationLines[0]}
               <br />
-              {naptecContact.country}
+              {naptecLocationLines[1]}
             </p>
-            <p className="mt-6 text-xs font-bold uppercase tracking-[0.14em] text-white/60">
-              Phone
-            </p>
-            <a
-              href={naptecContact.phoneHref}
-              className="mt-2 block text-lg font-semibold tracking-tight text-white underline underline-offset-4 transition-colors hover:text-white/90"
-            >
-              {naptecContact.phone}
-            </a>
-            <p className="mt-6 text-xs font-bold uppercase tracking-[0.14em] text-white/60">
-              Email
-            </p>
-            <a
-              href={`mailto:${naptecContact.email}`}
-              className="mt-2 block break-all text-lg font-semibold tracking-tight text-white underline underline-offset-4 transition-colors hover:text-white/90 sm:break-normal"
-            >
-              {naptecContact.email}
-            </a>
+
+            <div className="mt-6 space-y-3">
+              <div>
+                <p className="font-sans text-xs font-bold uppercase tracking-[0.14em] text-white/60">
+                  Email
+                </p>
+                <a
+                  href={`mailto:${naptecContact.email}`}
+                  className="mt-1 block text-sm leading-relaxed text-white underline underline-offset-4 transition-colors hover:text-white/90"
+                >
+                  {naptecContact.email}
+                </a>
+              </div>
+              <div>
+                <p className="font-sans text-xs font-bold uppercase tracking-[0.14em] text-white/60">
+                  Phone
+                </p>
+                <a
+                  href={naptecContact.phoneHref}
+                  className="mt-1 block text-sm leading-relaxed text-white underline underline-offset-4 transition-colors hover:text-white/90"
+                >
+                  {naptecContact.phone}
+                </a>
+              </div>
+            </div>
+
             <Link
               href="/recruitment"
               className="mt-6 block text-sm font-semibold text-white transition-colors hover:text-white/85"
             >
               Apply to be a Care Professional
             </Link>
+
             <div className="mt-8 flex gap-3">
               {socialLinks.map(({ label, href, icon: Icon }) => (
                 <a
