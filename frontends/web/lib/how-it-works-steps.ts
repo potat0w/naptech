@@ -15,7 +15,7 @@ export const howItWorksSteps: HowItWorksStep[] = [
     navLabel: "Get in touch with Naptec",
     title: "Get in touch with Naptec",
     paragraphs: [
-      "Our team is based in Warrington and rooted in the community we serve. Get in touch to speak with a friendly advisor about care for you or a loved one.",
+      "Our team is based in London and rooted in the community we serve. Get in touch to speak with a friendly advisor about care for you or a loved one.",
     ],
     image:
       "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778932857/centre-for-ageing-better-rQJ3xo-0WYE-unsplash_mhe64i.jpg",

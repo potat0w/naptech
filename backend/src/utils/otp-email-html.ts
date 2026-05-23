@@ -1,3 +1,5 @@
+import { naptecEmailFooterHtml } from "../config/contact.js";
+
 export function buildPasswordResetOtpHtml(otp: string) {
   return `<!DOCTYPE html>
 <html lang="en">
@@ -65,14 +67,7 @@ export function buildPasswordResetOtpHtml(otp: string) {
           </tr>
           <tr>
             <td class="footer-pad" align="center" style="background-color:#f5f2f8;padding:24px 32px;border-top:1px solid #ede9f3;">
-              <p style="margin:0 0 8px;font-size:13px;font-weight:bold;color:#3f2d62;">Naptec Care</p>
-              <p style="margin:0 0 12px;font-size:12px;line-height:1.5;color:#6b6560;">
-                Unit 2, Walnut Tree Business Centre, Walnut Tree Farm,<br />
-                Lower Stretton, Warrington, Cheshire WA4 4PG
-              </p>
-              <p style="margin:0;font-size:12px;color:#6b6560;">
-                <a href="mailto:info@naptechealthcareservices.com" style="color:#644596;text-decoration:none;font-weight:bold;">info@naptechealthcareservices.com</a>
-              </p>
+              ${naptecEmailFooterHtml()}
             </td>
           </tr>
         </table>

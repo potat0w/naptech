@@ -14,6 +14,7 @@ import { images } from "@/lib/images";
 import { btnPrimary, btnSecondary } from "@/lib/layout";
 import { formValuesFromForm, inputErrorClass, validateWithSchema } from "@/lib/validation/helpers";
 import { submitInquiry } from "@/lib/api/inquiries";
+import { naptecContact } from "@/lib/contact";
 import { ApiError } from "@/lib/api/client";
 import { enquireSchema } from "@/lib/validation/schemas";
 import Link from "next/link";
@@ -260,10 +261,10 @@ export default function EnquireContent({ titleId, onClose }: EnquireContentProps
       Naptec processes your personal data to respond to your enquiry. For more
       information on how we use your data, please contact us at{" "}
       <a
-        href="mailto:info@naptechealthcareservices.com"
+        href={`mailto:${naptecContact.email}`}
         className="text-brand underline underline-offset-2 transition-colors hover:text-brand-dark"
       >
-        info@naptechealthcareservices.com
+        {naptecContact.email}
       </a>
       .
     </p>

@@ -35,6 +35,16 @@ body {
   color: var(--foreground);
 }
 
+html {
+  scroll-padding-top: 4rem;
+}
+
+@media (min-width: 640px) {
+  html {
+    scroll-padding-top: 4.25rem;
+  }
+}
+
 h1,
 h2,
 h3,

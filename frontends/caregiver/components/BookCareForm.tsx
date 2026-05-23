@@ -146,7 +146,7 @@ export default function BookCareForm({ onSuccess, embedded = false }: BookCareFo
             type="text"
             name="addressLine1"
             defaultValue={user.addressLine1}
-            placeholder="e.g. 14 Oak Lane"
+            placeholder="e.g. 111 Winterbourne Road"
             className={inputErrorClass(Boolean(fieldErrors.addressLine1), formInputClass)}
           />
           <FormFieldError message={fieldErrors.addressLine1} />
@@ -168,7 +168,7 @@ export default function BookCareForm({ onSuccess, embedded = false }: BookCareFo
               type="text"
               name="city"
               defaultValue={user.city}
-              placeholder="e.g. Manchester"
+              placeholder="e.g. London"
               className={inputErrorClass(Boolean(fieldErrors.city), formInputClass)}
             />
             <FormFieldError message={fieldErrors.city} />
@@ -179,7 +179,7 @@ export default function BookCareForm({ onSuccess, embedded = false }: BookCareFo
               type="text"
               name="postcode"
               defaultValue={user.postcode}
-              placeholder="e.g. M20 3AB"
+              placeholder="e.g. CR7 7QY"
               className={inputErrorClass(Boolean(fieldErrors.postcode), formInputClass)}
             />
             <FormFieldError message={fieldErrors.postcode} />

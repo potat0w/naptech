@@ -6,6 +6,7 @@ import {
   YouTubeIcon,
 } from "@/components/SocialIcons";
 import { containerClass } from "@/lib/layout";
+import { naptecContact, naptecFullAddress } from "@/lib/contact";
 import { naptecSocialLinks } from "@/lib/team";
 import Link from "next/link";
 
@@ -104,17 +105,27 @@ export default function Footer() {
               National Office
             </h3>
             <p className="mt-6 text-sm leading-relaxed text-white/70">
-              Unit 2, Walnut Tree Business Centre, Walnut Tree Farm, Lower
-              Stretton, Warrington, Cheshire WA4 4PG
+              {naptecFullAddress}
+              <br />
+              {naptecContact.country}
             </p>
+            <p className="mt-6 text-xs font-bold uppercase tracking-[0.14em] text-white/60">
+              Phone
+            </p>
+            <a
+              href={naptecContact.phoneHref}
+              className="mt-2 block text-lg font-semibold tracking-tight text-white underline underline-offset-4 transition-colors hover:text-white/90"
+            >
+              {naptecContact.phone}
+            </a>
             <p className="mt-6 text-xs font-bold uppercase tracking-[0.14em] text-white/60">
               Email
             </p>
             <a
-              href="mailto:info@naptechealthcareservices.com"
+              href={`mailto:${naptecContact.email}`}
               className="mt-2 block break-all text-lg font-semibold tracking-tight text-white underline underline-offset-4 transition-colors hover:text-white/90 sm:break-normal"
             >
-              info@naptechealthcareservices.com
+              {naptecContact.email}
             </a>
             <Link
               href="/recruitment"
