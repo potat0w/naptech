@@ -22,8 +22,8 @@ export const metadata: Metadata = {
   title: "Naptec Admin",
   description: "Naptec admin portal",
   icons: {
-    icon: siteLogo.src,
-    apple: siteLogo.src,
+    icon: siteLogo.favicon,
+    apple: siteLogo.favicon,
   },
 };
 

@@ -1,5 +1,7 @@
 export const images = {
   logo: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1779202191/logo1_ctw4rm.png",
+  favicon:
+    "https://res.cloudinary.com/dw1n6qugv/image/upload/w_48,h_48,c_limit,f_png/v1779202191/logo1_ctw4rm.png",
   hero: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778932857/centre-for-ageing-better-rQJ3xo-0WYE-unsplash_mhe64i.jpg",
   handsCare:
     "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933400/pexels-kampus-8949833_tldckz.jpg",

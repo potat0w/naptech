@@ -22,8 +22,8 @@ export const metadata: Metadata = {
   title: "Naptec Care",
   description: "Naptec caregiver portal",
   icons: {
-    icon: siteLogo.src,
-    apple: siteLogo.src,
+    icon: siteLogo.favicon,
+    apple: siteLogo.favicon,
   },
 };
 

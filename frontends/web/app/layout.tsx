@@ -25,8 +25,8 @@ export const metadata: Metadata = {
   title: "Naptec",
   description: "Quality home care from Naptec",
   icons: {
-    icon: siteLogo.src,
-    apple: siteLogo.src,
+    icon: siteLogo.favicon,
+    apple: siteLogo.favicon,
   },
 };
 
