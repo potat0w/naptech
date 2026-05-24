@@ -1,6 +1,7 @@
-import { webAppBase } from "@/lib/app-urls";
+import { webAppBase } from "@/lib/site-url";
 
 export const SEO = {
+  siteUrl: "https://www.naptechealthcareservices.co.uk",
   siteName: "Naptec Care",
   legalName: "NapTech Healthcare Services Ltd",
   defaultTitle: "Home Care in Croydon | Naptec Care",

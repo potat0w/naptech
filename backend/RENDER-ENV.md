@@ -5,9 +5,9 @@ Set these on **Render → naptech-1 → Environment** (not only in local `.env`)
 ## Three frontend URLs (emails + links)
 
 ```
-WEB_APP_URL=https://naptech-web.vercel.app
-ADMIN_APP_URL=https://naptech-admin.vercel.app
-CAREGIVER_APP_URL=https://naptech-caregiver.vercel.app
+WEB_APP_URL=https://www.naptechealthcareservices.co.uk
+ADMIN_APP_URL=https://admin.naptechealthcareservices.co.uk
+CAREGIVER_APP_URL=https://caregiver.naptechealthcareservices.co.uk
 ```
 
 `APP_URL` can match `WEB_APP_URL` for backward compatibility.
@@ -34,20 +34,20 @@ After deploy, logs should show:
 
 ```
 SMTP verify: connection to Brevo OK
-Web app URL: https://naptech-web.vercel.app
-Admin app URL: https://naptech-admin.vercel.app
-Caregiver app URL: https://naptech-caregiver.vercel.app
+Web app URL: https://www.naptechealthcareservices.co.uk
+Admin app URL: https://admin.naptechealthcareservices.co.uk
+Caregiver app URL: https://caregiver.naptechealthcareservices.co.uk
 ```
 
 ## Vercel (each frontend project)
 
-Each of `naptech-web`, `naptech-admin`, `naptech-caregiver` needs:
+Each web, admin, and caregiver project needs:
 
 ```
 NEXT_PUBLIC_API_URL=https://naptech-1.onrender.com/v1
-NEXT_PUBLIC_WEB_APP_URL=https://naptech-web.vercel.app
-NEXT_PUBLIC_ADMIN_APP_URL=https://naptech-admin.vercel.app
-NEXT_PUBLIC_CAREGIVER_APP_URL=https://naptech-caregiver.vercel.app
+NEXT_PUBLIC_WEB_APP_URL=https://www.naptechealthcareservices.co.uk
+NEXT_PUBLIC_ADMIN_APP_URL=https://admin.naptechealthcareservices.co.uk
+NEXT_PUBLIC_CAREGIVER_APP_URL=https://caregiver.naptechealthcareservices.co.uk
 ```
 
 Redeploy all three after changing env vars.

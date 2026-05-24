@@ -1,12 +1,12 @@
 import type { UserRole } from "@/lib/auth/types";
+import { webAppBase } from "@/lib/site-url";
+
+export { webAppBase };
 
 function baseUrl(envValue: string | undefined, fallback: string) {
   const raw = envValue?.trim() || fallback;
   return raw.replace(/\/$/, "");
 }
-
-export const webAppBase = () =>
-  baseUrl(process.env.NEXT_PUBLIC_WEB_APP_URL, "http://localhost:3000");
 
 export const adminAppBase = () =>
   baseUrl(process.env.NEXT_PUBLIC_ADMIN_APP_URL, "http://localhost:3001");

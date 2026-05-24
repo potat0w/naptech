@@ -43,7 +43,7 @@ Or from each folder: `cd frontends/web && npm run dev`.
 Add every frontend origin to `CORS_ORIGIN` in `backend/.env` (comma-separated):
 
 ```env
-CORS_ORIGIN=https://naptec.care,https://admin.naptec.care,https://care.naptec.care
+CORS_ORIGIN=https://www.naptechealthcareservices.co.uk,https://admin.naptechealthcareservices.co.uk,https://caregiver.naptechealthcareservices.co.uk
 ```
 
 ## Routes

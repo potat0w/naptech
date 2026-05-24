@@ -54,7 +54,7 @@ export default function AuthShell({
               href={webAppBase()}
               className="font-medium text-white underline underline-offset-4 transition-colors hover:text-white/80"
             >
-              Go to naptec.care
+              Visit our website
             </a>
           </p>
         }

@@ -1,18 +1,7 @@
 import type { UserRole } from "@/lib/auth/types";
+import { adminAppBase, caregiverAppBase, webAppBase } from "@/lib/site-url";
 
-function baseUrl(envValue: string | undefined, fallback: string) {
-  const raw = envValue?.trim() || fallback;
-  return raw.replace(/\/$/, "");
-}
-
-export const webAppBase = () =>
-  baseUrl(process.env.NEXT_PUBLIC_WEB_APP_URL, "http://localhost:3000");
-
-export const adminAppBase = () =>
-  baseUrl(process.env.NEXT_PUBLIC_ADMIN_APP_URL, "http://localhost:3001");
-
-export const caregiverAppBase = () =>
-  baseUrl(process.env.NEXT_PUBLIC_CAREGIVER_APP_URL, "http://localhost:3002");
+export { adminAppBase, caregiverAppBase, webAppBase };
 
 export function appUrl(base: string, path: string) {
   const normalized = path.startsWith("/") ? path : `/${path}`;

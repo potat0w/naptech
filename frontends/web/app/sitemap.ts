@@ -1,7 +1,9 @@
-import { webAppBase } from "@/lib/app-urls";
+import { webAppBase } from "@/lib/site-url";
 import { getAllArticleSlugs } from "@/lib/article-content";
 import { getAllServiceSlugs } from "@/lib/services";
 import type { MetadataRoute } from "next";
+
+export const dynamic = "force-dynamic";
 
 const staticPaths = [
   "",
