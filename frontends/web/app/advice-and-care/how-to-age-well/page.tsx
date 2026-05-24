@@ -1,5 +1,6 @@
-import ContentCarousel from "@/components/ContentCarousel";
+import ContentCarousel, { type CarouselCard } from "@/components/ContentCarousel";
 import GetInTouch from "@/components/GetInTouch";
+import { articles as articleContent } from "@/lib/article-content";
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -40,7 +41,22 @@ const pillars = [
   },
 ] as const;
 
-const guideCards: CarouselCard[] = [];
+const guideSlugs = [
+  "daily-wellness-tips-for-older-adults",
+  "the-importance-of-staying-active-in-later-life",
+  "healthy-eating-habits-for-seniors",
+  "simple-ways-to-improve-everyday-wellbeing",
+  "how-home-care-supports-independent-living",
+  "the-value-of-companionship-and-social-connection",
+];
+
+const guideCards: CarouselCard[] = articleContent
+  .filter((article) => guideSlugs.includes(article.slug))
+  .map((article) => ({
+    image: article.image,
+    title: article.title,
+    href: `/advice-and-care/articles/${article.slug}`,
+  }));
 
 function ContentBlock({
   heading,
