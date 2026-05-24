@@ -3,7 +3,7 @@ services:
     name: naptec-api
     runtime: node
     rootDir: backend
-    buildCommand: npm ci --include=dev && npm run build
+    buildCommand: npm install --include=dev && npm run build
     startCommand: npm run render:start
     healthCheckPath: /v1/health
     envVars:
