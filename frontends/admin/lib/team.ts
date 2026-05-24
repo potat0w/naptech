@@ -50,11 +50,11 @@ export const teamMembers: TeamMember[] = [
   },
   {
     id: "rafin",
-    name: "Alam Rafin",
+    name: "Iftaker Alam Rafin",
     role: "Proposed Register Manager",
-    bio: "Alam is the Proposed Register Manager responsible for day-to-day operations, safer recruitment, safeguarding, and the delivery of person-centred care. Driven by a lifelong dedication to community service and grassroots charity work, Alam ensures that care is delivered with dignity, compassion, and the highest ethical standards.",
+    bio: "Iftaker Alam Rafin is the Proposed Register Manager responsible for day-to-day operations, safer recruitment, safeguarding, and the delivery of person-centred care. Driven by a lifelong dedication to community service and grassroots charity work, he ensures that care is delivered with dignity, compassion, and the highest ethical standards.",
     image: images.teamRafin,
-    imageAlt: "Alam Rafin, Proposed Register Manager at Naptec",
+    imageAlt: "Iftaker Alam Rafin, Proposed Register Manager at Naptec",
     social: {
       ...social,
       linkedin: "https://www.linkedin.com/in/iftaker-alam-rafin-a558b9155",

@@ -40,7 +40,7 @@ export const teamMembers: TeamMember[] = [
     id: "janet",
     name: "Janet Olutu-Adegbuyi",
     role: "Nominated Individual",
-    bio: "Janet serves as the Nominated Individual, acting on behalf of the provider to supervise the management of the regulated activity. She brings more than 15 years of sector experience. Her [...]
+    bio: "Janet serves as the Nominated Individual, acting on behalf of the provider to supervise the management of the regulated activity. She brings more than 15 years of sector experience. Her primary focus is ensuring strict regulatory compliance, overseeing quality assurance, and holding the Proposed Register Manager to account.",
     image: images.teamJanet,
     imageAlt: "Janet Olutu-Adegbuyi, Nominated Individual at Naptec",
     social: {
@@ -52,9 +52,9 @@ export const teamMembers: TeamMember[] = [
     id: "rafin",
     name: "Iftaker Alam Rafin",
     role: "Proposed Register Manager",
-    bio: "Alam is the Proposed Register Manager responsible for day-to-day operations, safer recruitment, safeguarding, and the delivery of person-centred care. Driven by a lifelong dedication to [...]
+    bio: "Iftaker Alam Rafin is the Proposed Register Manager responsible for day-to-day operations, safer recruitment, safeguarding, and the delivery of person-centred care. Driven by a lifelong dedication to community service and grassroots charity work, he ensures that care is delivered with dignity, compassion, and the highest ethical standards.",
     image: images.teamRafin,
-    imageAlt: "Alam Rafin, Proposed Register Manager at Naptec",
+    imageAlt: "Iftaker Alam Rafin, Proposed Register Manager at Naptec",
     social: {
       ...social,
       linkedin: "https://www.linkedin.com/in/iftaker-alam-rafin-a558b9155",
