@@ -351,10 +351,6 @@ export const careOfferings = [
       "Enabling your loved one to continue doing the things they enjoy.",
   },
   {
-    title: "Transportation",
-    description: "Assistance getting from A to B for visits, errands, and outings.",
-  },
-  {
     title: "Medication management",
     description: "Ensuring medicines are taken correctly and on time.",
   },

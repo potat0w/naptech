@@ -5,9 +5,9 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Articles | Naptec",
+  title: "Home Care Articles & Guides | Naptec",
   description:
-    "Articles and guides from Naptec on home care, ageing well, and supporting loved ones at home.",
+    "Expert articles on home care, elderly wellbeing, dementia support, and independent living for families in Croydon and beyond.",
 };
 
 const serif = { fontFamily: "var(--font-playfair), ui-serif, serif" } as const;

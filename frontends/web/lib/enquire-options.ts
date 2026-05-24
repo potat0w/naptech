@@ -1,5 +1,5 @@
 export const careHomes = [
-  { value: "london", label: "Naptec – London (Thornton Heath)" },
+  { value: "croydon", label: "Naptec – Croydon" },
 ] as const;
 
 export const enquiryTypes = [

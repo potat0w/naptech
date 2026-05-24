@@ -1,8 +1,9 @@
 import AccordionList from "@/components/AccordionList";
+import CategoryServiceLinks from "@/components/CategoryServiceLinks";
 import ContentCarousel from "@/components/ContentCarousel";
-// import FaqTestimonials from "@/components/FaqTestimonials";
 import CareOfferingsCarousel from "@/components/CareOfferingsCarousel";
 import GetInTouch from "@/components/GetInTouch";
+import RelatedServices from "@/components/RelatedServices";
 import { btnPrimary } from "@/lib/layout";
 import type { ServicePage } from "@/lib/services";
 import Image from "next/image";
@@ -136,9 +137,9 @@ export default function ServicePageContent({ service }: { service: ServicePage }
               How can we <em className="italic">help?</em>
             </h2>
             <p className="mt-4 text-base leading-relaxed text-neutral-600">
-              We have helped thousands of families to stay safe, comfortable and
-              happy at home. Whatever situation you are facing, Naptec is here to
-              help.
+              Whatever situation you are facing, Naptec is here to help with
+              personalised home care, a free consultation, and support tailored to
+              your family.
             </p>
             <p className="mt-6 text-sm text-neutral-600">
               Are you in need of a little guidance right away?
@@ -207,12 +208,20 @@ export default function ServicePageContent({ service }: { service: ServicePage }
         </section>
       ) : null}
 
+      {service.isCategory ? (
+        <CategoryServiceLinks category={service.category} />
+      ) : null}
+
       {faqItems.length > 0 ? (
         <section className="border-t border-neutral-100 px-4 py-14 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-5xl">
             <AccordionList badge="FAQs" items={faqItems} />
           </div>
         </section>
+      ) : null}
+
+      {service.relatedSlugs && service.relatedSlugs.length > 0 ? (
+        <RelatedServices slugs={service.relatedSlugs} />
       ) : null}
 
       {guides.length > 0 ? (

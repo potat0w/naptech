@@ -7,9 +7,9 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 export const metadata: Metadata = {
-  title: "How To Age Well | Naptec",
+  title: "Ageing Well at Home | Elderly Care Tips | Naptec Croydon",
   description:
-    "Practical support for healthy ageing at home. Naptec helps families age well with dignified care in familiar surroundings.",
+    "Tips for healthy ageing at home in Croydon — wellbeing, nutrition, mental health, and how home care supports independence for older adults.",
 };
 
 const serif = { fontFamily: "var(--font-playfair), ui-serif, serif" } as const;
@@ -19,25 +19,25 @@ const pillars = [
     title: "Health & Wellbeing",
     description:
       "We all need to take care of our health and wellbeing no matter our age. We provide tips on different ways to exercise or keep your mind active.",
-    href: "/advice-and-care/articles",
+    href: "/advice-and-care/articles/daily-wellness-tips-for-older-adults",
   },
   {
     title: "Nutrition",
     description:
       "We aim to raise awareness of the importance of maintaining healthy eating habits and reducing the risk of malnutrition to keep older people healthy at home.",
-    href: "/advice-and-care/articles",
+    href: "/advice-and-care/articles/healthy-eating-habits-for-seniors",
   },
   {
     title: "Mental Health",
     description:
       "Getting older does not necessarily mean your mental abilities will be impacted. Keeping an active mind can help keep you physically and mentally well at home.",
-    href: "/advice-and-care/articles",
+    href: "/advice-and-care/articles/simple-ways-to-improve-everyday-wellbeing",
   },
   {
     title: "Frailty",
     description:
       "Frailty is a common condition in which older people become less able to recover from difficulties during everyday life. We offer advice on recovery and fall prevention.",
-    href: "/advice-and-care/articles",
+    href: "/advice-and-care/articles/the-importance-of-staying-active-in-later-life",
   },
 ] as const;
 
@@ -196,13 +196,12 @@ export default function HowToAgeWellPage() {
             can be in full control of.
           </p>
           <p>
-            Worried your loved one is forgetting things too often? Take a look at
-            our guide on how to spot the early signs of dementia in our{" "}
+            Worried your loved one is forgetting things too often? Read our{" "}
             <Link
-              href="/advice-and-care/articles"
+              href="/what-we-do/dementia-and-alzheimers"
               className="font-medium text-[#3B2A8F] underline underline-offset-4"
             >
-              articles
+              dementia care at home guide
             </Link>
             .
           </p>
@@ -222,8 +221,8 @@ export default function HowToAgeWellPage() {
           </p>
           <p>
             Your older loved one could benefit hugely from somebody making care
-            visits to their home and giving support when needed. Over the years we
-            have found that caring for somebody at home early on can prevent
+            visits to their home and giving support when needed. Caring for somebody
+            at home early on can help prevent
             accidents and even delay the need to move out. Our caregivers build a
             strong relationship with the person they visit, helping them spot any
             changes in health or behaviour and taking the necessary actions to
@@ -265,6 +264,7 @@ export default function HowToAgeWellPage() {
         title="Guides"
         cards={guideCards}
         ariaLabel="How to age well guides"
+        viewAllHref="/advice-and-care/articles"
       />
     </main>
   );

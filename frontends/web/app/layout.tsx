@@ -5,6 +5,9 @@ import AuthProvider from "@/components/AuthProvider";
 import EnquireProvider from "@/components/EnquireProvider";
 import AuthorCreditComment from "@/components/AuthorCreditComment";
 import SiteChrome from "@/components/SiteChrome";
+import { webAppBase } from "@/lib/app-urls";
+import { JsonLd, organizationSchema, websiteSchema } from "@/lib/seo/json-ld";
+import { SEO } from "@/lib/seo/config";
 import { siteLogo } from "@/lib/site-logo";
 
 const outfit = Outfit({
@@ -22,8 +25,19 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Naptec",
-  description: "Quality home care from Naptec",
+  metadataBase: new URL(webAppBase()),
+  title: {
+    default: SEO.defaultTitle,
+    template: "%s",
+  },
+  description: SEO.defaultDescription,
+  openGraph: {
+    type: "website",
+    locale: SEO.locale,
+    siteName: SEO.siteName,
+    title: SEO.defaultTitle,
+    description: SEO.defaultDescription,
+  },
   icons: {
     icon: siteLogo.favicon,
     apple: siteLogo.favicon,
@@ -45,6 +59,7 @@ export default function RootLayout({
         className={`${outfit.className} flex min-h-full flex-col bg-white text-neutral-900 antialiased`}
         suppressHydrationWarning
       >
+        <JsonLd data={[organizationSchema(), websiteSchema()]} />
         <AuthProvider>
           <EnquireProvider>
             <SiteChrome>{children}</SiteChrome>

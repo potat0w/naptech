@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Meet Our Team | Naptec",
   description:
-    "Meet the Naptec team — experienced care leaders dedicated to compassionate, reliable home care for every family.",
+    "Meet the Naptec team — care leaders dedicated to compassionate, reliable home care for every family.",
 };
 
 const serif = { fontFamily: "var(--font-playfair), ui-serif, serif" } as const;

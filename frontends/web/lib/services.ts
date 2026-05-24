@@ -1,3 +1,4 @@
+import { dementiaCare } from "@/lib/dementia-care";
 import {
   dayCare,
   homeHelpHousekeeping,
@@ -42,6 +43,9 @@ export type ServicePage = {
   sections: ServiceSection[];
   faqs: ServiceFaq[];
   description: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  relatedSlugs?: string[];
   isCategory?: boolean;
   guidesTitle?: string;
   guides?: ServiceGuide[];
@@ -139,11 +143,15 @@ function buildService(
 
 const companionship: ServicePage = {
   slug: "companionship",
-  title: "Companionship Care at home",
+  title: "Companionship Care at Home",
   shortTitle: "Companionship",
   category: "domiciliary",
   parentLabel: "Domiciliary Care",
   parentHref: "/what-we-do/domiciliary-care",
+  metaTitle: "Companionship Care at Home | Naptec – Croydon",
+  metaDescription:
+    "Companionship care at home in Croydon. Friendly, matched caregivers for conversation, outings, and elderly support.",
+  relatedSlugs: ["personal-care", "day-care", "dementia-and-alzheimers", "respite-care"],
   intro:
     "Whatever it is that you enjoy doing, we will find the right caregiver to support you and to become your companion.",
   description:
@@ -213,72 +221,164 @@ const companionship: ServicePage = {
 const categoryPages: ServicePage[] = [
   {
     slug: "domiciliary-care",
-    title: "Domiciliary Care at home",
+    title: "Domiciliary Care at Home",
     shortTitle: "Domiciliary Care",
     category: "domiciliary",
     parentLabel: "What We Do",
     parentHref: "/",
+    metaTitle: "Domiciliary Care at Home | Naptec – Croydon",
+    metaDescription:
+      "Domiciliary home care visits in Croydon — companionship, personal care, overnight care, and respite for elderly clients.",
     intro:
-      "Domiciliary care helps you stay independent at home with visits tailored to your routine, from companionship and housekeeping to personal care.",
-    description: "Domiciliary care at home from Naptec.",
+      "Domiciliary care — also called home care or elderly care at home — is professional support delivered through regular visits, tailored to your routine. From companionship and housekeeping to personal care and overnight support, Naptec helps older adults stay independent at home in Croydon.",
+    description:
+      "Domiciliary home care in Croydon from Naptec Care.",
     isCategory: true,
     sections: [
       {
-        heading: "What is domiciliary care?",
+        heading: "What is domiciliary home care?",
         paragraphs: [
-          "Domiciliary care is professional support delivered in your own home. It can include companionship, help around the house, personal care, and respite for family carers.",
+          "Domiciliary care — sometimes called home care or elderly care at home — means a trained caregiver visits you in your own home. Support can range from a few hours of companionship each week to several visits a day for personal care, medication reminders, and household help.",
+          "Unlike residential care, domiciliary care keeps your loved one in familiar surroundings with flexible support that can grow as needs change.",
         ],
         image: defaultImage,
-        imageAlt: "Domiciliary care at home",
+        imageAlt: "Domiciliary home care visit in Croydon",
+      },
+      {
+        heading: "Who is domiciliary care for?",
+        paragraphs: [
+          "Domiciliary care suits older adults who want to remain at home but need help with daily living, families seeking respite, and people recovering from illness who need short-term support. It is often the first step before live-in care if needs become more intensive.",
+        ],
+        image:
+          "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933400/pexels-kampus-8949833_tldckz.jpg",
+        imageAlt: "Elderly person receiving home care at home",
+        cta: { label: "Arrange home care", href: "/enquire" },
       },
     ],
-    faqs: [],
+    faqs: [
+      {
+        id: "difference-live-in",
+        title: "What is the difference between domiciliary care and live-in care?",
+        answer:
+          "Domiciliary care involves scheduled visits, while live-in care means a caregiver resides in the home for continuous support. We can help you choose the right option during a free consultation.",
+      },
+      {
+        id: "areas",
+        title: "Which areas do you provide domiciliary care?",
+        answer:
+          "We provide home care across Croydon and nearby areas including Thornton Heath, Purley, and Coulsdon. Contact us to confirm availability for your postcode.",
+      },
+      {
+        id: "cost",
+        title: "How much does domiciliary care cost?",
+        answer:
+          "Costs depend on visit frequency, length, and type of support. See our cost of care guide or contact us for a personalised quote.",
+      },
+    ],
   },
   {
     slug: "specialist-care",
-    title: "Specialist Care at home",
+    title: "Specialist Home Care",
     shortTitle: "Specialist Care",
     category: "specialist",
     parentLabel: "What We Do",
     parentHref: "/",
+    metaTitle: "Specialist Home Care | Dementia, Parkinson's & More | Naptec",
+    metaDescription:
+      "Specialist home care in Croydon including dementia care, Parkinson's support, palliative care, and post-operative recovery at home.",
     intro:
-      "Specialist care supports complex or long-term conditions at home with trained caregivers who understand your diagnosis and daily needs.",
-    description: "Specialist home care from Naptec.",
+      "Specialist home care supports complex or long-term health conditions with trained caregivers who understand your diagnosis, medication needs, and daily routines.",
+    description: "Specialist home care from Naptec in Croydon.",
     isCategory: true,
     sections: [
       {
-        heading: "What is specialist care?",
+        heading: "What is specialist home care?",
         paragraphs: [
-          "Specialist care includes support for dementia, cancer, Parkinson's, neurological conditions, palliative needs, recovery after surgery, and mobility challenges.",
+          "Specialist care brings condition-specific expertise into the home. Naptec provides dementia and Alzheimer's care, Parkinson's support, neurological care, cancer care, palliative care, post-operative recovery, and mobility support — always with a person-centred plan.",
         ],
         image: defaultImage,
-        imageAlt: "Specialist care at home",
+        imageAlt: "Specialist home care for complex needs",
       },
     ],
-    faqs: [],
+    faqs: [
+      {
+        id: "dementia",
+        title: "Do you provide dementia care at home?",
+        answer:
+          "Yes. Dementia care is one of our core specialist services, with trained caregivers, consistent matching, and options for overnight or live-in support.",
+      },
+    ],
   },
   {
     slug: "live-in-care",
-    title: "Live-In Care at home",
+    title: "Live-In Care at Home",
     shortTitle: "Live-In Care",
     category: "live-in",
     parentLabel: "What We Do",
     parentHref: "/",
+    metaTitle: "Live-In Care at Home | Naptec – Croydon",
+    metaDescription:
+      "Live-in care at home for elderly clients in Croydon. A dedicated caregiver in your home for continuous, personalised support.",
     intro:
-      "When your loved one needs frequent support, live-in care helps them stay independent and comfortable at home with a trusted caregiver.",
-    description: "Live-in care at home from Naptec.",
+      "Live-in care provides continuous support when regular visits are not enough. A dedicated caregiver lives in your home so your loved one stays safe, comfortable, and independent without moving into residential care.",
+    description:
+      "Live-in home care in Croydon from Naptec Care.",
     isCategory: true,
+    relatedSlugs: [
+      "dementia-and-alzheimers",
+      "personal-care",
+      "overnight-care",
+      "respite-care",
+    ],
     sections: [
       {
         heading: "What is live-in care?",
         paragraphs: [
-          "A caregiver lives in your home to provide continuous support, companionship, and assistance tailored to your loved one's routine and preferences.",
+          "Live-in care means a professional caregiver lives in your home and provides round-the-clock support tailored to daily routines — from personal care and meal preparation to companionship and overnight reassurance.",
+          "It is a popular alternative to care homes when families want one-to-one attention, familiar surroundings, and flexible care that adapts over time.",
         ],
-        image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933382/pexels-jsme-mila-523821574-18459193_nlhoas.jpg",
-        imageAlt: "Live-in care at home",
+        image:
+          "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933382/pexels-jsme-mila-523821574-18459193_nlhoas.jpg",
+        imageAlt: "Live-in caregiver supporting an elderly client at home",
+      },
+      {
+        heading: "When is live-in care the right choice?",
+        paragraphs: [
+          "Families often choose live-in care when someone needs frequent supervision, has advanced dementia, cannot be left alone safely, or when several daily visits would be less practical than continuous support.",
+          "We discuss sleeping arrangements, household space, and care goals during a free home consultation before matching a caregiver.",
+        ],
+        image:
+          "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933399/pexels-olly-3791666_nap6fe.jpg",
+        imageAlt: "Elderly couple at home with live-in care support",
+        cta: { label: "Discuss live-in care", href: "/enquire" },
       },
     ],
-    faqs: [],
+    faqs: [
+      {
+        id: "how-works",
+        title: "How does live-in care work?",
+        answer:
+          "A matched caregiver lives in your home and follows a personalised care plan. They provide daily support, companionship, and overnight presence according to agreed hours and rest breaks.",
+      },
+      {
+        id: "vs-care-home",
+        title: "Is live-in care better than a care home?",
+        answer:
+          "It depends on individual needs. Live-in care offers one-to-one support in familiar surroundings, which many families prefer for dementia or when couples wish to stay together at home.",
+      },
+      {
+        id: "cost",
+        title: "How much does live-in care cost?",
+        answer:
+          "Live-in care costs vary based on care needs, hours, and accommodation. Contact Naptec for a tailored quote and funding guidance.",
+      },
+      {
+        id: "dementia",
+        title: "Can live-in care support dementia?",
+        answer:
+          "Yes. Live-in care is often recommended for people with dementia who need continuous supervision, routine, and familiar surroundings.",
+      },
+    ],
   },
 ];
 
@@ -292,7 +392,6 @@ const domiciliaryServices: ServicePage[] = [
 ];
 
 const specialistServices = [
-  ["Dementia & Alzheimer's", "dementia and memory support"],
   ["Cancer", "cancer care at home"],
   ["Parkinson's Care", "Parkinson's support"],
   ["Neurological", "neurological conditions"],
@@ -309,6 +408,7 @@ const specialistServices = [
 export const services: ServicePage[] = [
   ...categoryPages,
   ...domiciliaryServices,
+  dementiaCare,
   ...specialistServices,
 ];
 
@@ -318,6 +418,10 @@ export function getServiceBySlug(slug: string): ServicePage | undefined {
 
 export function getAllServiceSlugs(): string[] {
   return services.map((s) => s.slug);
+}
+
+export function getServicesByCategory(category: ServiceCategory): ServicePage[] {
+  return services.filter((s) => !s.isCategory && s.category === category);
 }
 
 export const careOfferings = [
@@ -349,10 +453,6 @@ export const careOfferings = [
     title: "Community engagement",
     description:
       "Enabling your loved one to continue doing the things they enjoy.",
-  },
-  {
-    title: "Transportation",
-    description: "Assistance getting from A to B for visits, errands, and outings.",
   },
   {
     title: "Medication management",

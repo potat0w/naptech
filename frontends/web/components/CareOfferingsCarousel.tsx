@@ -3,7 +3,6 @@
 import { careOfferings } from "@/lib/services";
 import {
   Calendar,
-  Car,
   ChevronLeft,
   ChevronRight,
   Home,
@@ -26,7 +25,6 @@ const iconMap: Record<string, LucideIcon> = {
   "Mobility support": Accessibility,
   "Health appointment management": Calendar,
   "Community engagement": HeartHandshake,
-  Transportation: Car,
   "Medication management": Pill,
 };
 

@@ -13,9 +13,9 @@ import WhyUs from "@/components/WhyUs";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Naptec | Home care built around your family",
+  title: "Home Care in Croydon | Naptec Care",
   description:
-    "Personalised, reliable home care from Naptec so your loved one can stay independent in the place they love.",
+    "Professional home care, live-in care, dementia care, personal care, and respite care at home in Croydon. Free consultation for local families.",
 };
 
 export default function Home() {

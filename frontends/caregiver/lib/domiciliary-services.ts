@@ -172,7 +172,7 @@ export const overnightCare: ServicePage = {
     {
       heading: "Do you need someone to be there for you during the night?",
       paragraphs: [
-        "At Naptec, we understand that it is important for you to know that you or your loved one feels safe and well supported at home no matter the time of day or night. Our experienced and dedicated caregivers are available to provide care and support during the night, whether this be as a sleep-in service or a waking night service – our overnight care is tailored for whatever you might need.",
+        "At Naptec, we understand that it is important for you to know that you or your loved one feels safe and well supported at home no matter the time of day or night. Our trained and dedicated caregivers are available to provide care and support during the night, whether this be as a sleep-in service or a waking night service – our overnight care is tailored for whatever you might need.",
         "Overnight care is perfect for those who are elderly or unwell, and may either require frequent assistance during the night hours – such as with administering medication or help reaching the bathroom – or who simply want a comforting presence nearby should they need it. Having overnight care at home means that you or your loved one can remain living independently at home with the care and support you need to stay safe and well.",
       ],
       image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933400/pexels-olly-3768131_mdki5q.jpg",
@@ -238,7 +238,7 @@ export const dayCare: ServicePage = {
     {
       heading: "What is Naptec day care?",
       paragraphs: [
-        "Whatever support you need, our experienced caregivers will share in your interests and accompany you in whatever you like to do whether that is crafting, going for a walk, playing games or enjoying music. Naptec day care is flexible to fit in with you. You might only want a few hours or a full day of support and whatever you need, we will match you with a caregiver who will become a trusted companion who enables you to continue living a fulfilled and active life.",
+        "Whatever support you need, our dedicated caregivers will share in your interests and accompany you in whatever you like to do whether that is crafting, going for a walk, playing games or enjoying music. Naptec day care is flexible to fit in with you. You might only want a few hours or a full day of support and whatever you need, we will match you with a caregiver who will become a trusted companion who enables you to continue living a fulfilled and active life.",
         "Naptec day care at home is also ideal for people living with dementia, Parkinson's or for those recovering from a stroke or enduring a mental health need such as depression.",
         "Day care:",
       ],
@@ -257,7 +257,7 @@ export const dayCare: ServicePage = {
       heading: "What can I expect from Naptec day care?",
       paragraphs: [
         "Day care at home means that a caregiver will work with you to develop a plan for activities that are personalised to you and enable you to live your life your way. Day care at Naptec is tailored to your needs, whether that is through physical activities such as walking or reminiscence activities to stimulate your memories.",
-        "It can also include rehabilitative sessions as recommended by other professionals such as physiotherapists and occupational therapists to assist your recovery. Our experienced caregivers are highly trained and will provide a day care service for adults that includes companionship, home help, personal care and specialist care.",
+        "It can also include rehabilitative sessions as recommended by other professionals such as physiotherapists and occupational therapists to assist your recovery. Our caregivers are highly trained and will provide a day care service for adults that includes companionship, home help, personal care and specialist care.",
       ],
       image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933400/pexels-kampus-8949833_tldckz.jpg",
       imageAlt: "Daytime activities with a caregiver",
@@ -307,7 +307,7 @@ export const respiteCare: ServicePage = {
         "It is tailored to your loved one's needs",
         "You are able to take a rest from caring",
         "It is delivered by caregivers matched to you and your loved one",
-        "It is given by highly trained and experienced caregivers",
+        "It is given by highly trained caregivers",
       ],
       image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933365/pexels-kampus-7551662_ock8o9.jpg",
       imageAlt: "Respite care at home",
@@ -317,7 +317,7 @@ export const respiteCare: ServicePage = {
       paragraphs: [
         "By choosing our tailored respite care services, you will have peace of mind knowing that essential care is being taken care of whilst you recharge your batteries. Respite care can take different forms, from a short break to a longer-term stay that enables you to enjoy a holiday.",
         "We can also provide home visits to support you to care for your loved one if you need time to get back on your feet – for example after a hospital stay or if you have been unwell.",
-        "Our caregivers are highly trained and experienced in providing a variety of care services including companionship, personal care and dementia care.",
+        "Our caregivers are highly trained in providing a variety of care services including companionship, personal care and dementia care.",
       ],
       image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933350/pexels-jsme-mila-523821574-29372720_niar1j.jpg",
       imageAlt: "Family carer taking a well-deserved break",
@@ -347,7 +347,7 @@ export const respiteCare: ServicePage = {
       id: "who-provides",
       title: "Who provides respite care?",
       answer:
-        "All respite care is provided by our experienced and fully trained caregivers so both the elderly individual receiving care and their loved ones can take a break with confidence.",
+        "All respite care is provided by our fully trained caregivers so both the elderly individual receiving care and their loved ones can take a break with confidence.",
     },
     {
       id: "short-notice",

@@ -1,52 +1,69 @@
-import ContentCarousel, { type CarouselCard } from "@/components/ContentCarousel";
-import GetInTouch from "@/components/GetInTouch";
+import ContentCarousel from "@/components/ContentCarousel";
+import { costOfCareGuideCards } from "@/lib/carousel-cards";
+import {
+  bodyText,
+  btnPrimary,
+  btnPrimaryInverse,
+  cardBase,
+  containerClass,
+  labelEyebrow,
+  sectionBgBrand,
+  sectionPy,
+  sectionTitle,
+} from "@/lib/layout";
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 export const metadata: Metadata = {
-  title: "The Cost of Home Care | Naptec",
+  title: "Home Care Costs & Funding Guide | Naptec – Croydon",
   description:
-    "Understand the costs and financial support available when considering home care options with Naptec.",
+    "Understand home care costs and funding in Croydon. Compare home care vs care homes, explore financial support, and book a free consultation with Naptec Care.",
 };
 
-const serif = { fontFamily: "var(--font-playfair), ui-serif, serif" } as const;
+const costFactors = [
+  "The type of care required",
+  "The number of care hours needed each week",
+  "Whether specialist support is required",
+  "Your location",
+  "The complexity of care needs",
+] as const;
 
-const regionCards = [
+const fundingOptions = [
+  "Local Authority funding",
+  "NHS Continuing Healthcare funding",
+  "Attendance Allowance",
+  "Pension Credit",
+  "Other disability-related benefits",
+] as const;
+
+const croydonLinks = [
   {
-    title: "England",
+    title: "Home care in Croydon",
     description:
-      "Useful information regarding the cost of care for those considering care in England.",
-    href: "/advice-and-care/articles",
+      "We provide professional home care across Croydon. Speak with our team for a personalised quote based on your care needs.",
+    href: "/home-care-croydon",
+    linkText: "Explore home care in Croydon",
   },
   {
-    title: "Scotland",
+    title: "Our care services",
     description:
-      "Helpful guidance on understanding your care options and costs if you live in Scotland.",
-    href: "/advice-and-care/articles",
+      "Personal care, dementia support, live-in care, respite, and more — find the type of support that fits your situation.",
+    href: "/what-we-do/domiciliary-care",
+    linkText: "View our home care services",
   },
   {
-    title: "Wales",
+    title: "Funding & FAQs",
     description:
-      "Advice on understanding care options and cost for those living in Wales.",
-    href: "/advice-and-care/articles",
-  },
-  {
-    title: "Northern Ireland",
-    description:
-      "Guidance on your care options and the cost of them if you live in Northern Ireland.",
-    href: "/advice-and-care/articles",
+      "Answers on arranging care, what to expect, and how we can help you understand your options.",
+    href: "/advice-and-care/faqs",
+    linkText: "View home care FAQs",
   },
 ] as const;
 
-const packageExamples = [
-  "One client required 7 hours of home visits to take care of their personal care needs, and this cost £231 per week",
-  "One client was living with mid-stage dementia and needed a package of specialist care for 14 hours per week, which cost £490 per week",
-  "One client with diabetes required 14 hours of home visits per week for diabetes monitoring and other health care needs, and this cost £518 per week",
-] as const;
-
-const guideCards: CarouselCard[] = [];
+const textLink =
+  "text-sm font-medium text-brand underline underline-offset-4 transition-colors hover:text-brand-dark";
 
 function ContentBlock({
   heading,
@@ -68,20 +85,14 @@ function ContentBlock({
       className={`mx-auto mt-14 grid max-w-6xl gap-8 sm:mt-16 lg:mt-20 lg:grid-cols-2 lg:items-center lg:gap-12`}
     >
       <div className={reverse ? "lg:order-2" : ""}>
-        <h2
-          className="text-3xl font-normal leading-tight text-neutral-900 sm:text-4xl"
-          style={serif}
-        >
+        <h2 className="text-3xl font-normal leading-tight text-neutral-900 sm:text-4xl">
           {heading}
         </h2>
-        <div className="mt-5 space-y-4 text-base leading-relaxed text-neutral-600">
+        <div className={`mt-5 space-y-4 ${bodyText}`}>
           {children}
           {cta ? (
             <p className="pt-2">
-              <Link
-                href={cta.href}
-                className="text-sm font-medium text-[#3B2A8F] underline underline-offset-4 transition-colors hover:text-[#2d1f6d]"
-              >
+              <Link href={cta.href} className={textLink}>
                 {cta.label}
               </Link>
             </p>
@@ -89,7 +100,7 @@ function ContentBlock({
         </div>
       </div>
       <div
-        className={`relative aspect-[4/3] w-full overflow-hidden rounded-sm bg-[#f2f2f2] ${reverse ? "lg:order-1" : ""}`}
+        className={`relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-surface-card ${reverse ? "lg:order-1" : ""}`}
       >
         <Image
           src={image}
@@ -103,14 +114,61 @@ function ContentBlock({
   );
 }
 
-function InlineLink({ href, children }: { href: string; children: ReactNode }) {
+function ProseSection({
+  heading,
+  children,
+  id,
+}: {
+  heading: string;
+  children: ReactNode;
+  id?: string;
+}) {
   return (
-    <Link
-      href={href}
-      className="font-medium text-[#3B2A8F] underline underline-offset-4 transition-colors hover:text-[#2d1f6d]"
-    >
+    <div id={id} className="mx-auto mt-14 max-w-6xl scroll-mt-28 sm:mt-16 lg:mt-20">
+      <h2 className="text-3xl font-normal leading-tight text-neutral-900 sm:text-4xl">
+        {heading}
+      </h2>
+      <div className={`mt-5 space-y-4 ${bodyText}`}>{children}</div>
+    </div>
+  );
+}
+
+function InlineLink({ href, children }: { href: string; children: ReactNode }) {
+  if (href.startsWith("http://") || href.startsWith("https://")) {
+    return (
+      <a
+        href={href}
+        className={textLink}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {children}
+      </a>
+    );
+  }
+  return (
+    <Link href={href} className={textLink}>
       {children}
     </Link>
+  );
+}
+
+function BulletCardList({ items }: { items: readonly string[] }) {
+  return (
+    <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+      {items.map((item) => (
+        <li
+          key={item}
+          className={`flex gap-3 ${cardBase} !p-5 text-sm leading-relaxed text-body sm:text-base`}
+        >
+          <span
+            className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand"
+            aria-hidden
+          />
+          {item}
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -119,10 +177,10 @@ export default function CostOfCarePage() {
     <main className="flex flex-1 flex-col">
       <section className="px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
         <div className="mx-auto max-w-6xl">
-          <nav aria-label="Breadcrumb" className="text-sm text-neutral-500">
+          <nav aria-label="Breadcrumb" className="text-sm text-muted">
             <ol className="flex flex-wrap items-center gap-2">
               <li>
-                <Link href="/" className="transition-colors hover:text-[#3B2A8F]">
+                <Link href="/" className="transition-colors hover:text-brand">
                   Home
                 </Link>
               </li>
@@ -132,7 +190,7 @@ export default function CostOfCarePage() {
               <li>
                 <Link
                   href="/advice-and-care"
-                  className="transition-colors hover:text-[#3B2A8F]"
+                  className="transition-colors hover:text-brand"
                 >
                   Advice &amp; Support
                 </Link>
@@ -141,29 +199,25 @@ export default function CostOfCarePage() {
                 /
               </li>
               <li className="font-medium text-neutral-800">
-                The Cost of Elderly Care
+                The cost of home care
               </li>
             </ol>
           </nav>
 
-          <p className="mt-8 text-xs font-semibold uppercase tracking-[0.2em] text-[#3B2A8F]">
-            Funding Guidance
-          </p>
-          <h1
-            className="mt-4 text-4xl font-normal tracking-tight text-neutral-900 sm:text-5xl lg:text-6xl"
-            style={serif}
-          >
+          <p className={`mt-8 ${labelEyebrow}`}>Funding Guidance</p>
+          <h1 className={`mt-4 tracking-tight text-neutral-900 ${sectionTitle}`}>
             The cost of home care
           </h1>
-          <p className="mt-6 max-w-3xl text-base leading-relaxed text-neutral-600 sm:text-lg">
-            Understanding the costs and financial support available when
-            considering care options.
+          <p className={`mt-6 max-w-3xl ${bodyText}`}>
+            Practical guidance on home care costs and funding in Croydon and across
+            the UK — so you can understand your options, compare care at home with
+            residential care, and find support that fits your family&apos;s needs.
           </p>
 
-          <div className="relative mt-10 aspect-[21/9] w-full overflow-hidden rounded-sm bg-[#f2f2f2] sm:mt-12">
+          <div className="relative mt-10 aspect-[21/9] w-full overflow-hidden rounded-2xl bg-surface-card sm:mt-12">
             <Image
               src="https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933350/pexels-jsme-mila-523821574-29372720_niar1j.jpg"
-              alt="Family discussing care costs at home"
+              alt="Family discussing home care costs at home"
               fill
               priority
               sizes="(max-width: 1152px) 100vw, 1152px"
@@ -173,58 +227,19 @@ export default function CostOfCarePage() {
         </div>
 
         <ContentBlock
-          heading="Understanding the cost of home care"
-          image="https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933332/pexels-jsme-mila-523821574-18429571_lahwba.jpg"
-          imageAlt="Care professional supporting a client at home"
-        >
-          <p>
-            Everyone wants the very best care for themselves and their loved
-            ones, but the financial considerations of this are undoubtedly
-            important and a big part of your decision. If you are unsure where
-            to begin when it comes to finding out the cost of the home care
-            services you need, we can help by providing a general overview of
-            the average prices in different regions around the UK.
-          </p>
-          <p>
-            Home care can offer an excellent, cost-effective alternative to care
-            homes that is helpful for those looking for additional support with
-            everything from personal care to medical care, so if you are
-            currently looking into the home care options available to you,
-            you&apos;re in the right place.
-          </p>
-          <p>
-            At Naptec, our aim is to help people age positively and in place by
-            bringing expert care to their home. For many years we have been
-            providing the highest standard of care, with industry-leading
-            training for our caregivers accredited by nursing and medical
-            professionals. Whatever questions you have about arranging home care
-            services, we can help.
-          </p>
-        </ContentBlock>
-
-      </section>
-
-      <GetInTouch />
-
-      <section className="px-4 pb-10 sm:px-6 sm:pb-14 lg:px-8 lg:pb-16">
-        <ContentBlock
           heading="What does home care involve?"
           image="https://res.cloudinary.com/dw1n6qugv/image/upload/v1778932857/centre-for-ageing-better-rQJ3xo-0WYE-unsplash_mhe64i.jpg"
           imageAlt="Caregiver helping with daily activities at home"
-          reverse
           cta={{
-            label: "Read our guide to what home or domiciliary care is",
+            label: "Read our guide to domiciliary care",
             href: "/what-we-do/domiciliary-care",
           }}
         >
           <p>
             Home care (sometimes called domiciliary care) means care received in
-            someone&apos;s own home instead of in a hospital, clinic, care home
-            or elsewhere. This could mean help with daily activities like
-            cooking or getting dressed, or more intensive medical support.
-            Whatever you require, if you are not yet ready to move to a care
-            home, your needs can likely be met in the comfort of your own home
-            by a trained professional.
+            someone&apos;s own home instead of in a hospital, clinic, care home,
+            or elsewhere. This could mean help with daily activities like cooking
+            or getting dressed, or more intensive support when needed.
           </p>
         </ContentBlock>
 
@@ -232,162 +247,106 @@ export default function CostOfCarePage() {
           heading="Is home care more affordable than a care home?"
           image="https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933400/pexels-kampus-8949833_tldckz.jpg"
           imageAlt="Older adult receiving care at home"
-          cta={{
-            label: "Read our guide to the benefits of home care versus a care home",
-            href: "/advice-and-care/articles",
-          }}
+          reverse
         >
           <p>
-            Data from the National Audit Office suggests that the projected
-            increase in adults aged 65+ requiring care by 2038 is 57% (compared
-            with 2018), and the projected increase in the cost of that care for
-            the same demographic is 106%. Not only is demand for care homes set
-            to increase, but the price of care will increase too. Home care can
-            provide a more affordable alternative to a care home that allows you
-            to pay only for the care you need.
+            For many families, home care can be a more cost-effective alternative
+            to residential care, particularly when only a few hours of support are
+            needed each day.
           </p>
           <p>
-            Since the government actively aims to keep older people living at
-            home for as long as possible, there are many support options in place
-            if you are interested in choosing home care over moving to a care
-            home.
+            According to recent UK care sector data, the average cost of a
+            residential care home can exceed £1,300 per week, while nursing homes
+            often cost £1,500 per week or more. In contrast, home care allows
+            individuals to pay only for the support they require, whether
+            that&apos;s a few visits per week, daily assistance, or specialist care.
+          </p>
+          <p>
+            Beyond financial considerations, home care offers the added benefits of
+            remaining in familiar surroundings, maintaining independence, and
+            receiving one-to-one support tailored to individual needs.
+          </p>
+          <p className="pt-2">
+            <Link href="/enquire" className={btnPrimary}>
+              Contact Naptec Care for a personalised assessment
+            </Link>
           </p>
         </ContentBlock>
 
-        <div className="mx-auto mt-14 max-w-6xl sm:mt-16 lg:mt-20">
-          <h2
-            className="text-3xl font-normal leading-tight text-neutral-900 sm:text-4xl"
-            style={serif}
-          >
-            How much does home care cost?
-          </h2>
-          <div className="mt-5 space-y-4 text-base leading-relaxed text-neutral-600">
-            <p>
-              As of recent figures, there are thousands of domiciliary care
-              services registered with the Care Quality Commission, and all will
-              have their own price points. The cost of home care will always
-              depend on the services you need (i.e. companionship, specialist
-              medical care, housekeeping, etc.), how often you require them
-              throughout the week, and the area you live in.
-            </p>
-            <p>
-              With so many home care agencies available, we understand it can be
-              hard to know which price point you should be looking at. As a
-              provider of home care services, at Naptec we are proud to offer
-              premium packages with the highest quality of care, while being
-              upfront about costs and ensuring that what we offer our clients is
-              fully transparent and fits within their budget – with us, you
-              never need to worry about hidden or surprise bills.
-            </p>
-            <p>
-              Depending on where in the UK you are based, you could be looking at
-              a slightly different average hourly cost of home care services, so
-              the following examples should offer some insight into what you
-              might expect to pay in your area:
-            </p>
-          </div>
+        <ProseSection heading="How much does home care cost?" id="how-much">
+          <p>
+            The cost of home care varies depending on several factors, including:
+          </p>
+          <BulletCardList items={costFactors} />
+          <p>
+            Industry sources suggest that home care costs across the UK can vary
+            significantly depending on the level of support required. Because every
+            situation is unique, the most accurate way to understand the likely
+            cost of care is through a personalised assessment.
+          </p>
+          <p>
+            At Naptec Care, we create bespoke care plans based on individual needs,
+            ensuring clients receive the right level of support without paying for
+            services they don&apos;t need.
+          </p>
+          <p>
+            Naptec Care provides home care across Croydon. For a quote tailored to
+            your situation, speak with our team — we&apos;ll explain costs clearly
+            with no obligation.
+          </p>
+          <p>
+            <Link href="/enquire" className={textLink}>
+              Get in touch for a personalised care quote
+            </Link>
+          </p>
 
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:gap-6">
-            {regionCards.map((region) => (
-              <article
-                key={region.title}
-                className="rounded-xl bg-[#f4f4f2] p-8 sm:p-9"
-              >
-                <h3
-                  className="text-2xl font-normal text-[#3B2A8F]"
-                  style={serif}
-                >
-                  {region.title}
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+            {croydonLinks.map((item) => (
+              <article key={item.title} className={`flex flex-col ${cardBase}`}>
+                <h3 className="text-xl font-normal text-brand sm:text-2xl">
+                  {item.title}
                 </h3>
-                <p className="mt-4 text-sm leading-relaxed text-neutral-600 sm:text-base">
-                  {region.description}
+                <p className="mt-4 flex-1 text-sm leading-relaxed text-body sm:text-base">
+                  {item.description}
                 </p>
-                <Link
-                  href={region.href}
-                  className="mt-5 inline-block text-sm font-medium text-[#3B2A8F] underline underline-offset-4 transition-colors hover:text-[#2d1f6d]"
-                >
-                  Discover more
+                <Link href={item.href} className={`mt-5 inline-block ${textLink}`}>
+                  {item.linkText}
                 </Link>
               </article>
             ))}
           </div>
-        </div>
+        </ProseSection>
 
-        <div className="mx-auto mt-14 max-w-6xl sm:mt-16 lg:mt-20">
-          <h2
-            className="text-3xl font-normal leading-tight text-neutral-900 sm:text-4xl"
-            style={serif}
-          >
-            Is home care paid hourly or daily?
-          </h2>
-          <div className="mt-5 space-y-4 text-base leading-relaxed text-neutral-600">
-            <p>
-              There are many options when it comes to how you will pay for your
-              home care, and this will depend on the services you need and the
-              options offered by your service provider.
-            </p>
-            <p>
-              For example, if you need ad hoc respite care, this may be billed
-              at an hourly rate. Or, if you have a contract with an agency for
-              several hours of personal care each week, this may be billed as a
-              daily rate.
-            </p>
-            <p>
-              At Naptec, we know that there is no one-size-fits-all when it comes
-              to home care, so your package will be completely unique to your
-              situation, location, health conditions and other needs. Here are
-              some examples of the bespoke packages we have offered to clients in
-              the past:
-            </p>
-          </div>
-          <ul className="mt-6 space-y-4 rounded-xl bg-[#f4f4f2] p-8 sm:p-9">
-            {packageExamples.map((example) => (
-              <li
-                key={example}
-                className="flex gap-3 text-sm leading-relaxed text-neutral-700 sm:text-base"
-              >
-                <span
-                  className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#3B2A8F]"
-                  aria-hidden
-                />
-                {example}
-              </li>
-            ))}
-          </ul>
-          <p className="mt-6 text-base leading-relaxed text-neutral-600">
-            Whatever your needs, our team of caregivers at Naptec can provide
-            exactly what you require and more. Feel free to{" "}
-            <InlineLink href="/enquire">reach out to us</InlineLink> at any time
-            to discuss the cost of your bespoke home care services.
+        <ProseSection heading="Can I get financial help with home care?" id="funding">
+          <p>
+            Many people are surprised to learn that financial support may be
+            available to help cover the cost of care.
           </p>
-        </div>
-
-        <div className="mx-auto mt-14 max-w-6xl sm:mt-16 lg:mt-20">
-          <h2
-            className="text-3xl font-normal leading-tight text-neutral-900 sm:text-4xl"
-            style={serif}
-          >
-            Do I need to pay for my own home care?
-          </h2>
-          <div className="mt-6 max-w-3xl space-y-5 text-base leading-[1.85] text-neutral-600 sm:text-lg sm:leading-[1.9]">
-            <p>
-              You may have to pay for your own home care, but you could also be
-              eligible for support or full funding from your local council. We
-              have guidance dedicated to figuring out how to pay for your home
-              care services:{" "}
-              <InlineLink href="/advice-and-care/articles">
-                Paying For Care: Who Pays What?
+          <p>Depending on your circumstances, you may be eligible for:</p>
+          <BulletCardList items={fundingOptions} />
+          <p>
+            Our team can help point you in the right direction and explain the
+            options that may be available to you. You may also find these official
+            resources helpful:
+          </p>
+          <ul className="mt-6 space-y-3 text-base leading-relaxed text-body">
+            <li>
+              <InlineLink href="https://www.nhs.uk/social-care-and-support/money-work-and-benefits/paying-for-your-own-care-self-funding/">
+                Paying for your own care (NHS)
               </InlineLink>
-            </p>
-            <p>
-              You may also be entitled to benefits that could help with the cost
-              of your home care. You can read more about these here:{" "}
-              <InlineLink href="/advice-and-care/articles">
-                Financial Benefits For Pensioners: Topping Up Your Income
+            </li>
+            <li>
+              <InlineLink href="https://www.gov.uk/pension-credit/what-youll-get">
+                Pension Credit (GOV.UK)
               </InlineLink>
-            </p>
-          </div>
-        </div>
+            </li>
+            <li>
+              <InlineLink href="/advice-and-care/faqs">
+                Naptec home care FAQs
+              </InlineLink>
+            </li>
+          </ul>
+        </ProseSection>
 
         <ContentBlock
           heading="How do I arrange home care for myself or a loved one?"
@@ -396,30 +355,49 @@ export default function CostOfCarePage() {
           reverse
         >
           <p>
-            We understand there&apos;s no place like home, so our Naptec care
-            offering aims to help older individuals retain independence and stay
-            in familiar surroundings. We offer a number of bespoke services
-            which can be tailored to your needs, and our caregivers are highly
-            trained to deliver the individualised service you need.
+            We understand there&apos;s no place like home. Naptec Care provides
+            professional, relationship-led home care for older people in their own
+            homes across Croydon and nearby areas.
           </p>
           <p>
-            We&apos;re an award-winning home care provider devoted to providing
-            the highest-quality relationship-led care for older people in their
-            own homes. Arranging care for yourself or your loved one
-            shouldn&apos;t be stressful, so whatever questions you would like
-            answered, feel free to{" "}
-            <InlineLink href="/enquire">
-              reach out to the Naptec team
-            </InlineLink>{" "}
-            to discuss your needs.
+            Arranging care shouldn&apos;t be stressful. Whatever questions you have,
+            our team is here to guide you through funding, care options, and next
+            steps — starting with a free, no-obligation conversation.
           </p>
         </ContentBlock>
       </section>
 
+      <section
+        className={`${sectionBgBrand} ${sectionPy} text-white`}
+        aria-labelledby="cost-care-cta-heading"
+      >
+        <div className={`${containerClass} max-w-3xl`}>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
+            Free consultation
+          </p>
+          <h2
+            id="cost-care-cta-heading"
+            className={`mt-4 text-white ${sectionTitle}`}
+          >
+            Need help understanding the cost of care?
+          </h2>
+          <p className="mt-5 text-base leading-relaxed text-white/90 sm:text-lg">
+            Every care journey is different. Contact Naptec Care today for a free
+            consultation and personalised care assessment. We&apos;ll help you
+            understand your options, discuss funding possibilities, and create a
+            care plan tailored to your needs.
+          </p>
+          <Link href="/enquire" className={`mt-8 ${btnPrimaryInverse}`}>
+            Enquire today
+          </Link>
+        </div>
+      </section>
+
       <ContentCarousel
         title="Guides"
-        cards={guideCards}
+        cards={costOfCareGuideCards}
         ariaLabel="Cost of care guides"
+        viewAllHref="/advice-and-care/articles"
       />
     </main>
   );

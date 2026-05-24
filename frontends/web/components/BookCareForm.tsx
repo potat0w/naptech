@@ -168,7 +168,7 @@ export default function BookCareForm({ onSuccess, embedded = false }: BookCareFo
               type="text"
               name="city"
               defaultValue={user.city}
-              placeholder="e.g. London"
+              placeholder="e.g. Croydon"
               className={inputErrorClass(Boolean(fieldErrors.city), formInputClass)}
             />
             <FormFieldError message={fieldErrors.city} />

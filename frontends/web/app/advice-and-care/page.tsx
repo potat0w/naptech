@@ -1,5 +1,6 @@
-import ContentCarousel, { type CarouselCard } from "@/components/ContentCarousel";
+import ContentCarousel from "@/components/ContentCarousel";
 import GetInTouch from "@/components/GetInTouch";
+import { adviceHubGuideCards } from "@/lib/carousel-cards";
 import { ArrowRight } from "lucide-react";
 import { containerClass } from "@/lib/layout";
 import Image from "next/image";
@@ -7,9 +8,9 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Advice & Support | Naptec",
+  title: "Home Care Advice & Support | Costs, FAQs & Ageing Well | Naptec",
   description:
-    "Elderly care advice from Naptec — understand care types, funding options, and how to age well at home.",
+    "Home care advice for families in Croydon — understand care types, home care costs, funding, FAQs, and how to age well at home.",
 };
 
 const serif = { fontFamily: "var(--font-playfair), ui-serif, serif" } as const;
@@ -40,8 +41,6 @@ const pillars = [
       "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933350/pexels-jsme-mila-523821574-29372720_niar1j.jpg",
   },
 ] as const;
-
-const guideCards: CarouselCard[] = [];
 
 function DiscoverMore({ href, label }: { href: string; label?: string }) {
   return (
@@ -86,12 +85,12 @@ export default function AdviceAndCarePage() {
             className="mt-8 text-4xl font-normal tracking-tight text-neutral-900 sm:text-5xl lg:text-6xl"
             style={serif}
           >
-            Advice &amp; support
+            Home care advice &amp; support
           </h1>
           <p className="mt-6 max-w-3xl text-base leading-relaxed text-neutral-600 sm:text-lg sm:leading-relaxed">
-            We can help you understand the different types of care, explain your
-            funding options and provide general advice on ageing well. Whatever you
-            need, we are here to help.
+            Practical guidance for families considering elderly care at home in
+            Croydon — from home care costs and funding to FAQs and ageing well.
+            Whatever you need, we are here to help.
           </p>
 
           <div className="mt-12 grid gap-8 lg:mt-16 lg:grid-cols-2 lg:items-center lg:gap-12">
@@ -108,8 +107,8 @@ export default function AdviceAndCarePage() {
                 with empathy, clarity and confidence.
               </p>
               <DiscoverMore
-                href="/advice-and-care/articles"
-                label="Discover more about talking about care"
+                href="/advice-and-care/articles/benefits-of-professional-home-care-services"
+                label="Read about choosing professional home care"
               />
             </div>
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-sm bg-[#f2f2f2]">
@@ -161,8 +160,9 @@ export default function AdviceAndCarePage() {
 
       <ContentCarousel
         title="Guides"
-        cards={guideCards}
+        cards={adviceHubGuideCards}
         ariaLabel="Care advice guides"
+        viewAllHref="/advice-and-care/articles"
       />
 
       <GetInTouch />

@@ -2,7 +2,7 @@ export const naptecContact = {
   companyName: "NapTech Healthcare Services Ltd",
   addressLine1: "111 Winterbourne Road",
   area: "Thornton Heath",
-  city: "London",
+  city: "Croydon",
   postcode: "CR7 7QY",
   country: "United Kingdom",
   phone: "+44 203 488 4074",

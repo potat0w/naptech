@@ -10,21 +10,39 @@ import Link from "next/link";
 
 const services = [
   {
-    title: "Home Help & Housekeeping",
+    title: "Home care in Croydon",
     description:
-      "Practical support around the home — from light housekeeping and meal preparation to errands — so daily life stays comfortable and manageable.",
-    href: "/what-we-do/home-help-and-housekeeping",
+      "Professional elderly care at home across Croydon — personal care, dementia support, and flexible visits tailored to your family.",
+    href: "/home-care-croydon",
   },
   {
-    title: "Personal Care",
+    title: "Personal care",
     description:
-      "With Naptec you can feel confident that our caregivers will assist with your care and support needs discreetly and with dignity.",
+      "Dignified help with bathing, dressing, and daily living at home from trained caregivers in Croydon.",
     href: "/what-we-do/personal-care",
   },
   {
-    title: "Overnight Care",
+    title: "Dementia care",
     description:
-      "Reassuring support through the night so your loved one feels safe at home — and family can rest knowing a trusted Naptec caregiver is there when needed.",
+      "Specialist dementia and Alzheimer's care at home with trained caregivers who understand memory loss and changing needs.",
+    href: "/what-we-do/dementia-and-alzheimers",
+  },
+  {
+    title: "Live-in care",
+    description:
+      "Continuous support from a dedicated caregiver living in your home — an alternative to residential care for many families.",
+    href: "/what-we-do/live-in-care",
+  },
+  {
+    title: "Respite care",
+    description:
+      "Planned or short-notice breaks for family carers, with trusted elderly care at home while you rest and recharge.",
+    href: "/what-we-do/respite-care",
+  },
+  {
+    title: "Overnight care",
+    description:
+      "Sleep-in and waking night services so your loved one feels safe at home through the night.",
     href: "/what-we-do/overnight-care",
   },
 ] as const;
@@ -54,13 +72,13 @@ export default function PopularServices() {
     >
       <div className={containerClass}>
         <h2 id="popular-services-heading" className={sectionTitle}>
-          Popular Services
+          Home care services in Croydon
         </h2>
-        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3 lg:mt-12">
+        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:mt-12 lg:grid-cols-3">
           {services.map((item) => (
             <article
               key={item.title}
-              className={`${cardBase} flex min-h-[300px] flex-col sm:min-h-[320px]`}
+              className={`${cardBase} flex min-h-[280px] flex-col`}
             >
               <h3 className={`mb-4 ${cardTitle}`}>{item.title}</h3>
               <p className="mb-8 flex-1 text-sm leading-relaxed text-body">

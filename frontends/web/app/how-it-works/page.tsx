@@ -6,9 +6,9 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "How It Works | Naptec",
+  title: "How Home Care Works | Naptec Croydon",
   description:
-    "Learn how Naptec home care works — from your first conversation to meeting your Care Professionals and starting care at home.",
+    "How to arrange home care in Croydon with Naptec — free consultation, care assessment, caregiver matching, and starting support at home.",
 };
 
 const serif = { fontFamily: "var(--font-playfair), ui-serif, serif" } as const;
@@ -36,13 +36,12 @@ export default function HowItWorksPage() {
             className="mt-8 text-4xl font-normal tracking-tight text-neutral-900 sm:text-5xl lg:text-6xl"
             style={serif}
           >
-            How it works
+            How home care works
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-relaxed text-neutral-600">
-            Whatever care your loved one needs, we will work quickly to find a
-            bespoke solution that is right for you. Care needs can change over
-            time, so we are always ready to adapt — and just a phone call away
-            when you need us.
+            Arranging home care in Croydon should feel clear and supportive. We work
+            quickly to find the right solution for your family — from your first
+            call through to meeting your caregiver and starting care at home.
           </p>
         </div>
       </section>

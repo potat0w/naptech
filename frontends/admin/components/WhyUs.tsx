@@ -56,9 +56,12 @@ const slides = [
   {
     image:
       "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933332/pexels-jsme-mila-523821574-18429571_lahwba.jpg",
-    alt: "Award recognition",
-    titleParts: [{ text: "Awards" }],
-    body: "We're proud to be recommended by families we support and recognised for excellence in home care. Our commitment to innovation and supporting our teams helps us deliver outstanding care every day.",
+    alt: "Caregiver supporting a client at home",
+    titleParts: [
+      { text: "Quality " },
+      { text: "and safety", italic: true },
+    ],
+    body: "We follow strict care standards, conduct regular quality checks, provide ongoing caregiver training, and continuously monitor client satisfaction so you can feel confident in the support we provide.",
     href: "/why-us/trust-and-safety",
   },
 ];

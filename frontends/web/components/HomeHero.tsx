@@ -28,11 +28,11 @@ export default function HomeHero() {
         >
           <p className={`${labelEyebrow} animate-fade-up`}>Welcome to Naptec</p>
           <h1 className="animate-fade-up animate-fade-up-delay-1 mt-4 max-w-lg scroll-mt-20 text-[2.75rem] font-normal leading-[1.08] text-neutral-900 sm:scroll-mt-[4.25rem] sm:text-5xl lg:text-[3.5rem] xl:text-6xl">
-            Quality home care for your <em className={accentItalic}>loved ones</em>
+            Professional <em className={accentItalic}>home care</em> in Croydon
           </h1>
           <p className="animate-fade-up animate-fade-up-delay-2 mt-6 max-w-md text-base leading-relaxed text-body sm:text-lg sm:leading-[1.7]">
-            Compassionate, reliable care that helps your loved one stay safe,
-            comfortable, and independent in the place they know best.
+            Compassionate elderly care at home across Croydon — including personal
+            care, dementia care, live-in care, and respite for local families.
           </p>
 
           <div className="animate-fade-up animate-fade-up-delay-3 mt-9 sm:mt-10">

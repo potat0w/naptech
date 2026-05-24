@@ -20,9 +20,9 @@ export const images = {
   teamPliaka:
     "https://res.cloudinary.com/dw1n6qugv/image/upload/v1779278141/Generated_Image_May_20_2026_-_5_54PM_acc1pp.png",
   teamJanet:
-    "https://res.cloudinary.com/dw1n6qugv/image/upload/v1779197872/1_msfkiy.png",
+    "https://res.cloudinary.com/dw1n6qugv/image/upload/v1779634084/Generated_Image_May_24_2026_-_8_12PM_dxd4al.png",
   teamRafin:
-    "https://res.cloudinary.com/dw1n6qugv/image/upload/v1779198421/rafin_kzhmjy.png",
+    "https://res.cloudinary.com/dw1n6qugv/image/upload/v1779634094/Generated_Image_May_24_2026_-_8_35PM_nhdxwd.png",
 } as const;
 
 export const careGallery = [

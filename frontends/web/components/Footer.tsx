@@ -21,10 +21,12 @@ const navColumns = [
   {
     title: "What We Do",
     links: [
+      { label: "Home Care in Croydon", href: "/home-care-croydon" },
       { label: "Domiciliary Care", href: "/what-we-do/domiciliary-care" },
-      { label: "Companionship", href: "/what-we-do/companionship" },
-      { label: "Home Help & Housekeeping", href: "/what-we-do/home-help-and-housekeeping" },
+      { label: "Dementia Care", href: "/what-we-do/dementia-and-alzheimers" },
+      { label: "Live-In Care", href: "/what-we-do/live-in-care" },
       { label: "Personal Care", href: "/what-we-do/personal-care" },
+      { label: "Respite Care", href: "/what-we-do/respite-care" },
     ],
   },
   {

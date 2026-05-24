@@ -1,5 +1,6 @@
 import AccordionList from "@/components/AccordionList";
-import ContentCarousel, { type CarouselCard } from "@/components/ContentCarousel";
+import ContentCarousel from "@/components/ContentCarousel";
+import { carouselCard } from "@/lib/carousel-cards";
 import { btnPrimary, btnPrimaryInverse, containerClass, sectionTitle } from "@/lib/layout";
 import {
   Clock,
@@ -98,55 +99,47 @@ const positions = [
   },
 ] as const;
 
-const guideCards: CarouselCard[] = [
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933382/pexels-jsme-mila-523821574-18459193_nlhoas.jpg",
-    title: "How care professionals can promote dignity in care",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933365/pexels-kampus-7551662_ock8o9.jpg",
-    title: "What it takes to become a professional dementia carer",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933350/pexels-jsme-mila-523821574-29372720_niar1j.jpg",
-    title: "What to expect from a domiciliary care interview",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933332/pexels-jsme-mila-523821574-18429571_lahwba.jpg",
-    title: "Complex care roles at Naptec",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778932857/centre-for-ageing-better-rQJ3xo-0WYE-unsplash_mhe64i.jpg",
-    title: "Jobs and careers in palliative care",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933400/pexels-kampus-8949833_tldckz.jpg",
-    title: "What skills and qualities does a good carer need?",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933400/pexels-olly-3768131_mdki5q.jpg",
-    title: "A guide to typical care interview questions",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933399/pexels-olly-3791666_nap6fe.jpg",
-    title: "What is a live-in carer?",
-    href: "/advice-and-care/articles",
-  },
+const guideCards = [
+  carouselCard(
+    "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933382/pexels-jsme-mila-523821574-18459193_nlhoas.jpg",
+    "Building meaningful relationships through care",
+    "/advice-and-care/articles/building-meaningful-relationships-through-care",
+  ),
+  carouselCard(
+    "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933365/pexels-kampus-7551662_ock8o9.jpg",
+    "Dementia care at home",
+    "/what-we-do/dementia-and-alzheimers",
+  ),
+  carouselCard(
+    "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933350/pexels-jsme-mila-523821574-29372720_niar1j.jpg",
+    "Apply to join Naptec",
+    "/recruitment/apply",
+  ),
+  carouselCard(
+    "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933332/pexels-jsme-mila-523821574-18429571_lahwba.jpg",
+    "Specialist home care roles",
+    "/what-we-do/specialist-care",
+  ),
+  carouselCard(
+    "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778932857/centre-for-ageing-better-rQJ3xo-0WYE-unsplash_mhe64i.jpg",
+    "Palliative care at home",
+    "/what-we-do/palliative",
+  ),
+  carouselCard(
+    "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933400/pexels-kampus-8949833_tldckz.jpg",
+    "How personalised care improves quality of life",
+    "/advice-and-care/articles/how-personalised-care-improves-quality-of-life",
+  ),
+  carouselCard(
+    "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933400/pexels-olly-3768131_mdki5q.jpg",
+    "How home care supports independent living",
+    "/advice-and-care/articles/how-home-care-supports-independent-living",
+  ),
+  carouselCard(
+    "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933399/pexels-olly-3791666_nap6fe.jpg",
+    "What is live-in care?",
+    "/what-we-do/live-in-care",
+  ),
 ];
 
 function ContentBlock({
@@ -254,27 +247,22 @@ export default function RecruitmentPage() {
 
       <section className="px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <ContentBlock
-          heading="A Financial Times best employer"
+          heading="A supportive place to work"
           image="https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933365/pexels-kampus-7551662_ock8o9.jpg"
-          imageAlt="Naptec team celebrating an award"
+          imageAlt="Naptec care team together"
           reverse
         >
           <p>
-            Naptec has been recognised by the Financial Times as one of the{" "}
-            <strong className="font-medium text-neutral-800">
-              top employers in the UK
-            </strong>
-            , standing out amongst major companies nationwide.
+            We focus on building a positive workplace where Care Professionals
+            feel supported, valued, and able to do their best work every day.
           </p>
           <p>
-            This ranking is based on extensive feedback from employees who rated
-            their experiences in areas like workplace environment, compensation,
-            career progression, and company image.
+            From flexible roles and ongoing training to approachable local teams,
+            we invest in the people who deliver care in our communities.
           </p>
           <p>
-            Achieving a top place, we&apos;re in great company alongside major
-            brands — and proud of the culture we&apos;ve built for our Care
-            Professionals.
+            If you want meaningful work with a team that listens and supports you,
+            Naptec could be the right fit.
           </p>
         </ContentBlock>
 
@@ -438,8 +426,7 @@ export default function RecruitmentPage() {
                       All visits are a minimum of one hour long, so there is
                       plenty of time to provide high quality care. When you join
                       Naptec you have the best of both worlds — a community-based
-                      business backed by years of expertise in exceptional home
-                      care.
+                      business committed to compassionate, high-quality home care.
                     </p>
                     <DiscoverMore />
                   </div>
