@@ -13,14 +13,8 @@ publicRouter.post("/inquiries", inquiryLimiter, async (req, res, next) => {
     const body = await validateBody(enquireSchema, req.body);
     const inquiry = await inquiryService.createInquiry({
       ...body,
-      privacyConsent:
-        body.privacyConsent === true ||
-        body.privacyConsent === "yes" ||
-        body.privacyConsent === "on",
-      marketingConsent:
-        body.marketingConsent === true ||
-        body.marketingConsent === "yes" ||
-        body.marketingConsent === "on",
+      privacyConsent: Boolean(body.privacyConsent),
+      marketingConsent: Boolean(body.marketingConsent),
     });
     res.status(201).json({
       inquiry: {

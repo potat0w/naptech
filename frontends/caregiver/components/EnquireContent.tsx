@@ -1,6 +1,5 @@
 "use client";
 
-import EnquirePrivacyNotice from "@/components/EnquirePrivacyNotice";
 import FormFieldError from "@/components/FormFieldError";
 import FormSplitLayout from "@/components/FormSplitLayout";
 import {
@@ -192,8 +191,6 @@ export default function EnquireContent({ titleId, onClose }: EnquireContentProps
             />
             <FormFieldError message={fieldErrors.message} />
           </label>
-
-          <EnquirePrivacyNotice />
 
           <div className="pt-1">
             <button
