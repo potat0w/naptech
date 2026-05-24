@@ -1,5 +1,4 @@
 import AccordionList from "@/components/AccordionList";
-import CareProTestimonials from "@/components/CareProTestimonials";
 import ContentCarousel, { type CarouselCard } from "@/components/ContentCarousel";
 import { btnPrimary, btnPrimaryInverse, containerClass, sectionTitle } from "@/lib/layout";
 import {
@@ -23,17 +22,6 @@ export const metadata: Metadata = {
 };
 
 const serif = { fontFamily: "var(--font-playfair), ui-serif, serif" } as const;
-
-const stats = [
-  { value: "96", suffix: "%", label: "are proud to work for Naptec" },
-  { value: "95", suffix: "%", label: "feel motivated to go the extra mile" },
-  {
-    value: "88",
-    suffix: "%",
-    label: "see themselves working at Naptec in 12 months' time",
-  },
-  { value: "82", suffix: "%", label: "would recommend Naptec as a great place to work" },
-] as const;
 
 const benefits: {
   title: string;
@@ -321,30 +309,6 @@ export default function RecruitmentPage() {
         </div>
       </section>
 
-      <section className="bg-[#3B2A8F] px-4 py-14 text-white sm:px-6 sm:py-16 lg:px-8 lg:py-20">
-        <div className={containerClass}>
-          <h2
-            className="text-center text-3xl font-normal sm:text-4xl"
-            style={serif}
-          >
-            What our Care Professionals say
-          </h2>
-          <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-            {stats.map((stat) => (
-              <div key={stat.value} className="text-center">
-                <p className="text-5xl font-normal tabular-nums sm:text-6xl" style={serif}>
-                  {stat.value}
-                  <span className="text-3xl sm:text-4xl">{stat.suffix}</span>
-                </p>
-                <p className="mt-3 text-sm leading-relaxed text-white/85">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <div className={`${containerClass} grid gap-10 lg:grid-cols-2 lg:items-center`}>
           <div>
@@ -452,8 +416,6 @@ export default function RecruitmentPage() {
           </div>
         </div>
       </section>
-
-      <CareProTestimonials />
 
       <section className="px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <div className="mx-auto max-w-5xl">

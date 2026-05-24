@@ -6,7 +6,6 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const serif = { fontFamily: "var(--font-playfair), ui-serif, serif" } as const;
-const GAP_PX = 24;
 
 export type CarouselCard = {
   image: string;
@@ -27,15 +26,15 @@ export default function ContentCarousel({
 }: ContentCarouselProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
-  const [offset, setOffset] = useState(0);
-  const [stepPx, setStepPx] = useState(0);
-  const maxOffset = Math.max(0, cards.length - 2);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(1);
+
+  const maxIndex = Math.max(0, cards.length - visibleCount);
 
   const measure = useCallback(() => {
-    const track = trackRef.current;
-    const first = track?.firstElementChild;
-    if (!(first instanceof HTMLElement)) return;
-    setStepPx(first.offsetWidth + GAP_PX);
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+    setVisibleCount(viewport.clientWidth >= 640 ? 2 : 1);
   }, []);
 
   useEffect(() => {
@@ -45,8 +44,51 @@ export default function ContentCarousel({
     return () => observer.disconnect();
   }, [measure]);
 
-  const goPrev = () => setOffset((o) => Math.max(0, o - 1));
-  const goNext = () => setOffset((o) => Math.min(maxOffset, o + 1));
+  const scrollToIndex = useCallback(
+    (index: number) => {
+      const viewport = viewportRef.current;
+      const track = trackRef.current;
+      if (!viewport || !track) return;
+      const clamped = Math.max(0, Math.min(index, cards.length - 1));
+      const card = track.children[clamped];
+      if (!(card instanceof HTMLElement)) return;
+      const padLeft = parseFloat(getComputedStyle(track).paddingLeft || "0");
+      viewport.scrollTo({ left: card.offsetLeft - padLeft, behavior: "smooth" });
+    },
+    [cards.length],
+  );
+
+  const handleScroll = useCallback(() => {
+    const viewport = viewportRef.current;
+    const track = trackRef.current;
+    if (!viewport || !track) return;
+
+    const padLeft = parseFloat(getComputedStyle(track).paddingLeft || "0");
+    let closest = 0;
+    let minDist = Infinity;
+
+    for (let i = 0; i < track.children.length; i++) {
+      const child = track.children[i];
+      if (!(child instanceof HTMLElement)) continue;
+      const dist = Math.abs(child.offsetLeft - padLeft - viewport.scrollLeft);
+      if (dist < minDist) {
+        minDist = dist;
+        closest = i;
+      }
+    }
+
+    setActiveIndex(Math.min(closest, Math.max(0, cards.length - visibleCount)));
+  }, [cards.length, visibleCount]);
+
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+    viewport.addEventListener("scroll", handleScroll, { passive: true });
+    return () => viewport.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
+
+  const goPrev = () => scrollToIndex(activeIndex - 1);
+  const goNext = () => scrollToIndex(activeIndex + 1);
 
   return (
     <section className="overflow-hidden bg-white py-16 sm:py-20" aria-label={ariaLabel}>
@@ -62,7 +104,7 @@ export default function ContentCarousel({
             <button
               type="button"
               onClick={goPrev}
-              disabled={offset === 0}
+              disabled={activeIndex === 0}
               className="flex h-12 w-12 items-center justify-center rounded-full bg-neutral-200 text-neutral-600 transition-[filter] hover:brightness-90 disabled:cursor-not-allowed disabled:opacity-40"
               aria-label={`Previous ${title} item`}
             >
@@ -71,7 +113,7 @@ export default function ContentCarousel({
             <button
               type="button"
               onClick={goNext}
-              disabled={offset === maxOffset}
+              disabled={activeIndex >= maxIndex}
               className="flex h-12 w-12 items-center justify-center rounded-full bg-[#3B2A8F] text-white transition-[filter] hover:brightness-90 disabled:cursor-not-allowed disabled:opacity-40"
               aria-label={`Next ${title} item`}
             >
@@ -81,32 +123,31 @@ export default function ContentCarousel({
         </div>
       </div>
 
-      <div ref={viewportRef} className="relative mt-10 w-full overflow-hidden sm:mt-12">
+      <div
+        ref={viewportRef}
+        className="relative mt-10 w-full overflow-x-auto overscroll-x-contain scroll-smooth snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] sm:mt-12 [&::-webkit-scrollbar]:hidden"
+      >
         <div
           ref={trackRef}
-          className="flex gap-6 px-4 transition-transform duration-500 ease-in-out sm:px-6 lg:px-8 max-[80rem]:pl-4 min-[80rem]:pl-[max(1rem,calc((100vw-80rem)/2+1rem))]"
-          style={{
-            transform:
-              stepPx > 0 ? `translateX(-${offset * stepPx}px)` : undefined,
-          }}
+          className="flex gap-6 px-4 sm:px-6 lg:px-8 max-[80rem]:pl-4 min-[80rem]:pl-[max(1rem,calc((100vw-80rem)/2+1rem))]"
         >
           {cards.map((card) => (
             <article
               key={card.title}
-              className="min-w-[calc(50%-12px)] shrink-0 sm:min-w-[calc(50%-12px)]"
+              className="w-[calc(100vw-2rem)] shrink-0 snap-start sm:w-[calc(50vw-1.75rem)]"
             >
               <div className="relative aspect-[4/3] w-full bg-[#f2f2f2]">
                 <Image
                   src={card.image}
                   alt=""
                   fill
-                  sizes="(max-width: 768px) 85vw, 40vw"
+                  sizes="(max-width: 640px) calc(100vw - 2rem), 50vw"
                   className="object-contain p-4"
                 />
               </div>
               <div className="bg-white pt-5">
                 <h3
-                  className="mb-4 text-xl font-normal leading-snug text-neutral-900 sm:text-2xl"
+                  className="mb-4 break-words text-xl font-normal leading-snug text-neutral-900 sm:text-2xl"
                   style={serif}
                 >
                   {card.title}
