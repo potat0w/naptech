@@ -46,38 +46,7 @@ const packageExamples = [
   "One client with diabetes required 14 hours of home visits per week for diabetes monitoring and other health care needs, and this cost £518 per week",
 ] as const;
 
-const guideCards: CarouselCard[] = [
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933400/pexels-kampus-8949833_tldckz.jpg",
-    title: "Paying for care: who pays what?",
-    href: "/advice-and-care/cost-of-care",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933400/pexels-olly-3768131_mdki5q.jpg",
-    title: "Financial benefits for pensioners: topping up your income",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933399/pexels-olly-3791666_nap6fe.jpg",
-    title: "The benefits of home care versus a care home",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933382/pexels-jsme-mila-523821574-18459193_nlhoas.jpg",
-    title: "What is home or domiciliary care?",
-    href: "/what-we-do/domiciliary-care",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933365/pexels-kampus-7551662_ock8o9.jpg",
-    title: "How to age well at home",
-    href: "/advice-and-care/how-to-age-well",
-  },
-];
+const guideCards: CarouselCard[] = [];
 
 function ContentBlock({
   heading,

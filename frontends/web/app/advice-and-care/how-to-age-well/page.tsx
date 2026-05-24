@@ -40,33 +40,7 @@ const pillars = [
   },
 ] as const;
 
-const guideCards = [
-  {
-    image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933399/pexels-olly-3791666_nap6fe.jpg",
-    title: "Financial benefits for pensioners: topping up your income",
-    href: "/advice-and-care/cost-of-care",
-  },
-  {
-    image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933382/pexels-jsme-mila-523821574-18459193_nlhoas.jpg",
-    title: "How to get power of attorney for ageing parents",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933365/pexels-kampus-7551662_ock8o9.jpg",
-    title: "The best mobile phones for the elderly",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933350/pexels-jsme-mila-523821574-29372720_niar1j.jpg",
-    title: "How to get hot meals delivered for ageing adults",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933332/pexels-jsme-mila-523821574-18429571_lahwba.jpg",
-    title: "Festive Christmas games for older adults",
-    href: "/advice-and-care/articles",
-  },
-];
+const guideCards: CarouselCard[] = [];
 
 function ContentBlock({
   heading,

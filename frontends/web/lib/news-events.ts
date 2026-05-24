@@ -7,74 +7,74 @@ export type NewsEventItem = {
 export const newsEvents: NewsEventItem[] = [
   {
     image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933382/pexels-jsme-mila-523821574-18459193_nlhoas.jpg",
-    title: "Naptec welcomes local leaders to our office",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image:
       "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933365/pexels-kampus-7551662_ock8o9.jpg",
-    title: "Scam Awareness",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933350/pexels-jsme-mila-523821574-29372720_niar1j.jpg",
-    title: "Naptec listed among UK's best employers 2026",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933332/pexels-jsme-mila-523821574-18429571_lahwba.jpg",
-    title: "Home Care Awards success",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778932857/centre-for-ageing-better-rQJ3xo-0WYE-unsplash_mhe64i.jpg",
-    title: "Health Investor Awards shortlist",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933400/pexels-kampus-8949833_tldckz.jpg",
-    title: "5* Employer Award celebrations",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933400/pexels-olly-3768131_mdki5q.jpg",
-    title: "Care Professional of the Year 2025",
+    title: "Scam awareness for older people and families",
     href: "/advice-and-care/articles",
   },
   {
     image:
       "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933399/pexels-olly-3791666_nap6fe.jpg",
-    title: "Sponsoring community events across the UK",
+    title: "Symptoms of dehydration in older people",
+    href: "/advice-and-care/articles",
+  },
+  {
+    image:
+      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933400/pexels-olly-3768131_mdki5q.jpg",
+    title: "Signs of loneliness in older people",
     href: "/advice-and-care/articles",
   },
   {
     image:
       "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933382/pexels-jsme-mila-523821574-18459193_nlhoas.jpg",
-    title: "Spot the Signs award nomination",
+    title: "How to get power of attorney for ageing parents",
     href: "/advice-and-care/articles",
   },
   {
     image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933365/pexels-kampus-7551662_ock8o9.jpg",
-    title: "Home Care Awards shortlist announced",
+      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933400/pexels-kampus-8949833_tldckz.jpg",
+    title: "Home adaptations for disabled older people",
     href: "/advice-and-care/articles",
   },
   {
     image:
       "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933350/pexels-jsme-mila-523821574-29372720_niar1j.jpg",
-    title: "Festive celebrations with clients and families",
+    title: "How to get hot meals delivered for ageing adults",
     href: "/advice-and-care/articles",
   },
   {
     image:
       "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933332/pexels-jsme-mila-523821574-18429571_lahwba.jpg",
-    title: "Franchise partner wins prestigious national business award",
+    title: "How to know when a loved one needs home care",
+    href: "/advice-and-care/articles",
+  },
+  {
+    image:
+      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778932857/centre-for-ageing-better-rQJ3xo-0WYE-unsplash_mhe64i.jpg",
+    title: "Supporting a parent with dementia at home",
+    href: "/advice-and-care/articles",
+  },
+  {
+    image:
+      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933365/pexels-kampus-7551662_ock8o9.jpg",
+    title: "How to make the home safer for older adults",
+    href: "/advice-and-care/articles",
+  },
+  {
+    image:
+      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933399/pexels-olly-3791666_nap6fe.jpg",
+    title: "What is domiciliary care and how does it work?",
+    href: "/advice-and-care/articles",
+  },
+  {
+    image:
+      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933400/pexels-olly-3768131_mdki5q.jpg",
+    title: "Companion care and wellbeing at home",
+    href: "/advice-and-care/articles",
+  },
+  {
+    image:
+      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933382/pexels-jsme-mila-523821574-18459193_nlhoas.jpg",
+    title: "How to arrange respite care for family carers",
     href: "/advice-and-care/articles",
   },
 ];

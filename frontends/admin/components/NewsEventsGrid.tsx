@@ -19,6 +19,14 @@ export default function NewsEventsGrid({ items: itemsProp }: NewsEventsGridProps
   const start = page * PER_PAGE;
   const items = allItems.slice(start, start + PER_PAGE);
 
+  if (allItems.length === 0) {
+    return (
+      <p className="max-w-2xl text-base leading-relaxed text-neutral-600">
+        New content is on the way. Please check back soon.
+      </p>
+    );
+  }
+
   return (
     <>
       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-14">

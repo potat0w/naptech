@@ -66,28 +66,7 @@ export const homeHelpHousekeeping: ServicePage = {
     },
   ],
   guidesTitle: "Guides",
-  guides: [
-    {
-      image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933332/pexels-jsme-mila-523821574-18429571_lahwba.jpg",
-      title: "Laundry and cleaning support",
-      href: "/advice-and-care/articles",
-    },
-    {
-      image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778932857/centre-for-ageing-better-rQJ3xo-0WYE-unsplash_mhe64i.jpg",
-      title: "Helping older adults with housekeeping",
-      href: "/advice-and-care/articles",
-    },
-    {
-      image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933400/pexels-kampus-8949833_tldckz.jpg",
-      title: "Pet care support",
-      href: "/advice-and-care/articles",
-    },
-    {
-      image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933400/pexels-olly-3768131_mdki5q.jpg",
-      title: "A guide to low maintenance gardens for the elderly",
-      href: "/advice-and-care/how-to-age-well",
-    },
-  ],
+  guides: [],
   showConfusedSection: false,
 };
 
@@ -177,28 +156,7 @@ export const personalCare: ServicePage = {
     },
   ],
   guidesTitle: "Guides & Support",
-  guides: [
-    {
-      image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933350/pexels-jsme-mila-523821574-29372720_niar1j.jpg",
-      title: "The importance of personal hygiene care for older adults",
-      href: "/advice-and-care/articles",
-    },
-    {
-      image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933332/pexels-jsme-mila-523821574-18429571_lahwba.jpg",
-      title: "How to talk about personal hygiene with your loved one",
-      href: "/advice-and-care/articles",
-    },
-    {
-      image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778932857/centre-for-ageing-better-rQJ3xo-0WYE-unsplash_mhe64i.jpg",
-      title: "5 essential hygiene routines to keep your loved ones healthy",
-      href: "/advice-and-care/articles",
-    },
-    {
-      image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933400/pexels-kampus-8949833_tldckz.jpg",
-      title: "Medication management",
-      href: "/advice-and-care/articles",
-    },
-  ],
+  guides: [],
 };
 
 export const overnightCare: ServicePage = {
@@ -263,23 +221,7 @@ export const overnightCare: ServicePage = {
     },
   ],
   guidesTitle: "Guides & Support",
-  guides: [
-    {
-      image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933365/pexels-kampus-7551662_ock8o9.jpg",
-      title: "What is Overnight Care?",
-      href: "/advice-and-care/articles",
-    },
-    {
-      image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933350/pexels-jsme-mila-523821574-29372720_niar1j.jpg",
-      title: "Healthy sleep and insomnia in older adults",
-      href: "/advice-and-care/how-to-age-well",
-    },
-    {
-      image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933332/pexels-jsme-mila-523821574-18429571_lahwba.jpg",
-      title: "Sleep-in vs waking night care",
-      href: "/advice-and-care/articles",
-    },
-  ],
+  guides: [],
   showConfusedSection: false,
 };
 
@@ -337,23 +279,7 @@ export const dayCare: ServicePage = {
     },
   ],
   guidesTitle: "Advice & Support",
-  guides: [
-    {
-      image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933400/pexels-olly-3768131_mdki5q.jpg",
-      title: "Looking for respite care? Look no further than the home",
-      href: "/what-we-do/respite-care",
-    },
-    {
-      image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933399/pexels-olly-3791666_nap6fe.jpg",
-      title: "Making communities dementia friendly",
-      href: "/advice-and-care/articles",
-    },
-    {
-      image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933382/pexels-jsme-mila-523821574-18459193_nlhoas.jpg",
-      title: "New dementia training",
-      href: "/advice-and-care/articles",
-    },
-  ],
+  guides: [],
   showConfusedSection: false,
 };
 
@@ -473,32 +399,6 @@ export const respiteCare: ServicePage = {
     },
   ],
   guidesTitle: "Guides",
-  guides: [
-    {
-      image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933332/pexels-jsme-mila-523821574-18429571_lahwba.jpg",
-      title: "What is respite care?",
-      href: "/advice-and-care/articles",
-    },
-    {
-      image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778932857/centre-for-ageing-better-rQJ3xo-0WYE-unsplash_mhe64i.jpg",
-      title: "The benefits of in-home respite care",
-      href: "/advice-and-care/articles",
-    },
-    {
-      image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933400/pexels-kampus-8949833_tldckz.jpg",
-      title: "How long can respite care last?",
-      href: "/advice-and-care/cost-of-care",
-    },
-    {
-      image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933400/pexels-olly-3768131_mdki5q.jpg",
-      title: "Carer's burnout",
-      href: "/advice-and-care/how-to-age-well",
-    },
-    {
-      image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933399/pexels-olly-3791666_nap6fe.jpg",
-      title: "Who pays for respite care?",
-      href: "/advice-and-care/cost-of-care",
-    },
-  ],
+  guides: [],
   showConfusedSection: false,
 };

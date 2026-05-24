@@ -1,6 +1,5 @@
 import ContentCarousel, { type CarouselCard } from "@/components/ContentCarousel";
 import GetInTouch from "@/components/GetInTouch";
-import NewsEvents from "@/components/NewsEvents";
 import { ArrowRight } from "lucide-react";
 import { containerClass } from "@/lib/layout";
 import Image from "next/image";
@@ -42,68 +41,7 @@ const pillars = [
   },
 ] as const;
 
-const guideCards: CarouselCard[] = [
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933332/pexels-jsme-mila-523821574-18429571_lahwba.jpg",
-    title: "Do all pensioners get winter fuel allowance?",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778932857/centre-for-ageing-better-rQJ3xo-0WYE-unsplash_mhe64i.jpg",
-    title: "Home adaptations for disabled older people",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933400/pexels-kampus-8949833_tldckz.jpg",
-    title: "Signs of loneliness in older people",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933400/pexels-olly-3768131_mdki5q.jpg",
-    title: "Symptoms of dehydration in older people",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933399/pexels-olly-3791666_nap6fe.jpg",
-    title: "How to get power of attorney for ageing parents",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933382/pexels-jsme-mila-523821574-18459193_nlhoas.jpg",
-    title: "How to get hot meals delivered for ageing adults",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933365/pexels-kampus-7551662_ock8o9.jpg",
-    title: "A guide to common medical abbreviations on prescriptions",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933350/pexels-jsme-mila-523821574-29372720_niar1j.jpg",
-    title: "Financial benefits for pensioners: topping up your income",
-    href: "/advice-and-care/cost-of-care",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933332/pexels-jsme-mila-523821574-18429571_lahwba.jpg",
-    title: "How to use a dosette box",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778932857/centre-for-ageing-better-rQJ3xo-0WYE-unsplash_mhe64i.jpg",
-    title: "The best mobile phones for the elderly",
-    href: "/advice-and-care/articles",
-  },
-];
+const guideCards: CarouselCard[] = [];
 
 function DiscoverMore({ href, label }: { href: string; label?: string }) {
   return (
@@ -219,24 +157,7 @@ export default function AdviceAndCarePage() {
         </div>
       </section>
 
-      <NewsEvents />
 
-      <section className="border-t border-neutral-100 bg-white py-10 sm:py-12">
-        <div className={`${containerClass} text-center`}>
-          <h2
-            className="text-2xl font-normal text-neutral-900 sm:text-3xl"
-            style={serif}
-          >
-            Find local news and events in your area
-          </h2>
-          <Link
-            href="/advice-and-care/news-events"
-            className="mt-5 inline-block text-sm font-medium text-[#3B2A8F] underline underline-offset-4 transition-colors hover:text-[#2d1f6d]"
-          >
-            View all news and events
-          </Link>
-        </div>
-      </section>
 
       <ContentCarousel
         title="Guides"

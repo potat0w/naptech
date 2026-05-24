@@ -10,23 +10,7 @@ import Link from "next/link";
 
 const serif = { fontFamily: "var(--font-playfair), ui-serif, serif" } as const;
 
-const defaultGuides = [
-  {
-    image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778932857/centre-for-ageing-better-rQJ3xo-0WYE-unsplash_mhe64i.jpg",
-    title: "Supporting mental health in older adults",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933400/pexels-kampus-8949833_tldckz.jpg",
-    title: "How to make friends in your 50s and older",
-    href: "/advice-and-care/how-to-age-well",
-  },
-  {
-    image: "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933400/pexels-olly-3768131_mdki5q.jpg",
-    title: "Friendly help with shopping and errands",
-    href: "/advice-and-care/articles",
-  },
-];
+const defaultGuides: { image: string; title: string; href: string }[] = [];
 
 export default function ServicePageContent({ service }: { service: ServicePage }) {
   const faqItems = service.faqs.map((faq) => ({

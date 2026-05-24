@@ -29,44 +29,7 @@ function FaqAnswer({ children }: { children: ReactNode }) {
   return <div className="space-y-4">{children}</div>;
 }
 
-const adviceCards: CarouselCard[] = [
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933399/pexels-olly-3791666_nap6fe.jpg",
-    title: "Meet our magical client, Mr P",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933382/pexels-jsme-mila-523821574-18459193_nlhoas.jpg",
-    title: "The New Ageing - Brand & Ageism",
-    href: "/advice-and-care/how-to-age-well",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933365/pexels-kampus-7551662_ock8o9.jpg",
-    title: "Launching Homecare's Got Talent!",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933350/pexels-jsme-mila-523821574-29372720_niar1j.jpg",
-    title: "Dementia training: Anthony's journey",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778933332/pexels-jsme-mila-523821574-18429571_lahwba.jpg",
-    title: "Celebrating 10 years of being most recommended home care company",
-    href: "/advice-and-care/articles",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dw1n6qugv/image/upload/v1778932857/centre-for-ageing-better-rQJ3xo-0WYE-unsplash_mhe64i.jpg",
-    title: "5 Signs an ageing relative may need support",
-    href: "/advice-and-care/how-to-age-well",
-  },
-];
+const adviceCards: CarouselCard[] = [];
 
 const faqs = [
   {

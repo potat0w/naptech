@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "News & Events | Naptec",
   description:
-    "Latest news and events from Naptec — updates on awards, community work, and home care across the UK.",
+    "Practical advice and guides from Naptec on home care, ageing well, and supporting loved ones at home.",
 };
 
 const serif = { fontFamily: "var(--font-playfair), ui-serif, serif" } as const;

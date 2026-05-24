@@ -90,6 +90,8 @@ export default function ContentCarousel({
   const goPrev = () => scrollToIndex(activeIndex - 1);
   const goNext = () => scrollToIndex(activeIndex + 1);
 
+  if (cards.length === 0) return null;
+
   return (
     <section className="overflow-hidden bg-white py-16 sm:py-20" aria-label={ariaLabel}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

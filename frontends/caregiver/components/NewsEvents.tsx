@@ -56,6 +56,8 @@ export default function NewsEvents() {
   const goPrev = () => setOffset((o) => Math.max(0, o - 1));
   const goNext = () => setOffset((o) => Math.min(maxOffset, o + 1));
 
+  if (cards.length === 0) return null;
+
   return (
     <section
       className={`overflow-hidden ${sectionBgSurfaceAlt} ${sectionPy}`}
