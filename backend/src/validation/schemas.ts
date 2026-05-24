@@ -52,21 +52,8 @@ export const enquireSchema = yup.object({
     .max(2000, "Message must be 2000 characters or fewer.")
     .optional()
     .default(""),
-  privacyConsent: yup
-    .mixed()
-    .required("Please confirm you have read the privacy notice.")
-    .test(
-      "privacyConsent",
-      "Please confirm you have read the privacy notice.",
-      (value) => value === "yes" || value === "on" || value === true
-    ),
-  marketingConsent: yup
-    .mixed()
-    .optional()
-    .test("marketingConsent", "", (value) => {
-      if (value === undefined || value === null || value === "") return true;
-      return value === "yes" || value === "on" || value === true;
-    }),
+  privacyConsent: yup.boolean().optional().default(true),
+  marketingConsent: yup.boolean().optional().default(false),
   enquiryType: yup.string().oneOf(["email", "visit", "brochure"]).optional(),
   careHomeSlug: yup.string().max(50).optional(),
 });

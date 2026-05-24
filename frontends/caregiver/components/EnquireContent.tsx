@@ -1,9 +1,9 @@
 "use client";
 
+import EnquirePrivacyNotice from "@/components/EnquirePrivacyNotice";
 import FormFieldError from "@/components/FormFieldError";
 import FormSplitLayout from "@/components/FormSplitLayout";
 import {
-  formCheckboxClass,
   formErrorClass,
   formInputClass,
   formRequiredClass,
@@ -14,7 +14,6 @@ import { images } from "@/lib/images";
 import { btnPrimary, btnSecondary } from "@/lib/layout";
 import { formValuesFromForm, inputErrorClass, validateWithSchema } from "@/lib/validation/helpers";
 import { submitInquiry } from "@/lib/api/inquiries";
-import { naptecContact } from "@/lib/contact";
 import { ApiError } from "@/lib/api/client";
 import { enquireSchema } from "@/lib/validation/schemas";
 import Link from "next/link";
@@ -57,12 +56,8 @@ export default function EnquireContent({ titleId, onClose }: EnquireContentProps
         phone: validation.values.phone,
         email: validation.values.email,
         message: validation.values.message,
-        privacyConsent:
-          validation.values.privacyConsent === true ||
-          validation.values.privacyConsent === "yes",
-        marketingConsent:
-          validation.values.marketingConsent === true ||
-          validation.values.marketingConsent === "yes",
+        privacyConsent: true,
+        marketingConsent: false,
       });
       setPending(false);
       setSubmitted(true);
@@ -198,46 +193,7 @@ export default function EnquireContent({ titleId, onClose }: EnquireContentProps
             <FormFieldError message={fieldErrors.message} />
           </label>
 
-          <fieldset
-            className={`space-y-2.5 rounded-2xl border bg-surface-alt/40 px-3.5 py-3.5 sm:px-4 ${
-              fieldErrors.privacyConsent
-                ? "border-red-300"
-                : "border-surface-card/80"
-            }`}
-          >
-            <legend className="sr-only">Consent</legend>
-            <label className="flex cursor-pointer gap-2.5 text-sm leading-snug text-body">
-              <input
-                type="checkbox"
-                name="privacyConsent"
-                value="yes"
-                className={formCheckboxClass}
-              />
-              <span>
-                I confirm I have read the{" "}
-                <a
-                  href="#privacy-notice"
-                  className="font-medium text-brand underline underline-offset-2 transition-colors hover:text-brand-dark"
-                >
-                  privacy notice
-                </a>{" "}
-                <span className={formRequiredClass}>*</span>
-              </span>
-            </label>
-            <FormFieldError message={fieldErrors.privacyConsent} />
-            <label className="flex cursor-pointer gap-2.5 text-sm leading-snug text-body">
-              <input
-                type="checkbox"
-                name="marketingConsent"
-                value="yes"
-                className={formCheckboxClass}
-              />
-              <span>
-                I would like to be kept up-to-date with news from our homes,
-                future offers and services
-              </span>
-            </label>
-          </fieldset>
+          <EnquirePrivacyNotice />
 
           <div className="pt-1">
             <button
@@ -251,23 +207,6 @@ export default function EnquireContent({ titleId, onClose }: EnquireContentProps
         </>
       )}
     </form>
-  );
-
-  const privacyFooter = (
-    <p
-      id="privacy-notice"
-      className="scroll-mt-28 text-xs leading-relaxed text-muted"
-    >
-      Naptec processes your personal data to respond to your enquiry. For more
-      information on how we use your data, please contact us at{" "}
-      <a
-        href={`mailto:${naptecContact.email}`}
-        className="text-brand underline underline-offset-2 transition-colors hover:text-brand-dark"
-      >
-        {naptecContact.email}
-      </a>
-      .
-    </p>
   );
 
   return (
@@ -294,7 +233,6 @@ export default function EnquireContent({ titleId, onClose }: EnquireContentProps
           </p>
         </>
       }
-      footer={privacyFooter}
     >
       {form}
     </FormSplitLayout>
