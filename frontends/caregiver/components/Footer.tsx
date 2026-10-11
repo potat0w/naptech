@@ -113,9 +113,12 @@ export default function Footer() {
             <div className="mt-8 border-t border-white/10 pt-6">
               <SectionLabel>Our Address</SectionLabel>
               <address className="not-italic text-sm leading-relaxed text-white/70">
-                {naptecLocationLines[0]}
-                <br />
-                {naptecLocationLines[1]}
+                {naptecLocationLines.map((line, i) => (
+                  <span key={line}>
+                    {i > 0 ? <br /> : null}
+                    {line}
+                  </span>
+                ))}
               </address>
             </div>
 

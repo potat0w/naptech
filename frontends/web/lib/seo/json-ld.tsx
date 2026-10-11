@@ -28,9 +28,9 @@ export function organizationSchema() {
     telephone: naptecContact.phone,
     address: {
       "@type": "PostalAddress",
-      streetAddress: naptecContact.addressLine1,
-      addressLocality: naptecContact.area,
-      addressRegion: naptecContact.city,
+      streetAddress: `${naptecContact.addressLine1}, ${naptecContact.addressLine2}, ${naptecContact.street}`,
+      addressLocality: naptecContact.city,
+      addressRegion: "Greater London",
       postalCode: naptecContact.postcode,
       addressCountry: "GB",
     },

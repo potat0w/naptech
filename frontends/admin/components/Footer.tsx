@@ -103,9 +103,12 @@ export default function Footer() {
             />
 
             <p className="mt-5 text-sm leading-relaxed text-white/70">
-              {naptecLocationLines[0]}
-              <br />
-              {naptecLocationLines[1]}
+              {naptecLocationLines.map((line, i) => (
+                <span key={line}>
+                  {i > 0 ? <br /> : null}
+                  {line}
+                </span>
+              ))}
             </p>
 
             <div className="mt-6 space-y-3">
